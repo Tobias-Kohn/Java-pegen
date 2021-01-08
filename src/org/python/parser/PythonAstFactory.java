@@ -48,7 +48,9 @@ public class PythonAstFactory implements AstFactory<PyObject> {
     private final PyObject _USub = new org.python.antlr.op.USub();
 
     public PyObject AnnAssign(PyObject target, PyObject annotation, PyObject value, int simple,
-                              int line_no, int col_offset) { return null; }
+                              int line_no, int col_offset) {
+        throw new RuntimeException("AnnAssign");
+    }
 
     public PyObject Assert(PyObject test, PyObject msg, int line_no, int col_offset) {
         Assert result = new Assert(test, msg);
@@ -67,10 +69,18 @@ public class PythonAstFactory implements AstFactory<PyObject> {
     }
 
     public PyObject AsyncFor(PyObject target, PyObject iter, PyObject[] body, PyObject[] orelse, PyObject type_comment,
-                             int line_no, int col_offset) { return null; }
+                             int line_no, int col_offset) {
+        throw new RuntimeException("AsyncFor");
+    }
+
     public PyObject AsyncFunctionDef(String name, PyObject args, PyObject[] body, PyObject decorator_list,
-                                     PyObject returns, PyObject type_comments,  int line_no, int col_offset) { return null; }
-    public PyObject AsyncWith(PyObject[] items, PyObject[] body, PyObject type_comment, int line_no, int col_offset) { return null; }
+                                     PyObject returns, PyObject type_comments,  int line_no, int col_offset) {
+        throw new RuntimeException("AsyncFucntionDef");
+    }
+
+    public PyObject AsyncWith(PyObject[] items, PyObject[] body, PyObject type_comment, int line_no, int col_offset) {
+        throw new RuntimeException("AsyncWith");
+    }
 
     public PyObject Attribute(PyObject value, String attr, PyObject ctx, int line_no, int col_offset) {
         Attribute result = new Attribute(value, Py.newString(attr), ctx);
@@ -86,7 +96,9 @@ public class PythonAstFactory implements AstFactory<PyObject> {
         return result;
     }
 
-    public PyObject Await(PyObject value, int line_no, int col_offset) { return null; }
+    public PyObject Await(PyObject value, int line_no, int col_offset) {
+        throw new RuntimeException("Await");
+    }
 
     public PyObject BinOp(PyObject left, PyObject op, PyObject right, int line_no, int col_offset) {
         BinOp result = new BinOp(left, op, right);
@@ -121,35 +133,35 @@ public class PythonAstFactory implements AstFactory<PyObject> {
         if (keywords == null)
             keywords = new PyObject[0];
         result.setKeywords(new AstList(Arrays.asList(keywords), AstAdapters.keywordAdapter));
-        /*if (args != null)
-            for (PyObject item : args)
-                result.getInternalArgs().add((expr) item);
-        if (keywords != null)
-            for (PyObject item : keywords)
-                result.getInternalKeywords().add((keyword) item);*/
         result.setLineno(line_no);
         result.setCol_offset(col_offset);
         return result;
     }
 
     public PyObject ClassDef(String name, PyObject[] bases, PyObject[] keywords, PyObject[] body,
-                             PyObject decorator_list, int line_no, int col_offset) { return null; }
-
-    public PyObject Compare(PyObject left, PyObject[] ops, PyObject[] comparators, int line_no, int col_offset) {
-        return null;
-        /*Compare result = new Compare();
-        result.setLeft(left);*/
-        // TODO: handle the types here!
-        /*for (PyObject item : ops)
-            result.getInternalOps().add((cmpopType) item);*/
-        /*for (PyObject item : comparators)
-            result.getInternalComparators().add((expr) item);
-        result.setLineno(line_no);
-        result.setCol_offset(col_offset);
-        return result;*/
+                             PyObject decorator_list, int line_no, int col_offset) {
+        throw new RuntimeException("ClassDef");
     }
 
-    public PyObject Constant(PyObject value, PyObject kind, int line_no, int col_offset) { return null; }
+    public PyObject Compare(PyObject left, PyObject[] ops, PyObject[] comparators, int line_no, int col_offset) {
+        Compare result = new Compare();
+        result.setLeft(left);
+        result.setOps(new AstList(Arrays.asList(ops), AstAdapters.cmpopAdapter));
+        result.setComparators(new AstList(Arrays.asList(comparators), AstAdapters.exprAdapter));
+        result.setLineno(line_no);
+        result.setCol_offset(col_offset);
+        return result;
+    }
+
+    public PyObject Constant(PyObject value, PyObject kind, int line_no, int col_offset) {
+        if (value instanceof PyNone) {
+            return Name("None", _Load, line_no, col_offset);
+        }
+        else if (value instanceof PyBoolean) {
+            return Name((value == Py.True) ? "True" : "False", _Load, line_no, col_offset);
+        }
+        throw new RuntimeException("Constant");
+    }
 
     public PyObject Continue(int line_no, int col_offset) {
         Continue result = new Continue();
@@ -185,7 +197,9 @@ public class PythonAstFactory implements AstFactory<PyObject> {
         return result;
     }
 
-    public PyObject ExceptHandler(PyObject type_, String name, PyObject[] body, int line_no, int col_offset) { return null; }
+    public PyObject ExceptHandler(PyObject type_, String name, PyObject[] body, int line_no, int col_offset) {
+        throw new RuntimeException("ExceptHandler");
+    }
 
     public PyObject Expr(PyObject value, int line_no, int col_offset) {
         Expr result = new Expr(value);
@@ -211,24 +225,28 @@ public class PythonAstFactory implements AstFactory<PyObject> {
         return result;
     }
 
-    public PyObject FormattedValue(PyObject value, int conversion, PyObject format_spec, int line_no, int col_offset) { return null; }
+    public PyObject FormattedValue(PyObject value, int conversion, PyObject format_spec, int line_no, int col_offset) {
+        throw new RuntimeException("FormattedValue");
+    }
 
     public PyObject FunctionDef(String name, PyObject args, PyObject[] body, PyObject decorator_list, PyObject returns,
                                 PyObject type_comments,  int line_no, int col_offset) {
         FunctionDef result = new FunctionDef();
         result.setName(Py.newString(name));
         result.setArgs(args);
+        arguments a = (arguments)args;
         result.setBody(new AstList(Arrays.asList(body), AstAdapters.stmtAdapter));
         if (decorator_list == null)
-            result.setDecorator_list(new AstList(Collections.emptyList(), AstAdapters.exprAdapter));
-        else
-            result.setDecorator_list(decorator_list);
+            decorator_list = new AstList(Collections.emptyList(), AstAdapters.exprAdapter);
+        result.setDecorator_list(decorator_list);
         result.setLineno(line_no);
         result.setCol_offset(col_offset);
         return result;
     }
 
-    public PyObject FunctionType(PyObject[] a, PyObject b) { return null; }
+    public PyObject FunctionType(PyObject[] a, PyObject b) {
+        throw new RuntimeException("FunctionType");
+    }
 
     public PyObject GeneratorExp(PyObject elt, PyObject[] generators, int line_no, int col_offset) {
         GeneratorExp result = new GeneratorExp();
@@ -274,18 +292,24 @@ public class PythonAstFactory implements AstFactory<PyObject> {
     }
 
     public PyObject ImportFrom(String module, PyObject[] names, int level, int line_no, int col_offset) {
+        // This is broken in Jython itself (GitHub issue #77)
         ImportFrom result = new ImportFrom();
         result.setModule(Py.newString(module));
         result.setNames(new AstList(Arrays.asList(names), AstAdapters.identifierAdapter));
         result.setLevel(Py.newInteger(level));
+        System.out.println(result.getLevel());
         result.setLineno(line_no);
         result.setCol_offset(col_offset);
         return result;
     }
 
-    public PyObject Interactive(PyObject[] body) { return null; }
+    public PyObject Interactive(PyObject[] body) {
+        throw new RuntimeException("Interactive");
+    }
 
-    public PyObject JoinedStr(PyObject[] values, int line_no, int col_offset) { return null; }
+    public PyObject JoinedStr(PyObject[] values, int line_no, int col_offset) {
+        throw new RuntimeException("JoinedStr");
+    }
 
     public PyObject Lambda(PyObject args, PyObject body, int line_no, int col_offset) {
         Lambda result = new Lambda(args, body);
@@ -325,9 +349,13 @@ public class PythonAstFactory implements AstFactory<PyObject> {
         return result;
     }
 
-    public PyObject NamedExpr(PyObject target, PyObject value, int line_no, int col_offset) { return null; }
+    public PyObject NamedExpr(PyObject target, PyObject value, int line_no, int col_offset) {
+        throw new RuntimeException("NamedExpr");
+    }
 
-    public PyObject Nonlocal(PyObject[] names, int line_no, int col_offset) { return null; }
+    public PyObject Nonlocal(PyObject[] names, int line_no, int col_offset) {
+        throw new RuntimeException("Nonlocal");
+    }
 
     public PyObject Pass(int line_no, int col_offset) {
         Pass result = new Pass();
@@ -369,23 +397,21 @@ public class PythonAstFactory implements AstFactory<PyObject> {
     }
 
     public PyObject Slice(PyObject lower, PyObject upper, PyObject step, int line_no, int col_offset) {
-        Slice result = new Slice();
-        result.setLower(lower);
-        result.setUpper(upper);
-        result.setStep(step);
-        return result;
+        return new Slice(lower, upper, step);
     }
 
-    public PyObject Starred(PyObject value, PyObject ctx, int line_no, int col_offset) { return null; }
+    public PyObject Starred(PyObject value, PyObject ctx, int line_no, int col_offset) {
+        throw new RuntimeException("Starred");
+    }
 
     public PyObject Subscript(PyObject value, PyObject slice, PyObject ctx, int line_no, int col_offset) {
+        if (!(slice instanceof Slice) && !(slice instanceof Index))
+            slice = new Index(slice);
         Subscript result = new Subscript(value, slice, ctx);
         result.setLineno(line_no);
         result.setCol_offset(col_offset);
         return result;
     }
-
-    public PyObject Tuple(PyObject items, PyObject ctx, int line_no, int col_offset) { return null; }
 
     public PyObject Tuple(PyObject[] elts, PyObject ctx, int line_no, int col_offset) {
         Tuple result = new Tuple();
@@ -402,10 +428,12 @@ public class PythonAstFactory implements AstFactory<PyObject> {
         /*Try result = new Try();
         for (PyObject item : body)
             result.getInternalBody().add((stmt) item);*/
-        return null;
+        throw new RuntimeException("Try");
     }
 
-    public PyObject TypeIgnore(int line_no, String tag) { return null; }
+    public PyObject TypeIgnore(int line_no, String tag) {
+        throw new RuntimeException("TypeIgnore");
+    }
 
     public PyObject UnaryOp(PyObject op, PyObject operand, int line_no, int col_offset) {
         UnaryOp result = new UnaryOp(op, operand);
@@ -443,10 +471,12 @@ public class PythonAstFactory implements AstFactory<PyObject> {
         return result;
     }
 
-    public PyObject YieldFrom(PyObject value, int line_no, int col_offset) { return null; }
+    public PyObject YieldFrom(PyObject value, int line_no, int col_offset) {
+        throw new RuntimeException("YieldFrom");
+    }
 
     public PyObject alias(String name, String asname) {
-        return new alias(Py.newString(name), (asname != null) ? Py.newString(asname) : null);
+        return new alias(Py.newString(name), (asname != null) ? Py.newString(asname) : Py.None);
     }
 
     public PyObject arg(String arg, PyObject annotation, PyObject type_comment, int line_no, int col_offset) {
@@ -482,7 +512,9 @@ public class PythonAstFactory implements AstFactory<PyObject> {
         return new keyword(Py.newString(arg), value);
     }
 
-    public PyObject withitem(PyObject context_expr, PyObject optional_vars) { return null; }
+    public PyObject withitem(PyObject context_expr, PyObject optional_vars) {
+        throw new RuntimeException("withitem");
+    }
 
     public PyObject Add() { return _Add; }
     public PyObject And() { return _And; }
@@ -551,7 +583,15 @@ public class PythonAstFactory implements AstFactory<PyObject> {
     }
 
     public PyObject join_names_with_dot(PyObject a, PyObject b) {
-        throw new RuntimeException("join_names_with_dot");
+        Name n1 = (Name) a;
+        Name n2 = (Name) b;
+        String name = n1.getInternalId() + "." + n2.getInternalId();
+        Name result = new Name();
+        result.setId(Py.newString(name));
+        result.setCtx(n1.getCtx());
+        result.setLineno(n1.getLineno());
+        result.setCol_offset(n1.getCol_offset());
+        return result;
     }
 
     public int seq_count_dots(PyObject[] items) {
@@ -567,15 +607,21 @@ public class PythonAstFactory implements AstFactory<PyObject> {
     }
 
     public PyObject cmpop_expr_pair(PyObject op, PyObject item) {
-        throw new RuntimeException("cmpop_expr_pair");
+        return new CmpopExprPair(op, item);
     }
 
     public PyObject[] get_cmpops(PyObject[] items) {
-        throw new RuntimeException("get_cmpops");
+        PyObject[] result = new PyObject[items.length];
+        for (int i = 0; i < items.length; i++)
+            result[i] = ((CmpopExprPair)items[i]).getCmpOp();
+        return result;
     }
 
     public PyObject[] get_exprs(PyObject[] items) {
-        throw new RuntimeException("get_exprs");
+        PyObject[] result = new PyObject[items.length];
+        for (int i = 0; i < items.length; i++)
+            result[i] = ((CmpopExprPair)items[i]).getExpr();
+        return result;
     }
 
     public PyObject set_expr_context(PyObject expr, PyObject ctx) {
@@ -593,19 +639,25 @@ public class PythonAstFactory implements AstFactory<PyObject> {
     }
 
     public PyObject key_value_pair(PyObject key, PyObject value) {
-        throw new RuntimeException("key_value_pair");
+        return new KeyValuePair(key, value);
     }
 
     public PyObject[] get_keys(PyObject[] items) {
-        throw new RuntimeException("get_keys");
+        PyObject[] result = new PyObject[items.length];
+        for (int i = 0; i < items.length; i++)
+            result[i] = ((KeyValuePair)items[i]).getKey();
+        return result;
     }
 
     public PyObject[] get_values(PyObject[] items) {
-        throw new RuntimeException("get_values");
+        PyObject[] result = new PyObject[items.length];
+        for (int i = 0; i < items.length; i++)
+            result[i] = ((KeyValuePair)items[i]).getValue();
+        return result;
     }
 
     public PyObject name_default_pair(PyObject arg, PyObject value, Token tc) {
-        throw new RuntimeException("name_default_pair");
+        return new NameDefaultPair(arg, value);
     }
 
     public PyObject slash_with_default(PyObject[] plain_names, PyObject[] names_with_defaults) {
@@ -613,20 +665,42 @@ public class PythonAstFactory implements AstFactory<PyObject> {
     }
 
     public PyObject star_etc(PyObject vararg, PyObject[] kwonlyargs, PyObject kwarg) {
-        throw new RuntimeException("star_etc");
+        return new StarEtc(vararg, kwonlyargs, kwarg);
     }
 
     public PyObject make_arguments(PyObject[] slash_without_default, PyObject slash_with_default,
                                    PyObject[] plain_names, PyObject[] names_with_default, PyObject star_etc) {
         arguments result = new arguments();
-        result.setArgs(new AstList(Arrays.asList(plain_names), AstAdapters.exprAdapter));
-        result.setDefaults(new AstList(Collections.emptyList(), AstAdapters.exprAdapter));
+        if (plain_names == null)
+            plain_names = new PyObject[0];
+        if (names_with_default != null && names_with_default.length > 0) {
+            PyObject[] names = new PyObject[plain_names.length + names_with_default.length];
+            PyObject[] deflt = new PyObject[names_with_default.length];
+            System.arraycopy(plain_names, 0, names, 0, plain_names.length);
+            for (int i = 0; i < names_with_default.length; i++) {
+                names[plain_names.length + i] = ((NameDefaultPair) names_with_default[i]).getArg();
+                deflt[i] = ((NameDefaultPair) names_with_default[i]).getValue();
+            }
+            result.setArgs(new AstList(Arrays.asList(names), AstAdapters.exprAdapter));
+            result.setDefaults(new AstList(Arrays.asList(deflt), AstAdapters.exprAdapter));
+        } else {
+            result.setArgs(new AstList(Arrays.asList(plain_names), AstAdapters.exprAdapter));
+            result.setDefaults(new AstList(Collections.emptyList(), AstAdapters.exprAdapter));
+        }
+        if (star_etc != null) {
+            result.setVararg(((StarEtc)star_etc).getVararg());
+            result.setKwarg(((StarEtc)star_etc).getKwarg());
+        }
         return result;
-        //throw new RuntimeException("make_arguments");
     }
 
     public PyObject function_def_decorators(PyObject[] decorators, PyObject function) {
-        throw new RuntimeException("function_def_decorators");
+        if (function instanceof FunctionDef) {
+            FunctionDef func = (FunctionDef) function;
+            func.setDecorator_list(new AstList(Arrays.asList(decorators), AstAdapters.exprAdapter));
+            return func;
+        } else
+            throw new RuntimeException("function_def_decorators");
     }
 
     public PyObject class_def_decorators(PyObject[] decorators, PyObject cls) {
@@ -634,24 +708,28 @@ public class PythonAstFactory implements AstFactory<PyObject> {
     }
 
     public PyObject keyword_or_starred(PyObject element, int is_keyword) {
-        throw new RuntimeException("keyword_or_starred");
+        // TODO: actually create a keyword or starred item here!
+        return element;
     }
 
-    public PyObject[] seq_extract_starred_exprs(PyObject[] a) { return null; }
-    public PyObject[] seq_delete_starred_exprs(PyObject[] a) { return null; }
+    public PyObject[] seq_extract_starred_exprs(PyObject[] a) {
+        return null;
+    }
+
+    public PyObject[] seq_delete_starred_exprs(PyObject[] a) {
+        return a;
+    }
 
     public PyObject collect_call_seqs(PyObject[] a, PyObject[] b, int line_no, int col_offset) {
         if (b == null)
             return Call(dummy_name(), a, null, line_no, col_offset);
         PyObject[] starreds = seq_extract_starred_exprs(b);
-        PyObject[] keywords = new PyObject[0];// seq_delete_starred_exprs(b);
+        PyObject[] keywords = seq_delete_starred_exprs(b);
         PyObject[] args = join_sequences(a, starreds);
         return Call(dummy_name(), args, keywords, line_no, col_offset);
     }
 
     public PyObject concatenate_strings(PyObject[] items) {
-    /*    if (items.length == 1)
-            return items[0];*/
         StringBuilder stringBuilder = new StringBuilder();
         for (PyObject item : items) {
             if (item instanceof Str) {
@@ -663,7 +741,7 @@ public class PythonAstFactory implements AstFactory<PyObject> {
                 }
             }
         }
-        return new Str(Py.newString(stringBuilder.toString()));
+        return new Str(Py.newUnicode(stringBuilder.toString()));
     }
 
     public PyObject[] join_sequences(PyObject[] a, PyObject[] b) {
@@ -769,5 +847,4 @@ public class PythonAstFactory implements AstFactory<PyObject> {
     public PyObject get_pair_value(PyObject pair) {
         throw new RuntimeException("get_pair_value");
     }
-    
 }

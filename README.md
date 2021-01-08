@@ -86,10 +86,15 @@ there are some fundamental limitations since the Python input is actually compil
 
 Some of the missing parts (in no particular order):
 - Support for f-Strings;
-- Error detection and handling;
-- Parameters and arguments other than purely positional;
+- Error detection and handling in the parser (i.e. do not cause any syntax errors! ;-) );
+- Try/Except/Finally and `raise`;
+- Positional-only and keyword-only arguments;
 - Class definitions;
-- Async and await;
+- `async` and `await`;
+- `nonlocal`, `yield from`;
+- Star (as in `foo(*args)`);
+- `from x import ...` (this is missing due to a bug in Jython);
+- Walrus operator (i.e. `x := 123`);
 
 Since Jython 2 has no support for features such as (type) annotations, they are simply ignored by the compiler.
 In the long run, this is clearly not the desired behaviour, but once Jython 3 has matured enough to support the
