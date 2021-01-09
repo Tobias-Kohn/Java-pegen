@@ -230,17 +230,20 @@ class GeneratedParser<T> extends Parser<T> {
         int line_no = this.lineno();
         int col_offset = this.col_offset();
         {
+            Token literal;
             T[] a;
+            Token literal_1;
+            Token literal_2;
             T b;
             T[] _loop0_2;
             if (
-                    this.expectStr('(') != null
+                    (literal = this.expectStr('(')) != null
                             &&
                             ((a = this.type_expressions()) != null || true)
                             &&
-                            this.expectStr(')') != null
+                            (literal_1 = this.expectStr(')')) != null
                             &&
-                            this.expectStr("->") != null
+                            (literal_2 = this.expectStr("->")) != null
                             &&
                             (b = this.expression()) != null
                             &&
@@ -325,20 +328,24 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         {
             T[] a;
+            Token literal;
+            Token literal_1;
             T b;
+            Token literal_2;
+            Token literal_3;
             T c;
             if (
                     (a = this._gather_3()) != null
                             &&
-                            this.expectStr(',') != null
+                            (literal = this.expectStr(',')) != null
                             &&
-                            this.expectStr('*') != null
+                            (literal_1 = this.expectStr('*')) != null
                             &&
                             (b = this.expression()) != null
                             &&
-                            this.expectStr(',') != null
+                            (literal_2 = this.expectStr(',')) != null
                             &&
-                            this.expectStr("**") != null
+                            (literal_3 = this.expectStr("**")) != null
                             &&
                             (c = this.expression()) != null
             ) {
@@ -348,13 +355,15 @@ class GeneratedParser<T> extends Parser<T> {
         }
         {
             T[] a;
+            Token literal;
+            Token literal_1;
             T b;
             if (
                     (a = this._gather_5()) != null
                             &&
-                            this.expectStr(',') != null
+                            (literal = this.expectStr(',')) != null
                             &&
-                            this.expectStr('*') != null
+                            (literal_1 = this.expectStr('*')) != null
                             &&
                             (b = this.expression()) != null
             ) {
@@ -364,13 +373,15 @@ class GeneratedParser<T> extends Parser<T> {
         }
         {
             T[] a;
+            Token literal;
+            Token literal_1;
             T b;
             if (
                     (a = this._gather_7()) != null
                             &&
-                            this.expectStr(',') != null
+                            (literal = this.expectStr(',')) != null
                             &&
-                            this.expectStr("**") != null
+                            (literal_1 = this.expectStr("**")) != null
                             &&
                             (b = this.expression()) != null
             ) {
@@ -379,16 +390,19 @@ class GeneratedParser<T> extends Parser<T> {
             this.reset(mark);
         }
         {
+            Token literal;
             T a;
+            Token literal_1;
+            Token literal_2;
             T b;
             if (
-                    this.expectStr('*') != null
+                    (literal = this.expectStr('*')) != null
                             &&
                             (a = this.expression()) != null
                             &&
-                            this.expectStr(',') != null
+                            (literal_1 = this.expectStr(',')) != null
                             &&
-                            this.expectStr("**") != null
+                            (literal_2 = this.expectStr("**")) != null
                             &&
                             (b = this.expression()) != null
             ) {
@@ -397,9 +411,10 @@ class GeneratedParser<T> extends Parser<T> {
             this.reset(mark);
         }
         {
+            Token literal;
             T a;
             if (
-                    this.expectStr('*') != null
+                    (literal = this.expectStr('*')) != null
                             &&
                             (a = this.expression()) != null
             ) {
@@ -408,9 +423,10 @@ class GeneratedParser<T> extends Parser<T> {
             this.reset(mark);
         }
         {
+            Token literal;
             T a;
             if (
-                    this.expectStr("**") != null
+                    (literal = this.expectStr("**")) != null
                             &&
                             (a = this.expression()) != null
             ) {
@@ -629,10 +645,11 @@ class GeneratedParser<T> extends Parser<T> {
         }
         {
             T[] a;
+            Token literal;
             if (
                     (a = this._gather_12()) != null
                             &&
-                            (this.expectStr(';') != null || true)
+                            ((literal = this.expectStr(';')) != null || true)
                             &&
                             this.expect(TokenType.NEWLINE) != null
             ) {
@@ -942,12 +959,13 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         {
             T a;
+            Token literal;
             T b;
             T c;
             if (
                     (a = this.name()) != null
                             &&
-                            this.expectStr(':') != null
+                            (literal = this.expectStr(':')) != null
                             &&
                             (b = this.expression()) != null
                             &&
@@ -959,12 +977,13 @@ class GeneratedParser<T> extends Parser<T> {
         }
         {
             T a;
+            Token literal;
             T b;
             T c;
             if (
                     (a = this._tmp_20()) != null
                             &&
-                            this.expectStr(':') != null
+                            (literal = this.expectStr(':')) != null
                             &&
                             (b = this.expression()) != null
                             &&
@@ -1040,104 +1059,117 @@ class GeneratedParser<T> extends Parser<T> {
         int line_no = this.lineno();
         int col_offset = this.col_offset();
         {
+            Token literal;
             if (
-                    this.expectStr("+=") != null
+                    (literal = this.expectStr("+=")) != null
             ) {
                 return ast.augoperator ( ast.Add() );
             }
             this.reset(mark);
         }
         {
+            Token literal;
             if (
-                    this.expectStr("-=") != null
+                    (literal = this.expectStr("-=")) != null
             ) {
                 return ast.augoperator ( ast.Sub() );
             }
             this.reset(mark);
         }
         {
+            Token literal;
             if (
-                    this.expectStr("*=") != null
+                    (literal = this.expectStr("*=")) != null
             ) {
                 return ast.augoperator ( ast.Mult() );
             }
             this.reset(mark);
         }
         {
+            Token literal;
             if (
-                    this.expectStr("@=") != null
+                    (literal = this.expectStr("@=")) != null
             ) {
                 return ast.augoperator ( ast.MatMult() );
             }
             this.reset(mark);
         }
         {
+            Token literal;
             if (
-                    this.expectStr("/=") != null
+                    (literal = this.expectStr("/=")) != null
             ) {
                 return ast.augoperator ( ast.Div() );
             }
             this.reset(mark);
         }
         {
+            Token literal;
             if (
-                    this.expectStr("%=") != null
+                    (literal = this.expectStr("%=")) != null
             ) {
                 return ast.augoperator ( ast.Mod() );
             }
             this.reset(mark);
         }
         {
+            Token literal;
             if (
-                    this.expectStr("&=") != null
+                    (literal = this.expectStr("&=")) != null
             ) {
                 return ast.augoperator ( ast.BitAnd() );
             }
             this.reset(mark);
         }
         {
+            Token literal;
             if (
-                    this.expectStr("|=") != null
+                    (literal = this.expectStr("|=")) != null
             ) {
                 return ast.augoperator ( ast.BitOr() );
             }
             this.reset(mark);
         }
         {
+            Token literal;
             if (
-                    this.expectStr("^=") != null
+                    (literal = this.expectStr("^=")) != null
             ) {
                 return ast.augoperator ( ast.BitXor() );
             }
             this.reset(mark);
         }
         {
+            Token literal;
             if (
-                    this.expectStr("<<=") != null
+                    (literal = this.expectStr("<<=")) != null
             ) {
                 return ast.augoperator ( ast.LShift() );
             }
             this.reset(mark);
         }
         {
+            Token literal;
             if (
-                    this.expectStr(">>=") != null
+                    (literal = this.expectStr(">>=")) != null
             ) {
                 return ast.augoperator ( ast.RShift() );
             }
             this.reset(mark);
         }
         {
+            Token literal;
             if (
-                    this.expectStr("**=") != null
+                    (literal = this.expectStr("**=")) != null
             ) {
                 return ast.augoperator ( ast.Pow() );
             }
             this.reset(mark);
         }
         {
+            Token literal;
             if (
-                    this.expectStr("//=") != null
+                    (literal = this.expectStr("//=")) != null
             ) {
                 return ast.augoperator ( ast.FloorDiv() );
             }
@@ -1545,15 +1577,18 @@ class GeneratedParser<T> extends Parser<T> {
         int line_no = this.lineno();
         int col_offset = this.col_offset();
         {
+            Token literal;
             T[] a;
+            Token literal_1;
+            Token literal_2;
             if (
-                    this.expectStr('(') != null
+                    (literal = this.expectStr('(')) != null
                             &&
                             (a = this.import_from_as_names()) != null
                             &&
-                            (this.expectStr(',') != null || true)
+                            ((literal_1 = this.expectStr(',')) != null || true)
                             &&
-                            this.expectStr(')') != null
+                            (literal_2 = this.expectStr(')')) != null
             ) {
                 return a;
             }
@@ -1571,8 +1606,9 @@ class GeneratedParser<T> extends Parser<T> {
             this.reset(mark);
         }
         {
+            Token literal;
             if (
-                    this.expectStr('*') != null
+                    (literal = this.expectStr('*')) != null
             ) {
                 return ast.singleton_seq ( ast.alias_for_star ( ) );
             }
@@ -1798,11 +1834,12 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         {
             T a;
+            Token literal;
             T b;
             if (
                     (a = this.dotted_name()) != null
                             &&
-                            this.expectStr('.') != null
+                            (literal = this.expectStr('.')) != null
                             &&
                             (b = this.name()) != null
             ) {
@@ -1852,6 +1889,7 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         {
             T a;
+            Token literal;
             T[] b;
             T c;
             if (
@@ -1859,7 +1897,7 @@ class GeneratedParser<T> extends Parser<T> {
                             &&
                             (a = this.named_expression()) != null
                             &&
-                            this.expectStr(':') != null
+                            (literal = this.expectStr(':')) != null
                             &&
                             (b = this.block()) != null
                             &&
@@ -1871,6 +1909,7 @@ class GeneratedParser<T> extends Parser<T> {
         }
         {
             T a;
+            Token literal;
             T[] b;
             T[] c;
             if (
@@ -1878,7 +1917,7 @@ class GeneratedParser<T> extends Parser<T> {
                             &&
                             (a = this.named_expression()) != null
                             &&
-                            this.expectStr(':') != null
+                            (literal = this.expectStr(':')) != null
                             &&
                             (b = this.block()) != null
                             &&
@@ -1921,6 +1960,7 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         {
             T a;
+            Token literal;
             T[] b;
             T c;
             if (
@@ -1928,7 +1968,7 @@ class GeneratedParser<T> extends Parser<T> {
                             &&
                             (a = this.named_expression()) != null
                             &&
-                            this.expectStr(':') != null
+                            (literal = this.expectStr(':')) != null
                             &&
                             (b = this.block()) != null
                             &&
@@ -1940,6 +1980,7 @@ class GeneratedParser<T> extends Parser<T> {
         }
         {
             T a;
+            Token literal;
             T[] b;
             T[] c;
             if (
@@ -1947,7 +1988,7 @@ class GeneratedParser<T> extends Parser<T> {
                             &&
                             (a = this.named_expression()) != null
                             &&
-                            this.expectStr(':') != null
+                            (literal = this.expectStr(':')) != null
                             &&
                             (b = this.block()) != null
                             &&
@@ -1989,11 +2030,12 @@ class GeneratedParser<T> extends Parser<T> {
         int line_no = this.lineno();
         int col_offset = this.col_offset();
         {
+            Token literal;
             T[] b;
             if (
                     this.expectKeyword("else") != null
                             &&
-                            this.expectStr(':') != null
+                            (literal = this.expectStr(':')) != null
                             &&
                             (b = this.block()) != null
             ) {
@@ -2034,6 +2076,7 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         {
             T a;
+            Token literal;
             T[] b;
             T[] c;
             if (
@@ -2041,7 +2084,7 @@ class GeneratedParser<T> extends Parser<T> {
                             &&
                             (a = this.named_expression()) != null
                             &&
-                            this.expectStr(':') != null
+                            (literal = this.expectStr(':')) != null
                             &&
                             (b = this.block()) != null
                             &&
@@ -2085,6 +2128,7 @@ class GeneratedParser<T> extends Parser<T> {
         {
             T t;
             T ex;
+            Token literal;
             Token tc;
             T[] b;
             T[] el;
@@ -2099,7 +2143,7 @@ class GeneratedParser<T> extends Parser<T> {
                             &&
                             (ex = this.star_expressions()) != null
                             &&
-                            this.expectStr(':') != null
+                            (literal = this.expectStr(':')) != null
                             &&
                             ((tc = this.expect(TokenType.TYPE_COMMENT)) != null || true)
                             &&
@@ -2114,6 +2158,7 @@ class GeneratedParser<T> extends Parser<T> {
         {
             T t;
             T ex;
+            Token literal;
             Token tc;
             T[] b;
             T[] el;
@@ -2130,7 +2175,7 @@ class GeneratedParser<T> extends Parser<T> {
                             &&
                             (ex = this.star_expressions()) != null
                             &&
-                            this.expectStr(':') != null
+                            (literal = this.expectStr(':')) != null
                             &&
                             ((tc = this.expect(TokenType.TYPE_COMMENT)) != null || true)
                             &&
@@ -2174,20 +2219,24 @@ class GeneratedParser<T> extends Parser<T> {
         int line_no = this.lineno();
         int col_offset = this.col_offset();
         {
+            Token literal;
             T[] a;
+            Token literal_1;
+            Token literal_2;
+            Token literal_3;
             T[] b;
             if (
                     this.expectKeyword("with") != null
                             &&
-                            this.expectStr('(') != null
+                            (literal = this.expectStr('(')) != null
                             &&
                             (a = this._gather_39()) != null
                             &&
-                            (this.expectStr(',') != null || true)
+                            ((literal_1 = this.expectStr(',')) != null || true)
                             &&
-                            this.expectStr(')') != null
+                            (literal_2 = this.expectStr(')')) != null
                             &&
-                            this.expectStr(':') != null
+                            (literal_3 = this.expectStr(':')) != null
                             &&
                             (b = this.block()) != null
             ) {
@@ -2197,6 +2246,7 @@ class GeneratedParser<T> extends Parser<T> {
         }
         {
             T[] a;
+            Token literal;
             Token tc;
             T[] b;
             if (
@@ -2204,7 +2254,7 @@ class GeneratedParser<T> extends Parser<T> {
                             &&
                             (a = this._gather_41()) != null
                             &&
-                            this.expectStr(':') != null
+                            (literal = this.expectStr(':')) != null
                             &&
                             ((tc = this.expect(TokenType.TYPE_COMMENT)) != null || true)
                             &&
@@ -2215,22 +2265,26 @@ class GeneratedParser<T> extends Parser<T> {
             this.reset(mark);
         }
         {
+            Token literal;
             T[] a;
+            Token literal_1;
+            Token literal_2;
+            Token literal_3;
             T[] b;
             if (
                     this.expect(TokenType.ASYNC) != null
                             &&
                             this.expectKeyword("with") != null
                             &&
-                            this.expectStr('(') != null
+                            (literal = this.expectStr('(')) != null
                             &&
                             (a = this._gather_43()) != null
                             &&
-                            (this.expectStr(',') != null || true)
+                            ((literal_1 = this.expectStr(',')) != null || true)
                             &&
-                            this.expectStr(')') != null
+                            (literal_2 = this.expectStr(')')) != null
                             &&
-                            this.expectStr(':') != null
+                            (literal_3 = this.expectStr(':')) != null
                             &&
                             (b = this.block()) != null
             ) {
@@ -2240,6 +2294,7 @@ class GeneratedParser<T> extends Parser<T> {
         }
         {
             T[] a;
+            Token literal;
             Token tc;
             T[] b;
             if (
@@ -2249,7 +2304,7 @@ class GeneratedParser<T> extends Parser<T> {
                             &&
                             (a = this._gather_45()) != null
                             &&
-                            this.expectStr(':') != null
+                            (literal = this.expectStr(':')) != null
                             &&
                             ((tc = this.expect(TokenType.TYPE_COMMENT)) != null || true)
                             &&
@@ -2347,12 +2402,13 @@ class GeneratedParser<T> extends Parser<T> {
         int line_no = this.lineno();
         int col_offset = this.col_offset();
         {
+            Token literal;
             T[] b;
             T[] f;
             if (
                     this.expectKeyword("try") != null
                             &&
-                            this.expectStr(':') != null
+                            (literal = this.expectStr(':')) != null
                             &&
                             (b = this.block()) != null
                             &&
@@ -2363,6 +2419,7 @@ class GeneratedParser<T> extends Parser<T> {
             this.reset(mark);
         }
         {
+            Token literal;
             T[] b;
             T[] ex;
             T[] el;
@@ -2370,7 +2427,7 @@ class GeneratedParser<T> extends Parser<T> {
             if (
                     this.expectKeyword("try") != null
                             &&
-                            this.expectStr(':') != null
+                            (literal = this.expectStr(':')) != null
                             &&
                             (b = this.block()) != null
                             &&
@@ -2418,6 +2475,7 @@ class GeneratedParser<T> extends Parser<T> {
         {
             T e;
             T t;
+            Token literal;
             T[] b;
             if (
                     this.expectKeyword("except") != null
@@ -2426,7 +2484,7 @@ class GeneratedParser<T> extends Parser<T> {
                             &&
                             ((t = this._tmp_49()) != null || true)
                             &&
-                            this.expectStr(':') != null
+                            (literal = this.expectStr(':')) != null
                             &&
                             (b = this.block()) != null
             ) {
@@ -2435,11 +2493,12 @@ class GeneratedParser<T> extends Parser<T> {
             this.reset(mark);
         }
         {
+            Token literal;
             T[] b;
             if (
                     this.expectKeyword("except") != null
                             &&
-                            this.expectStr(':') != null
+                            (literal = this.expectStr(':')) != null
                             &&
                             (b = this.block()) != null
             ) {
@@ -2479,11 +2538,12 @@ class GeneratedParser<T> extends Parser<T> {
         int line_no = this.lineno();
         int col_offset = this.col_offset();
         {
+            Token literal;
             T[] a;
             if (
                     this.expectKeyword("finally") != null
                             &&
-                            this.expectStr(':') != null
+                            (literal = this.expectStr(':')) != null
                             &&
                             (a = this.block()) != null
             ) {
@@ -2671,8 +2731,11 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         {
             T n;
+            Token literal;
             T params;
+            Token literal_1;
             T a;
+            Token literal_2;
             T tc;
             T[] b;
             if (
@@ -2680,15 +2743,15 @@ class GeneratedParser<T> extends Parser<T> {
                             &&
                             (n = this.name()) != null
                             &&
-                            this.expectStr('(') != null
+                            (literal = this.expectStr('(')) != null
                             &&
                             ((params = this.params()) != null || true)
                             &&
-                            this.expectStr(')') != null
+                            (literal_1 = this.expectStr(')')) != null
                             &&
                             ((a = this._tmp_51()) != null || true)
                             &&
-                            this.expectStr(':') != null
+                            (literal_2 = this.expectStr(':')) != null
                             &&
                             ((tc = this.func_type_comment()) != null || true)
                             &&
@@ -2700,8 +2763,11 @@ class GeneratedParser<T> extends Parser<T> {
         }
         {
             T n;
+            Token literal;
             T params;
+            Token literal_1;
             T a;
+            Token literal_2;
             T tc;
             T[] b;
             if (
@@ -2711,15 +2777,15 @@ class GeneratedParser<T> extends Parser<T> {
                             &&
                             (n = this.name()) != null
                             &&
-                            this.expectStr('(') != null
+                            (literal = this.expectStr('(')) != null
                             &&
                             ((params = this.params()) != null || true)
                             &&
-                            this.expectStr(')') != null
+                            (literal_1 = this.expectStr(')')) != null
                             &&
                             ((a = this._tmp_52()) != null || true)
                             &&
-                            this.expectStr(':') != null
+                            (literal_2 = this.expectStr(':')) != null
                             &&
                             ((tc = this.func_type_comment()) != null || true)
                             &&
@@ -2954,12 +3020,14 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         {
             T[] a;
+            Token literal;
+            Token literal_1;
             if (
                     (a = null_if_empty(this._loop1_60())) != null
                             &&
-                            this.expectStr('/') != null
+                            (literal = this.expectStr('/')) != null
                             &&
-                            this.expectStr(',') != null
+                            (literal_1 = this.expectStr(',')) != null
             ) {
                 return a;
             }
@@ -2967,10 +3035,11 @@ class GeneratedParser<T> extends Parser<T> {
         }
         {
             T[] a;
+            Token literal;
             if (
                     (a = null_if_empty(this._loop1_61())) != null
                             &&
-                            this.expectStr('/') != null
+                            (literal = this.expectStr('/')) != null
                             &&
                             this.positive_lookahead(this::expectStr, ')')
             ) {
@@ -3012,14 +3081,16 @@ class GeneratedParser<T> extends Parser<T> {
         {
             T[] a;
             T[] b;
+            Token literal;
+            Token literal_1;
             if (
                     (a = this._loop0_62()) != null
                             &&
                             (b = null_if_empty(this._loop1_63())) != null
                             &&
-                            this.expectStr('/') != null
+                            (literal = this.expectStr('/')) != null
                             &&
-                            this.expectStr(',') != null
+                            (literal_1 = this.expectStr(',')) != null
             ) {
                 return ast.slash_with_default ( a , b );
             }
@@ -3028,12 +3099,13 @@ class GeneratedParser<T> extends Parser<T> {
         {
             T[] a;
             T[] b;
+            Token literal;
             if (
                     (a = this._loop0_64()) != null
                             &&
                             (b = null_if_empty(this._loop1_65())) != null
                             &&
-                            this.expectStr('/') != null
+                            (literal = this.expectStr('/')) != null
                             &&
                             this.positive_lookahead(this::expectStr, ')')
             ) {
@@ -3073,11 +3145,12 @@ class GeneratedParser<T> extends Parser<T> {
         int line_no = this.lineno();
         int col_offset = this.col_offset();
         {
+            Token literal;
             T a;
             T[] b;
             T c;
             if (
-                    this.expectStr('*') != null
+                    (literal = this.expectStr('*')) != null
                             &&
                             (a = this.param_no_default()) != null
                             &&
@@ -3090,12 +3163,14 @@ class GeneratedParser<T> extends Parser<T> {
             this.reset(mark);
         }
         {
+            Token literal;
+            Token literal_1;
             T[] b;
             T c;
             if (
-                    this.expectStr('*') != null
+                    (literal = this.expectStr('*')) != null
                             &&
-                            this.expectStr(',') != null
+                            (literal_1 = this.expectStr(',')) != null
                             &&
                             (b = null_if_empty(this._loop1_67())) != null
                             &&
@@ -3146,9 +3221,10 @@ class GeneratedParser<T> extends Parser<T> {
         int line_no = this.lineno();
         int col_offset = this.col_offset();
         {
+            Token literal;
             T a;
             if (
-                    this.expectStr("**") != null
+                    (literal = this.expectStr("**")) != null
                             &&
                             (a = this.param_no_default()) != null
             ) {
@@ -3189,11 +3265,12 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         {
             T a;
+            Token literal;
             Token tc;
             if (
                     (a = this.param()) != null
                             &&
-                            this.expectStr(',') != null
+                            (literal = this.expectStr(',')) != null
                             &&
                             ((tc = this.expect(TokenType.TYPE_COMMENT)) != null || true)
             ) {
@@ -3249,13 +3326,14 @@ class GeneratedParser<T> extends Parser<T> {
         {
             T a;
             T c;
+            Token literal;
             Token tc;
             if (
                     (a = this.param()) != null
                             &&
                             (c = this.default_()) != null
                             &&
-                            this.expectStr(',') != null
+                            (literal = this.expectStr(',')) != null
                             &&
                             ((tc = this.expect(TokenType.TYPE_COMMENT)) != null || true)
             ) {
@@ -3314,13 +3392,14 @@ class GeneratedParser<T> extends Parser<T> {
         {
             T a;
             T c;
+            Token literal;
             Token tc;
             if (
                     (a = this.param()) != null
                             &&
                             ((c = this.default_()) != null || true)
                             &&
-                            this.expectStr(',') != null
+                            (literal = this.expectStr(',')) != null
                             &&
                             ((tc = this.expect(TokenType.TYPE_COMMENT)) != null || true)
             ) {
@@ -3420,9 +3499,10 @@ class GeneratedParser<T> extends Parser<T> {
         int line_no = this.lineno();
         int col_offset = this.col_offset();
         {
+            Token literal;
             T a;
             if (
-                    this.expectStr(':') != null
+                    (literal = this.expectStr(':')) != null
                             &&
                             (a = this.expression()) != null
             ) {
@@ -3462,9 +3542,10 @@ class GeneratedParser<T> extends Parser<T> {
         int line_no = this.lineno();
         int col_offset = this.col_offset();
         {
+            Token literal;
             T a;
             if (
-                    this.expectStr('=') != null
+                    (literal = this.expectStr('=')) != null
                             &&
                             (a = this.expression()) != null
             ) {
@@ -3598,6 +3679,7 @@ class GeneratedParser<T> extends Parser<T> {
         {
             T a;
             T b;
+            Token literal;
             T[] c;
             if (
                     this.expectKeyword("class") != null
@@ -3606,7 +3688,7 @@ class GeneratedParser<T> extends Parser<T> {
                             &&
                             ((b = this._tmp_69()) != null || true)
                             &&
-                            this.expectStr(':') != null
+                            (literal = this.expectStr(':')) != null
                             &&
                             (c = this.block()) != null
             ) {
@@ -3702,10 +3784,11 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         {
             T[] a;
+            Token literal;
             if (
                     (a = this._gather_70()) != null
                             &&
-                            (this.expectStr(',') != null || true)
+                            ((literal = this.expectStr(',')) != null || true)
             ) {
                 return a;
             }
@@ -3745,12 +3828,13 @@ class GeneratedParser<T> extends Parser<T> {
         {
             T a;
             T[] b;
+            Token literal;
             if (
                     (a = this.star_expression()) != null
                             &&
                             (b = null_if_empty(this._loop1_72())) != null
                             &&
-                            (this.expectStr(',') != null || true)
+                            ((literal = this.expectStr(',')) != null || true)
             ) {
                 return ast.Tuple ( ast.seq_insert_in_front ( a , b ) , ast.Load() , line_no , col_offset );
             }
@@ -3758,10 +3842,11 @@ class GeneratedParser<T> extends Parser<T> {
         }
         {
             T a;
+            Token literal;
             if (
                     (a = this.star_expression()) != null
                             &&
-                            this.expectStr(',') != null
+                            (literal = this.expectStr(',')) != null
             ) {
                 return ast.Tuple ( ast.singleton_seq ( a ) , ast.Load() , line_no , col_offset );
             }
@@ -3808,9 +3893,10 @@ class GeneratedParser<T> extends Parser<T> {
         int line_no = this.lineno();
         int col_offset = this.col_offset();
         {
+            Token literal;
             T a;
             if (
-                    this.expectStr('*') != null
+                    (literal = this.expectStr('*')) != null
                             &&
                             (a = this.bitwise_or()) != null
             ) {
@@ -3860,10 +3946,11 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         {
             T[] a;
+            Token literal;
             if (
                     (a = this._gather_73()) != null
                             &&
-                            (this.expectStr(',') != null || true)
+                            ((literal = this.expectStr(',')) != null || true)
             ) {
                 return a;
             }
@@ -3901,9 +3988,10 @@ class GeneratedParser<T> extends Parser<T> {
         int line_no = this.lineno();
         int col_offset = this.col_offset();
         {
+            Token literal;
             T a;
             if (
-                    this.expectStr('*') != null
+                    (literal = this.expectStr('*')) != null
                             &&
                             (a = this.bitwise_or()) != null
             ) {
@@ -3953,11 +4041,12 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         {
             T a;
+            Token literal;
             T b;
             if (
                     (a = this.name()) != null
                             &&
-                            this.expectStr(":=") != null
+                            (literal = this.expectStr(":=")) != null
                             &&
                             (cut = true)
                             &&
@@ -4061,12 +4150,13 @@ class GeneratedParser<T> extends Parser<T> {
         {
             T a;
             T[] b;
+            Token literal;
             if (
                     (a = this.expression()) != null
                             &&
                             (b = null_if_empty(this._loop1_75())) != null
                             &&
-                            (this.expectStr(',') != null || true)
+                            ((literal = this.expectStr(',')) != null || true)
             ) {
                 return ast.Tuple ( ast.seq_insert_in_front ( a , b ) , ast.Load() , line_no , col_offset );
             }
@@ -4074,10 +4164,11 @@ class GeneratedParser<T> extends Parser<T> {
         }
         {
             T a;
+            Token literal;
             if (
                     (a = this.expression()) != null
                             &&
-                            this.expectStr(',') != null
+                            (literal = this.expectStr(',')) != null
             ) {
                 return ast.Tuple ( ast.singleton_seq ( a ) , ast.Load() , line_no , col_offset );
             }
@@ -4193,13 +4284,14 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         {
             T a;
+            Token literal;
             T b;
             if (
                     this.expectKeyword("lambda") != null
                             &&
                             ((a = this.lambda_params()) != null || true)
                             &&
-                            this.expectStr(':') != null
+                            (literal = this.expectStr(':')) != null
                             &&
                             (b = this.expression()) != null
             ) {
@@ -4380,12 +4472,14 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         {
             T[] a;
+            Token literal;
+            Token literal_1;
             if (
                     (a = null_if_empty(this._loop1_82())) != null
                             &&
-                            this.expectStr('/') != null
+                            (literal = this.expectStr('/')) != null
                             &&
-                            this.expectStr(',') != null
+                            (literal_1 = this.expectStr(',')) != null
             ) {
                 return a;
             }
@@ -4393,10 +4487,11 @@ class GeneratedParser<T> extends Parser<T> {
         }
         {
             T[] a;
+            Token literal;
             if (
                     (a = null_if_empty(this._loop1_83())) != null
                             &&
-                            this.expectStr('/') != null
+                            (literal = this.expectStr('/')) != null
                             &&
                             this.positive_lookahead(this::expectStr, ':')
             ) {
@@ -4438,14 +4533,16 @@ class GeneratedParser<T> extends Parser<T> {
         {
             T[] a;
             T[] b;
+            Token literal;
+            Token literal_1;
             if (
                     (a = this._loop0_84()) != null
                             &&
                             (b = null_if_empty(this._loop1_85())) != null
                             &&
-                            this.expectStr('/') != null
+                            (literal = this.expectStr('/')) != null
                             &&
-                            this.expectStr(',') != null
+                            (literal_1 = this.expectStr(',')) != null
             ) {
                 return ast.slash_with_default ( a , b );
             }
@@ -4454,12 +4551,13 @@ class GeneratedParser<T> extends Parser<T> {
         {
             T[] a;
             T[] b;
+            Token literal;
             if (
                     (a = this._loop0_86()) != null
                             &&
                             (b = null_if_empty(this._loop1_87())) != null
                             &&
-                            this.expectStr('/') != null
+                            (literal = this.expectStr('/')) != null
                             &&
                             this.positive_lookahead(this::expectStr, ':')
             ) {
@@ -4499,11 +4597,12 @@ class GeneratedParser<T> extends Parser<T> {
         int line_no = this.lineno();
         int col_offset = this.col_offset();
         {
+            Token literal;
             T a;
             T[] b;
             T c;
             if (
-                    this.expectStr('*') != null
+                    (literal = this.expectStr('*')) != null
                             &&
                             (a = this.lambda_param_no_default()) != null
                             &&
@@ -4516,12 +4615,14 @@ class GeneratedParser<T> extends Parser<T> {
             this.reset(mark);
         }
         {
+            Token literal;
+            Token literal_1;
             T[] b;
             T c;
             if (
-                    this.expectStr('*') != null
+                    (literal = this.expectStr('*')) != null
                             &&
-                            this.expectStr(',') != null
+                            (literal_1 = this.expectStr(',')) != null
                             &&
                             (b = null_if_empty(this._loop1_89())) != null
                             &&
@@ -4572,9 +4673,10 @@ class GeneratedParser<T> extends Parser<T> {
         int line_no = this.lineno();
         int col_offset = this.col_offset();
         {
+            Token literal;
             T a;
             if (
-                    this.expectStr("**") != null
+                    (literal = this.expectStr("**")) != null
                             &&
                             (a = this.lambda_param_no_default()) != null
             ) {
@@ -4615,10 +4717,11 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         {
             T a;
+            Token literal;
             if (
                     (a = this.lambda_param()) != null
                             &&
-                            this.expectStr(',') != null
+                            (literal = this.expectStr(',')) != null
             ) {
                 return a;
             }
@@ -4669,12 +4772,13 @@ class GeneratedParser<T> extends Parser<T> {
         {
             T a;
             T c;
+            Token literal;
             if (
                     (a = this.lambda_param()) != null
                             &&
                             (c = this.default_()) != null
                             &&
-                            this.expectStr(',') != null
+                            (literal = this.expectStr(',')) != null
             ) {
                 return ast.name_default_pair ( a , c , null );
             }
@@ -4728,12 +4832,13 @@ class GeneratedParser<T> extends Parser<T> {
         {
             T a;
             T c;
+            Token literal;
             if (
                     (a = this.lambda_param()) != null
                             &&
                             ((c = this.default_()) != null || true)
                             &&
-                            this.expectStr(',') != null
+                            (literal = this.expectStr(',')) != null
             ) {
                 return ast.name_default_pair ( a , c , null );
             }
@@ -5153,9 +5258,10 @@ class GeneratedParser<T> extends Parser<T> {
         int line_no = this.lineno();
         int col_offset = this.col_offset();
         {
+            Token literal;
             T a;
             if (
-                    this.expectStr("==") != null
+                    (literal = this.expectStr("==")) != null
                             &&
                             (a = this.bitwise_or()) != null
             ) {
@@ -5238,9 +5344,10 @@ class GeneratedParser<T> extends Parser<T> {
         int line_no = this.lineno();
         int col_offset = this.col_offset();
         {
+            Token literal;
             T a;
             if (
-                    this.expectStr("<=") != null
+                    (literal = this.expectStr("<=")) != null
                             &&
                             (a = this.bitwise_or()) != null
             ) {
@@ -5280,9 +5387,10 @@ class GeneratedParser<T> extends Parser<T> {
         int line_no = this.lineno();
         int col_offset = this.col_offset();
         {
+            Token literal;
             T a;
             if (
-                    this.expectStr('<') != null
+                    (literal = this.expectStr('<')) != null
                             &&
                             (a = this.bitwise_or()) != null
             ) {
@@ -5322,9 +5430,10 @@ class GeneratedParser<T> extends Parser<T> {
         int line_no = this.lineno();
         int col_offset = this.col_offset();
         {
+            Token literal;
             T a;
             if (
-                    this.expectStr(">=") != null
+                    (literal = this.expectStr(">=")) != null
                             &&
                             (a = this.bitwise_or()) != null
             ) {
@@ -5364,9 +5473,10 @@ class GeneratedParser<T> extends Parser<T> {
         int line_no = this.lineno();
         int col_offset = this.col_offset();
         {
+            Token literal;
             T a;
             if (
-                    this.expectStr('>') != null
+                    (literal = this.expectStr('>')) != null
                             &&
                             (a = this.bitwise_or()) != null
             ) {
@@ -5600,11 +5710,12 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         {
             T a;
+            Token literal;
             T b;
             if (
                     (a = this.bitwise_or()) != null
                             &&
-                            this.expectStr('|') != null
+                            (literal = this.expectStr('|')) != null
                             &&
                             (b = this.bitwise_xor()) != null
             ) {
@@ -5675,11 +5786,12 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         {
             T a;
+            Token literal;
             T b;
             if (
                     (a = this.bitwise_xor()) != null
                             &&
-                            this.expectStr('^') != null
+                            (literal = this.expectStr('^')) != null
                             &&
                             (b = this.bitwise_and()) != null
             ) {
@@ -5750,11 +5862,12 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         {
             T a;
+            Token literal;
             T b;
             if (
                     (a = this.bitwise_and()) != null
                             &&
-                            this.expectStr('&') != null
+                            (literal = this.expectStr('&')) != null
                             &&
                             (b = this.shift_expr()) != null
             ) {
@@ -5825,11 +5938,12 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         {
             T a;
+            Token literal;
             T b;
             if (
                     (a = this.shift_expr()) != null
                             &&
-                            this.expectStr("<<") != null
+                            (literal = this.expectStr("<<")) != null
                             &&
                             (b = this.sum()) != null
             ) {
@@ -5839,11 +5953,12 @@ class GeneratedParser<T> extends Parser<T> {
         }
         {
             T a;
+            Token literal;
             T b;
             if (
                     (a = this.shift_expr()) != null
                             &&
-                            this.expectStr(">>") != null
+                            (literal = this.expectStr(">>")) != null
                             &&
                             (b = this.sum()) != null
             ) {
@@ -5914,11 +6029,12 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         {
             T a;
+            Token literal;
             T b;
             if (
                     (a = this.sum()) != null
                             &&
-                            this.expectStr('+') != null
+                            (literal = this.expectStr('+')) != null
                             &&
                             (b = this.term()) != null
             ) {
@@ -5928,11 +6044,12 @@ class GeneratedParser<T> extends Parser<T> {
         }
         {
             T a;
+            Token literal;
             T b;
             if (
                     (a = this.sum()) != null
                             &&
-                            this.expectStr('-') != null
+                            (literal = this.expectStr('-')) != null
                             &&
                             (b = this.term()) != null
             ) {
@@ -6003,11 +6120,12 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         {
             T a;
+            Token literal;
             T b;
             if (
                     (a = this.term()) != null
                             &&
-                            this.expectStr('*') != null
+                            (literal = this.expectStr('*')) != null
                             &&
                             (b = this.factor()) != null
             ) {
@@ -6017,11 +6135,12 @@ class GeneratedParser<T> extends Parser<T> {
         }
         {
             T a;
+            Token literal;
             T b;
             if (
                     (a = this.term()) != null
                             &&
-                            this.expectStr('/') != null
+                            (literal = this.expectStr('/')) != null
                             &&
                             (b = this.factor()) != null
             ) {
@@ -6031,11 +6150,12 @@ class GeneratedParser<T> extends Parser<T> {
         }
         {
             T a;
+            Token literal;
             T b;
             if (
                     (a = this.term()) != null
                             &&
-                            this.expectStr("//") != null
+                            (literal = this.expectStr("//")) != null
                             &&
                             (b = this.factor()) != null
             ) {
@@ -6045,11 +6165,12 @@ class GeneratedParser<T> extends Parser<T> {
         }
         {
             T a;
+            Token literal;
             T b;
             if (
                     (a = this.term()) != null
                             &&
-                            this.expectStr('%') != null
+                            (literal = this.expectStr('%')) != null
                             &&
                             (b = this.factor()) != null
             ) {
@@ -6059,11 +6180,12 @@ class GeneratedParser<T> extends Parser<T> {
         }
         {
             T a;
+            Token literal;
             T b;
             if (
                     (a = this.term()) != null
                             &&
-                            this.expectStr('@') != null
+                            (literal = this.expectStr('@')) != null
                             &&
                             (b = this.factor()) != null
             ) {
@@ -6112,9 +6234,10 @@ class GeneratedParser<T> extends Parser<T> {
         int line_no = this.lineno();
         int col_offset = this.col_offset();
         {
+            Token literal;
             T a;
             if (
-                    this.expectStr('+') != null
+                    (literal = this.expectStr('+')) != null
                             &&
                             (a = this.factor()) != null
             ) {
@@ -6123,9 +6246,10 @@ class GeneratedParser<T> extends Parser<T> {
             this.reset(mark);
         }
         {
+            Token literal;
             T a;
             if (
-                    this.expectStr('-') != null
+                    (literal = this.expectStr('-')) != null
                             &&
                             (a = this.factor()) != null
             ) {
@@ -6134,9 +6258,10 @@ class GeneratedParser<T> extends Parser<T> {
             this.reset(mark);
         }
         {
+            Token literal;
             T a;
             if (
-                    this.expectStr('~') != null
+                    (literal = this.expectStr('~')) != null
                             &&
                             (a = this.factor()) != null
             ) {
@@ -6186,11 +6311,12 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         {
             T a;
+            Token literal;
             T b;
             if (
                     (a = this.await_primary()) != null
                             &&
-                            this.expectStr("**") != null
+                            (literal = this.expectStr("**")) != null
                             &&
                             (b = this.factor()) != null
             ) {
@@ -6312,11 +6438,12 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         {
             T a;
+            Token literal;
             T b;
             if (
                     (a = this.primary()) != null
                             &&
-                            this.expectStr('.') != null
+                            (literal = this.expectStr('.')) != null
                             &&
                             (b = this.name()) != null
             ) {
@@ -6338,15 +6465,17 @@ class GeneratedParser<T> extends Parser<T> {
         }
         {
             T a;
+            Token literal;
             T b;
+            Token literal_1;
             if (
                     (a = this.primary()) != null
                             &&
-                            this.expectStr('(') != null
+                            (literal = this.expectStr('(')) != null
                             &&
                             ((b = this.arguments()) != null || true)
                             &&
-                            this.expectStr(')') != null
+                            (literal_1 = this.expectStr(')')) != null
             ) {
                 return ast.Call ( a , (b != null) ? ast.get_call_args(b) : null , (b != null) ? ast.get_call_keywords(b) : null , line_no , col_offset );
             }
@@ -6354,15 +6483,17 @@ class GeneratedParser<T> extends Parser<T> {
         }
         {
             T a;
+            Token literal;
             T b;
+            Token literal_1;
             if (
                     (a = this.primary()) != null
                             &&
-                            this.expectStr('[') != null
+                            (literal = this.expectStr('[')) != null
                             &&
                             (b = this.slices()) != null
                             &&
-                            this.expectStr(']') != null
+                            (literal_1 = this.expectStr(']')) != null
             ) {
                 return ast.Subscript ( a , b , ast.Load() , line_no , col_offset );
             }
@@ -6421,10 +6552,11 @@ class GeneratedParser<T> extends Parser<T> {
         }
         {
             T[] a;
+            Token literal;
             if (
                     (a = this._gather_93()) != null
                             &&
-                            (this.expectStr(',') != null || true)
+                            ((literal = this.expectStr(',')) != null || true)
             ) {
                 return ast.Tuple ( a , ast.Load() , line_no , col_offset );
             }
@@ -6463,12 +6595,13 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         {
             T a;
+            Token literal;
             T b;
             T c;
             if (
                     ((a = this.expression()) != null || true)
                             &&
-                            this.expectStr(':') != null
+                            (literal = this.expectStr(':')) != null
                             &&
                             ((b = this.expression()) != null || true)
                             &&
@@ -6605,8 +6738,9 @@ class GeneratedParser<T> extends Parser<T> {
             this.reset(mark);
         }
         {
+            Token literal;
             if (
-                    this.expectStr("...") != null
+                    (literal = this.expectStr("...")) != null
             ) {
                 return ast.Constant ( ast.Ellipsis() , null , line_no , col_offset );
             }
@@ -6684,13 +6818,15 @@ class GeneratedParser<T> extends Parser<T> {
         int line_no = this.lineno();
         int col_offset = this.col_offset();
         {
+            Token literal;
             T[] a;
+            Token literal_1;
             if (
-                    this.expectStr('[') != null
+                    (literal = this.expectStr('[')) != null
                             &&
                             ((a = this.star_named_expressions()) != null || true)
                             &&
-                            this.expectStr(']') != null
+                            (literal_1 = this.expectStr(']')) != null
             ) {
                 return ast.List ( a , ast.Load() , line_no , col_offset );
             }
@@ -6728,10 +6864,12 @@ class GeneratedParser<T> extends Parser<T> {
         int line_no = this.lineno();
         int col_offset = this.col_offset();
         {
+            Token literal;
             T a;
             T[] b;
+            Token literal_1;
             if (
-                    this.expectStr('[') != null
+                    (literal = this.expectStr('[')) != null
                             &&
                             (a = this.named_expression()) != null
                             &&
@@ -6739,7 +6877,7 @@ class GeneratedParser<T> extends Parser<T> {
                             &&
                             (b = this.for_if_clauses()) != null
                             &&
-                            this.expectStr(']') != null
+                            (literal_1 = this.expectStr(']')) != null
             ) {
                 return ast.ListComp ( a , b , line_no , col_offset );
             }
@@ -6777,13 +6915,15 @@ class GeneratedParser<T> extends Parser<T> {
         int line_no = this.lineno();
         int col_offset = this.col_offset();
         {
+            Token literal;
             T[] a;
+            Token literal_1;
             if (
-                    this.expectStr('(') != null
+                    (literal = this.expectStr('(')) != null
                             &&
                             ((a = this._tmp_100()) != null || true)
                             &&
-                            this.expectStr(')') != null
+                            (literal_1 = this.expectStr(')')) != null
             ) {
                 return ast.Tuple ( a , ast.Load() , line_no , col_offset );
             }
@@ -6821,13 +6961,15 @@ class GeneratedParser<T> extends Parser<T> {
         int line_no = this.lineno();
         int col_offset = this.col_offset();
         {
+            Token literal;
             T a;
+            Token literal_1;
             if (
-                    this.expectStr('(') != null
+                    (literal = this.expectStr('(')) != null
                             &&
                             (a = this._tmp_101()) != null
                             &&
-                            this.expectStr(')') != null
+                            (literal_1 = this.expectStr(')')) != null
             ) {
                 return a;
             }
@@ -6865,10 +7007,12 @@ class GeneratedParser<T> extends Parser<T> {
         int line_no = this.lineno();
         int col_offset = this.col_offset();
         {
+            Token literal;
             T a;
             T[] b;
+            Token literal_1;
             if (
-                    this.expectStr('(') != null
+                    (literal = this.expectStr('(')) != null
                             &&
                             (a = this.expression()) != null
                             &&
@@ -6876,7 +7020,7 @@ class GeneratedParser<T> extends Parser<T> {
                             &&
                             (b = this.for_if_clauses()) != null
                             &&
-                            this.expectStr(')') != null
+                            (literal_1 = this.expectStr(')')) != null
             ) {
                 return ast.GeneratorExp ( a , b , line_no , col_offset );
             }
@@ -6914,13 +7058,15 @@ class GeneratedParser<T> extends Parser<T> {
         int line_no = this.lineno();
         int col_offset = this.col_offset();
         {
+            Token literal;
             T[] a;
+            Token literal_1;
             if (
-                    this.expectStr('{') != null
+                    (literal = this.expectStr('{')) != null
                             &&
                             (a = this.expressions_list()) != null
                             &&
-                            this.expectStr('}') != null
+                            (literal_1 = this.expectStr('}')) != null
             ) {
                 return ast.Set ( a , line_no , col_offset );
             }
@@ -6958,10 +7104,12 @@ class GeneratedParser<T> extends Parser<T> {
         int line_no = this.lineno();
         int col_offset = this.col_offset();
         {
+            Token literal;
             T a;
             T[] b;
+            Token literal_1;
             if (
-                    this.expectStr('{') != null
+                    (literal = this.expectStr('{')) != null
                             &&
                             (a = this.expression()) != null
                             &&
@@ -6969,7 +7117,7 @@ class GeneratedParser<T> extends Parser<T> {
                             &&
                             (b = this.for_if_clauses()) != null
                             &&
-                            this.expectStr('}') != null
+                            (literal_1 = this.expectStr('}')) != null
             ) {
                 return ast.SetComp ( a , b , line_no , col_offset );
             }
@@ -7007,13 +7155,15 @@ class GeneratedParser<T> extends Parser<T> {
         int line_no = this.lineno();
         int col_offset = this.col_offset();
         {
+            Token literal;
             T[] a;
+            Token literal_1;
             if (
-                    this.expectStr('{') != null
+                    (literal = this.expectStr('{')) != null
                             &&
                             ((a = this.double_starred_kvpairs()) != null || true)
                             &&
-                            this.expectStr('}') != null
+                            (literal_1 = this.expectStr('}')) != null
             ) {
                 return ast.Dict ( ast.get_keys ( a ) , ast.get_values ( a ) , line_no , col_offset );
             }
@@ -7051,16 +7201,18 @@ class GeneratedParser<T> extends Parser<T> {
         int line_no = this.lineno();
         int col_offset = this.col_offset();
         {
+            Token literal;
             T a;
             T[] b;
+            Token literal_1;
             if (
-                    this.expectStr('{') != null
+                    (literal = this.expectStr('{')) != null
                             &&
                             (a = this.kvpair()) != null
                             &&
                             (b = this.for_if_clauses()) != null
                             &&
-                            this.expectStr('}') != null
+                            (literal_1 = this.expectStr('}')) != null
             ) {
                 return ast.DictComp ( ast.get_pair_key(a) , ast.get_pair_value(a) , b , line_no , col_offset );
             }
@@ -7099,10 +7251,11 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         {
             T[] a;
+            Token literal;
             if (
                     (a = this._gather_102()) != null
                             &&
-                            (this.expectStr(',') != null || true)
+                            ((literal = this.expectStr(',')) != null || true)
             ) {
                 return a;
             }
@@ -7140,9 +7293,10 @@ class GeneratedParser<T> extends Parser<T> {
         int line_no = this.lineno();
         int col_offset = this.col_offset();
         {
+            Token literal;
             T a;
             if (
-                    this.expectStr("**") != null
+                    (literal = this.expectStr("**")) != null
                             &&
                             (a = this.bitwise_or()) != null
             ) {
@@ -7192,11 +7346,12 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         {
             T a;
+            Token literal;
             T b;
             if (
                     (a = this.expression()) != null
                             &&
-                            this.expectStr(':') != null
+                            (literal = this.expectStr(':')) != null
                             &&
                             (b = this.expression()) != null
             ) {
@@ -7407,10 +7562,11 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         {
             T a;
+            Token literal;
             if (
                     (a = this.args()) != null
                             &&
-                            (this.expectStr(',') != null || true)
+                            ((literal = this.expectStr(',')) != null || true)
                             &&
                             this.positive_lookahead(this::expectStr, ')')
             ) {
@@ -7503,11 +7659,12 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         {
             T[] a;
+            Token literal;
             T[] b;
             if (
                     (a = this._gather_110()) != null
                             &&
-                            this.expectStr(',') != null
+                            (literal = this.expectStr(',')) != null
                             &&
                             (b = this._gather_112()) != null
             ) {
@@ -7565,9 +7722,10 @@ class GeneratedParser<T> extends Parser<T> {
         int line_no = this.lineno();
         int col_offset = this.col_offset();
         {
+            Token literal;
             T a;
             if (
-                    this.expectStr('*') != null
+                    (literal = this.expectStr('*')) != null
                             &&
                             (a = this.expression()) != null
             ) {
@@ -7608,11 +7766,12 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         {
             T a;
+            Token literal;
             T b;
             if (
                     (a = this.name()) != null
                             &&
-                            this.expectStr('=') != null
+                            (literal = this.expectStr('=')) != null
                             &&
                             (b = this.expression()) != null
             ) {
@@ -7662,11 +7821,12 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         {
             T a;
+            Token literal;
             T b;
             if (
                     (a = this.name()) != null
                             &&
-                            this.expectStr('=') != null
+                            (literal = this.expectStr('=')) != null
                             &&
                             (b = this.expression()) != null
             ) {
@@ -7675,9 +7835,10 @@ class GeneratedParser<T> extends Parser<T> {
             this.reset(mark);
         }
         {
+            Token literal;
             T a;
             if (
-                    this.expectStr("**") != null
+                    (literal = this.expectStr("**")) != null
                             &&
                             (a = this.expression()) != null
             ) {
@@ -7730,12 +7891,13 @@ class GeneratedParser<T> extends Parser<T> {
         {
             T a;
             T[] b;
+            Token literal;
             if (
                     (a = this.star_target()) != null
                             &&
                             (b = this._loop0_118()) != null
                             &&
-                            (this.expectStr(',') != null || true)
+                            ((literal = this.expectStr(',')) != null || true)
             ) {
                 return ast.Tuple ( ast.seq_insert_in_front ( a , b ) , ast.Store() , line_no , col_offset );
             }
@@ -7774,10 +7936,11 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         {
             T[] a;
+            Token literal;
             if (
                     (a = this._gather_119()) != null
                             &&
-                            (this.expectStr(',') != null || true)
+                            ((literal = this.expectStr(',')) != null || true)
             ) {
                 return a;
             }
@@ -7815,9 +7978,10 @@ class GeneratedParser<T> extends Parser<T> {
         int line_no = this.lineno();
         int col_offset = this.col_offset();
         {
+            Token literal;
             T a;
             if (
-                    this.expectStr('*') != null
+                    (literal = this.expectStr('*')) != null
                             &&
                             (a = this._tmp_121()) != null
             ) {
@@ -7827,11 +7991,12 @@ class GeneratedParser<T> extends Parser<T> {
         }
         {
             T a;
+            Token literal;
             T b;
             if (
                     (a = this.t_primary()) != null
                             &&
-                            this.expectStr('.') != null
+                            (literal = this.expectStr('.')) != null
                             &&
                             (b = this.name()) != null
                             &&
@@ -7843,15 +8008,17 @@ class GeneratedParser<T> extends Parser<T> {
         }
         {
             T a;
+            Token literal;
             T b;
+            Token literal_1;
             if (
                     (a = this.t_primary()) != null
                             &&
-                            this.expectStr('[') != null
+                            (literal = this.expectStr('[')) != null
                             &&
                             (b = this.slices()) != null
                             &&
-                            this.expectStr(']') != null
+                            (literal_1 = this.expectStr(']')) != null
                             &&
                             this.negative_lookahead(this::t_lookahead)
             ) {
@@ -7909,39 +8076,45 @@ class GeneratedParser<T> extends Parser<T> {
             this.reset(mark);
         }
         {
+            Token literal;
             T a;
+            Token literal_1;
             if (
-                    this.expectStr('(') != null
+                    (literal = this.expectStr('(')) != null
                             &&
                             (a = this.star_target()) != null
                             &&
-                            this.expectStr(')') != null
+                            (literal_1 = this.expectStr(')')) != null
             ) {
                 return ast.set_expr_context ( a , ast.Store() );
             }
             this.reset(mark);
         }
         {
+            Token literal;
             T[] a;
+            Token literal_1;
             if (
-                    this.expectStr('(') != null
+                    (literal = this.expectStr('(')) != null
                             &&
                             ((a = this.star_targets_seq()) != null || true)
                             &&
-                            this.expectStr(')') != null
+                            (literal_1 = this.expectStr(')')) != null
             ) {
                 return ast.Tuple ( a , ast.Store() , line_no , col_offset );
             }
             this.reset(mark);
         }
         {
+            Token literal;
             T[] a;
+            Token literal_1;
             if (
-                    this.expectStr('[') != null
+                    (literal = this.expectStr('[')) != null
                             &&
                             ((a = this.star_targets_seq()) != null || true)
                             &&
-                            this.expectStr(']') != null
+                            (literal_1 = this.expectStr(']')) != null
             ) {
                 return ast.List ( a , ast.Store() , line_no , col_offset );
             }
@@ -7997,13 +8170,15 @@ class GeneratedParser<T> extends Parser<T> {
             this.reset(mark);
         }
         {
+            Token literal;
             T a;
+            Token literal_1;
             if (
-                    this.expectStr('(') != null
+                    (literal = this.expectStr('(')) != null
                             &&
                             (a = this.single_target()) != null
                             &&
-                            this.expectStr(')') != null
+                            (literal_1 = this.expectStr(')')) != null
             ) {
                 return a;
             }
@@ -8042,11 +8217,12 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         {
             T a;
+            Token literal;
             T b;
             if (
                     (a = this.t_primary()) != null
                             &&
-                            this.expectStr('.') != null
+                            (literal = this.expectStr('.')) != null
                             &&
                             (b = this.name()) != null
                             &&
@@ -8058,15 +8234,17 @@ class GeneratedParser<T> extends Parser<T> {
         }
         {
             T a;
+            Token literal;
             T b;
+            Token literal_1;
             if (
                     (a = this.t_primary()) != null
                             &&
-                            this.expectStr('[') != null
+                            (literal = this.expectStr('[')) != null
                             &&
                             (b = this.slices()) != null
                             &&
-                            this.expectStr(']') != null
+                            (literal_1 = this.expectStr(']')) != null
                             &&
                             this.negative_lookahead(this::t_lookahead)
             ) {
@@ -8107,10 +8285,11 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         {
             T[] a;
+            Token literal;
             if (
                     (a = this._gather_122()) != null
                             &&
-                            (this.expectStr(',') != null || true)
+                            ((literal = this.expectStr(',')) != null || true)
             ) {
                 return a;
             }
@@ -8149,11 +8328,12 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         {
             T a;
+            Token literal;
             T b;
             if (
                     (a = this.t_primary()) != null
                             &&
-                            this.expectStr('.') != null
+                            (literal = this.expectStr('.')) != null
                             &&
                             (b = this.name()) != null
                             &&
@@ -8165,15 +8345,17 @@ class GeneratedParser<T> extends Parser<T> {
         }
         {
             T a;
+            Token literal;
             T b;
+            Token literal_1;
             if (
                     (a = this.t_primary()) != null
                             &&
-                            this.expectStr('[') != null
+                            (literal = this.expectStr('[')) != null
                             &&
                             (b = this.slices()) != null
                             &&
-                            this.expectStr(']') != null
+                            (literal_1 = this.expectStr(']')) != null
                             &&
                             this.negative_lookahead(this::t_lookahead)
             ) {
@@ -8231,39 +8413,45 @@ class GeneratedParser<T> extends Parser<T> {
             this.reset(mark);
         }
         {
+            Token literal;
             T a;
+            Token literal_1;
             if (
-                    this.expectStr('(') != null
+                    (literal = this.expectStr('(')) != null
                             &&
                             (a = this.del_target()) != null
                             &&
-                            this.expectStr(')') != null
+                            (literal_1 = this.expectStr(')')) != null
             ) {
                 return ast.set_expr_context ( a , ast.Del() );
             }
             this.reset(mark);
         }
         {
+            Token literal;
             T[] a;
+            Token literal_1;
             if (
-                    this.expectStr('(') != null
+                    (literal = this.expectStr('(')) != null
                             &&
                             ((a = this.del_targets()) != null || true)
                             &&
-                            this.expectStr(')') != null
+                            (literal_1 = this.expectStr(')')) != null
             ) {
                 return ast.Tuple ( a , ast.Del() , line_no , col_offset );
             }
             this.reset(mark);
         }
         {
+            Token literal;
             T[] a;
+            Token literal_1;
             if (
-                    this.expectStr('[') != null
+                    (literal = this.expectStr('[')) != null
                             &&
                             ((a = this.del_targets()) != null || true)
                             &&
-                            this.expectStr(']') != null
+                            (literal_1 = this.expectStr(']')) != null
             ) {
                 return ast.List ( a , ast.Del() , line_no , col_offset );
             }
@@ -8302,10 +8490,11 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         {
             T[] a;
+            Token literal;
             if (
                     (a = this._gather_124()) != null
                             &&
-                            (this.expectStr(',') != null || true)
+                            ((literal = this.expectStr(',')) != null || true)
             ) {
                 return a;
             }
@@ -8344,11 +8533,12 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         {
             T a;
+            Token literal;
             T b;
             if (
                     (a = this.t_primary()) != null
                             &&
-                            this.expectStr('.') != null
+                            (literal = this.expectStr('.')) != null
                             &&
                             (b = this.name()) != null
                             &&
@@ -8360,15 +8550,17 @@ class GeneratedParser<T> extends Parser<T> {
         }
         {
             T a;
+            Token literal;
             T b;
+            Token literal_1;
             if (
                     (a = this.t_primary()) != null
                             &&
-                            this.expectStr('[') != null
+                            (literal = this.expectStr('[')) != null
                             &&
                             (b = this.slices()) != null
                             &&
-                            this.expectStr(']') != null
+                            (literal_1 = this.expectStr(']')) != null
                             &&
                             this.negative_lookahead(this::t_lookahead)
             ) {
@@ -8439,11 +8631,12 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         {
             T a;
+            Token literal;
             T b;
             if (
                     (a = this.t_primary()) != null
                             &&
-                            this.expectStr('.') != null
+                            (literal = this.expectStr('.')) != null
                             &&
                             (b = this.name()) != null
                             &&
@@ -8455,15 +8648,17 @@ class GeneratedParser<T> extends Parser<T> {
         }
         {
             T a;
+            Token literal;
             T b;
+            Token literal_1;
             if (
                     (a = this.t_primary()) != null
                             &&
-                            this.expectStr('[') != null
+                            (literal = this.expectStr('[')) != null
                             &&
                             (b = this.slices()) != null
                             &&
-                            this.expectStr(']') != null
+                            (literal_1 = this.expectStr(']')) != null
                             &&
                             this.positive_lookahead(this::t_lookahead)
             ) {
@@ -8487,15 +8682,17 @@ class GeneratedParser<T> extends Parser<T> {
         }
         {
             T a;
+            Token literal;
             T b;
+            Token literal_1;
             if (
                     (a = this.t_primary()) != null
                             &&
-                            this.expectStr('(') != null
+                            (literal = this.expectStr('(')) != null
                             &&
                             ((b = this.arguments()) != null || true)
                             &&
-                            this.expectStr(')') != null
+                            (literal_1 = this.expectStr(')')) != null
                             &&
                             this.positive_lookahead(this::t_lookahead)
             ) {
@@ -8545,26 +8742,29 @@ class GeneratedParser<T> extends Parser<T> {
         int line_no = this.lineno();
         int col_offset = this.col_offset();
         {
+            Token literal;
             if (
-                    this.expectStr('(') != null
+                    (literal = this.expectStr('(')) != null
             ) {
-                return ast.None();
+                return ast.from_token(literal);
             }
             this.reset(mark);
         }
         {
+            Token literal;
             if (
-                    this.expectStr('[') != null
+                    (literal = this.expectStr('[')) != null
             ) {
-                return ast.None();
+                return ast.from_token(literal);
             }
             this.reset(mark);
         }
         {
+            Token literal;
             if (
-                    this.expectStr('.') != null
+                    (literal = this.expectStr('.')) != null
             ) {
-                return ast.None();
+                return ast.from_token(literal);
             }
             this.reset(mark);
         }
@@ -8609,39 +8809,45 @@ class GeneratedParser<T> extends Parser<T> {
             this.reset(mark);
         }
         {
+            Token literal;
             T a;
+            Token literal_1;
             if (
-                    this.expectStr('(') != null
+                    (literal = this.expectStr('(')) != null
                             &&
                             (a = this.target()) != null
                             &&
-                            this.expectStr(')') != null
+                            (literal_1 = this.expectStr(')')) != null
             ) {
                 return ast.set_expr_context ( a , ast.Store() );
             }
             this.reset(mark);
         }
         {
+            Token literal;
             T[] b;
+            Token literal_1;
             if (
-                    this.expectStr('(') != null
+                    (literal = this.expectStr('(')) != null
                             &&
                             ((b = this.targets()) != null || true)
                             &&
-                            this.expectStr(')') != null
+                            (literal_1 = this.expectStr(')')) != null
             ) {
                 return ast.Tuple ( b , ast.Store() , line_no , col_offset );
             }
             this.reset(mark);
         }
         {
+            Token literal;
             T[] b;
+            Token literal_1;
             if (
-                    this.expectStr('[') != null
+                    (literal = this.expectStr('[')) != null
                             &&
                             ((b = this.targets()) != null || true)
                             &&
-                            this.expectStr(']') != null
+                            (literal_1 = this.expectStr(']')) != null
             ) {
                 return ast.List ( b , ast.Store() , line_no , col_offset );
             }
@@ -8759,9 +8965,10 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         List<T> children = new ArrayList<>();
         {
+            Token literal;
             T elem;
             while (
-                    this.expectStr(',') != null
+                    (literal = this.expectStr(',')) != null
                             &&
                             (elem = this.expression()) != null
             ) {
@@ -8844,9 +9051,10 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         List<T> children = new ArrayList<>();
         {
+            Token literal;
             T elem;
             while (
-                    this.expectStr(',') != null
+                    (literal = this.expectStr(',')) != null
                             &&
                             (elem = this.expression()) != null
             ) {
@@ -8929,9 +9137,10 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         List<T> children = new ArrayList<>();
         {
+            Token literal;
             T elem;
             while (
-                    this.expectStr(',') != null
+                    (literal = this.expectStr(',')) != null
                             &&
                             (elem = this.expression()) != null
             ) {
@@ -9014,9 +9223,10 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         List<T> children = new ArrayList<>();
         {
+            Token literal;
             T elem;
             while (
-                    this.expectStr(',') != null
+                    (literal = this.expectStr(',')) != null
                             &&
                             (elem = this.expression()) != null
             ) {
@@ -9140,9 +9350,10 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         List<T> children = new ArrayList<>();
         {
+            Token literal;
             T elem;
             while (
-                    this.expectStr(';') != null
+                    (literal = this.expectStr(';')) != null
                             &&
                             (elem = this.small_stmt()) != null
             ) {
@@ -9278,10 +9489,11 @@ class GeneratedParser<T> extends Parser<T> {
             this.reset(mark);
         }
         {
+            Token literal;
             if (
-                    this.expectStr('@') != null
+                    (literal = this.expectStr('@')) != null
             ) {
-                return ast.None();
+                return ast.from_token(literal);
             }
             this.reset(mark);
         }
@@ -9332,10 +9544,11 @@ class GeneratedParser<T> extends Parser<T> {
             this.reset(mark);
         }
         {
+            Token literal;
             if (
-                    this.expectStr('@') != null
+                    (literal = this.expectStr('@')) != null
             ) {
-                return ast.None();
+                return ast.from_token(literal);
             }
             this.reset(mark);
         }
@@ -9462,9 +9675,10 @@ class GeneratedParser<T> extends Parser<T> {
         int line_no = this.lineno();
         int col_offset = this.col_offset();
         {
+            Token literal;
             T d;
             if (
-                    this.expectStr('=') != null
+                    (literal = this.expectStr('=')) != null
                             &&
                             (d = this.annotated_rhs()) != null
             ) {
@@ -9503,13 +9717,15 @@ class GeneratedParser<T> extends Parser<T> {
         int line_no = this.lineno();
         int col_offset = this.col_offset();
         {
+            Token literal;
             T b;
+            Token literal_1;
             if (
-                    this.expectStr('(') != null
+                    (literal = this.expectStr('(')) != null
                             &&
                             (b = this.single_target()) != null
                             &&
-                            this.expectStr(')') != null
+                            (literal_1 = this.expectStr(')')) != null
             ) {
                 return b;
             }
@@ -9555,9 +9771,10 @@ class GeneratedParser<T> extends Parser<T> {
         int line_no = this.lineno();
         int col_offset = this.col_offset();
         {
+            Token literal;
             T d;
             if (
-                    this.expectStr('=') != null
+                    (literal = this.expectStr('=')) != null
                             &&
                             (d = this.annotated_rhs()) != null
             ) {
@@ -9734,9 +9951,10 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         List<T> children = new ArrayList<>();
         {
+            Token literal;
             T elem;
             while (
-                    this.expectStr(',') != null
+                    (literal = this.expectStr(',')) != null
                             &&
                             (elem = this.name()) != null
             ) {
@@ -9819,9 +10037,10 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         List<T> children = new ArrayList<>();
         {
+            Token literal;
             T elem;
             while (
-                    this.expectStr(',') != null
+                    (literal = this.expectStr(',')) != null
                             &&
                             (elem = this.name()) != null
             ) {
@@ -9903,9 +10122,10 @@ class GeneratedParser<T> extends Parser<T> {
         int line_no = this.lineno();
         int col_offset = this.col_offset();
         {
+            Token literal;
             T z;
             if (
-                    this.expectStr(',') != null
+                    (literal = this.expectStr(',')) != null
                             &&
                             (z = this.expression()) != null
             ) {
@@ -9944,10 +10164,11 @@ class GeneratedParser<T> extends Parser<T> {
         int line_no = this.lineno();
         int col_offset = this.col_offset();
         {
+            Token literal;
             if (
-                    this.expectStr(';') != null
+                    (literal = this.expectStr(';')) != null
             ) {
-                return ast.None();
+                return ast.from_token(literal);
             }
             this.reset(mark);
         }
@@ -10073,9 +10294,10 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         List<T> children = new ArrayList<>();
         {
+            Token literal;
             T elem;
             while (
-                    this.expectStr(',') != null
+                    (literal = this.expectStr(',')) != null
                             &&
                             (elem = this.import_from_as_name()) != null
             ) {
@@ -10199,9 +10421,10 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         List<T> children = new ArrayList<>();
         {
+            Token literal;
             T elem;
             while (
-                    this.expectStr(',') != null
+                    (literal = this.expectStr(',')) != null
                             &&
                             (elem = this.dotted_as_name()) != null
             ) {
@@ -10325,9 +10548,10 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         List<T> children = new ArrayList<>();
         {
+            Token literal;
             T elem;
             while (
-                    this.expectStr(',') != null
+                    (literal = this.expectStr(',')) != null
                             &&
                             (elem = this.with_item()) != null
             ) {
@@ -10410,9 +10634,10 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         List<T> children = new ArrayList<>();
         {
+            Token literal;
             T elem;
             while (
-                    this.expectStr(',') != null
+                    (literal = this.expectStr(',')) != null
                             &&
                             (elem = this.with_item()) != null
             ) {
@@ -10495,9 +10720,10 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         List<T> children = new ArrayList<>();
         {
+            Token literal;
             T elem;
             while (
-                    this.expectStr(',') != null
+                    (literal = this.expectStr(',')) != null
                             &&
                             (elem = this.with_item()) != null
             ) {
@@ -10580,9 +10806,10 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         List<T> children = new ArrayList<>();
         {
+            Token literal;
             T elem;
             while (
-                    this.expectStr(',') != null
+                    (literal = this.expectStr(',')) != null
                             &&
                             (elem = this.with_item()) != null
             ) {
@@ -10664,26 +10891,29 @@ class GeneratedParser<T> extends Parser<T> {
         int line_no = this.lineno();
         int col_offset = this.col_offset();
         {
+            Token literal;
             if (
-                    this.expectStr(',') != null
+                    (literal = this.expectStr(',')) != null
             ) {
-                return ast.None();
+                return ast.from_token(literal);
             }
             this.reset(mark);
         }
         {
+            Token literal;
             if (
-                    this.expectStr(')') != null
+                    (literal = this.expectStr(')')) != null
             ) {
-                return ast.None();
+                return ast.from_token(literal);
             }
             this.reset(mark);
         }
         {
+            Token literal;
             if (
-                    this.expectStr(':') != null
+                    (literal = this.expectStr(':')) != null
             ) {
-                return ast.None();
+                return ast.from_token(literal);
             }
             this.reset(mark);
         }
@@ -10841,9 +11071,10 @@ class GeneratedParser<T> extends Parser<T> {
         int line_no = this.lineno();
         int col_offset = this.col_offset();
         {
+            Token literal;
             T z;
             if (
-                    this.expectStr("->") != null
+                    (literal = this.expectStr("->")) != null
                             &&
                             (z = this.expression()) != null
             ) {
@@ -10882,9 +11113,10 @@ class GeneratedParser<T> extends Parser<T> {
         int line_no = this.lineno();
         int col_offset = this.col_offset();
         {
+            Token literal;
             T z;
             if (
-                    this.expectStr("->") != null
+                    (literal = this.expectStr("->")) != null
                             &&
                             (z = this.expression()) != null
             ) {
@@ -11578,13 +11810,15 @@ class GeneratedParser<T> extends Parser<T> {
         int line_no = this.lineno();
         int col_offset = this.col_offset();
         {
+            Token literal;
             T z;
+            Token literal_1;
             if (
-                    this.expectStr('(') != null
+                    (literal = this.expectStr('(')) != null
                             &&
                             ((z = this.arguments()) != null || true)
                             &&
-                            this.expectStr(')') != null
+                            (literal_1 = this.expectStr(')')) != null
             ) {
                 return z;
             }
@@ -11622,9 +11856,10 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         List<T> children = new ArrayList<>();
         {
+            Token literal;
             T elem;
             while (
-                    this.expectStr(',') != null
+                    (literal = this.expectStr(',')) != null
                             &&
                             (elem = this.star_expression()) != null
             ) {
@@ -11748,9 +11983,10 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         List<T> children = new ArrayList<>();
         {
+            Token literal;
             T elem;
             while (
-                    this.expectStr(',') != null
+                    (literal = this.expectStr(',')) != null
                             &&
                             (elem = this.star_named_expression()) != null
             ) {
@@ -12571,9 +12807,10 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         List<T> children = new ArrayList<>();
         {
+            Token literal;
             T elem;
             while (
-                    this.expectStr(',') != null
+                    (literal = this.expectStr(',')) != null
                             &&
                             (elem = this.slice()) != null
             ) {
@@ -12655,9 +12892,10 @@ class GeneratedParser<T> extends Parser<T> {
         int line_no = this.lineno();
         int col_offset = this.col_offset();
         {
+            Token literal;
             T d;
             if (
-                    this.expectStr(':') != null
+                    (literal = this.expectStr(':')) != null
                             &&
                             ((d = this.expression()) != null || true)
             ) {
@@ -12909,11 +13147,12 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         {
             T y;
+            Token literal;
             T[] z;
             if (
                     (y = this.star_named_expression()) != null
                             &&
-                            this.expectStr(',') != null
+                            (literal = this.expectStr(',')) != null
                             &&
                             ((z = this.star_named_expressions()) != null || true)
             ) {
@@ -13001,9 +13240,10 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         List<T> children = new ArrayList<>();
         {
+            Token literal;
             T elem;
             while (
-                    this.expectStr(',') != null
+                    (literal = this.expectStr(',')) != null
                             &&
                             (elem = this.double_starred_kvpair()) != null
             ) {
@@ -13209,9 +13449,10 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         List<T> children = new ArrayList<>();
         {
+            Token literal;
             T elem;
             while (
-                    this.expectStr(',') != null
+                    (literal = this.expectStr(',')) != null
                             &&
                             (elem = this._tmp_136()) != null
             ) {
@@ -13293,9 +13534,10 @@ class GeneratedParser<T> extends Parser<T> {
         int line_no = this.lineno();
         int col_offset = this.col_offset();
         {
+            Token literal;
             T[] k;
             if (
-                    this.expectStr(',') != null
+                    (literal = this.expectStr(',')) != null
                             &&
                             (k = this.kwargs()) != null
             ) {
@@ -13335,9 +13577,10 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         List<T> children = new ArrayList<>();
         {
+            Token literal;
             T elem;
             while (
-                    this.expectStr(',') != null
+                    (literal = this.expectStr(',')) != null
                             &&
                             (elem = this.kwarg_or_starred()) != null
             ) {
@@ -13420,9 +13663,10 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         List<T> children = new ArrayList<>();
         {
+            Token literal;
             T elem;
             while (
-                    this.expectStr(',') != null
+                    (literal = this.expectStr(',')) != null
                             &&
                             (elem = this.kwarg_or_double_starred()) != null
             ) {
@@ -13505,9 +13749,10 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         List<T> children = new ArrayList<>();
         {
+            Token literal;
             T elem;
             while (
-                    this.expectStr(',') != null
+                    (literal = this.expectStr(',')) != null
                             &&
                             (elem = this.kwarg_or_starred()) != null
             ) {
@@ -13590,9 +13835,10 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         List<T> children = new ArrayList<>();
         {
+            Token literal;
             T elem;
             while (
-                    this.expectStr(',') != null
+                    (literal = this.expectStr(',')) != null
                             &&
                             (elem = this.kwarg_or_double_starred()) != null
             ) {
@@ -13716,9 +13962,10 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         List<T> children = new ArrayList<>();
         {
+            Token literal;
             T elem;
             while (
-                    this.expectStr(',') != null
+                    (literal = this.expectStr(',')) != null
                             &&
                             (elem = this.star_target()) != null
             ) {
@@ -13842,9 +14089,10 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         List<T> children = new ArrayList<>();
         {
+            Token literal;
             T elem;
             while (
-                    this.expectStr(',') != null
+                    (literal = this.expectStr(',')) != null
                             &&
                             (elem = this.del_target()) != null
             ) {
@@ -13927,9 +14175,10 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         List<T> children = new ArrayList<>();
         {
+            Token literal;
             T elem;
             while (
-                    this.expectStr(',') != null
+                    (literal = this.expectStr(',')) != null
                             &&
                             (elem = this.target()) != null
             ) {
@@ -14012,10 +14261,11 @@ class GeneratedParser<T> extends Parser<T> {
         int col_offset = this.col_offset();
         {
             T z;
+            Token literal;
             if (
                     (z = this.star_targets()) != null
                             &&
-                            this.expectStr('=') != null
+                            (literal = this.expectStr('=')) != null
             ) {
                 return z;
             }
@@ -14052,18 +14302,20 @@ class GeneratedParser<T> extends Parser<T> {
         int line_no = this.lineno();
         int col_offset = this.col_offset();
         {
+            Token literal;
             if (
-                    this.expectStr('.') != null
+                    (literal = this.expectStr('.')) != null
             ) {
-                return ast.None();
+                return ast.from_token(literal);
             }
             this.reset(mark);
         }
         {
+            Token literal;
             if (
-                    this.expectStr("...") != null
+                    (literal = this.expectStr("...")) != null
             ) {
-                return ast.None();
+                return ast.from_token(literal);
             }
             this.reset(mark);
         }
@@ -14098,18 +14350,20 @@ class GeneratedParser<T> extends Parser<T> {
         int line_no = this.lineno();
         int col_offset = this.col_offset();
         {
+            Token literal;
             if (
-                    this.expectStr('.') != null
+                    (literal = this.expectStr('.')) != null
             ) {
-                return ast.None();
+                return ast.from_token(literal);
             }
             this.reset(mark);
         }
         {
+            Token literal;
             if (
-                    this.expectStr("...") != null
+                    (literal = this.expectStr("...")) != null
             ) {
-                return ast.None();
+                return ast.from_token(literal);
             }
             this.reset(mark);
         }
@@ -14144,9 +14398,10 @@ class GeneratedParser<T> extends Parser<T> {
         int line_no = this.lineno();
         int col_offset = this.col_offset();
         {
+            Token literal;
             T f;
             if (
-                    this.expectStr('@') != null
+                    (literal = this.expectStr('@')) != null
                             &&
                             (f = this.named_expression()) != null
                             &&
@@ -14187,9 +14442,10 @@ class GeneratedParser<T> extends Parser<T> {
         int line_no = this.lineno();
         int col_offset = this.col_offset();
         {
+            Token literal;
             T c;
             if (
-                    this.expectStr(',') != null
+                    (literal = this.expectStr(',')) != null
                             &&
                             (c = this.star_expression()) != null
             ) {
@@ -14228,9 +14484,10 @@ class GeneratedParser<T> extends Parser<T> {
         int line_no = this.lineno();
         int col_offset = this.col_offset();
         {
+            Token literal;
             T c;
             if (
-                    this.expectStr(',') != null
+                    (literal = this.expectStr(',')) != null
                             &&
                             (c = this.expression()) != null
             ) {
@@ -14483,9 +14740,10 @@ class GeneratedParser<T> extends Parser<T> {
         int line_no = this.lineno();
         int col_offset = this.col_offset();
         {
+            Token literal;
             T c;
             if (
-                    this.expectStr(',') != null
+                    (literal = this.expectStr(',')) != null
                             &&
                             (c = this.star_target()) != null
             ) {

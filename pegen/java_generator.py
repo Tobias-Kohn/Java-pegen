@@ -111,8 +111,8 @@ class JavaCallMakerVisitor(GrammarVisitor):
                 self.keywords.add(val)
                 return None, f"this.expectKeyword(\"{val}\")"
         if node.value and len(node.value) > 3 and node.value[0] == "'" == node.value[-1]:
-            return None, f"this.expectStr(\"{node.value[1:-1]}\")"
-        return None, f"this.expectStr({node.value})"
+            return "literal", f"this.expectStr(\"{node.value[1:-1]}\")"
+        return "literal", f"this.expectStr({node.value})"
 
     def visit_Rhs(self, node: Rhs) -> Tuple[Optional[str], str]:
         if node in self.cache:

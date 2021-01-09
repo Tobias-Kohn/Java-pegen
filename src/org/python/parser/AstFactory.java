@@ -67,7 +67,6 @@ public interface AstFactory<T> {
     T Slice(T lower, T upper, T step, int line_no, int col_offset);
     T Starred(T value, T ctx, int line_no, int col_offset);
     T Subscript(T value, T slice, T ctx, int line_no, int col_offset);
-    T Tuple(T items, T ctx, int line_no, int col_offset);
     T Tuple(T[] elts, T ctx, int line_no, int col_offset);
     T Try(T[] body, T[] handlers, T[] orelse, T[] finalbody, int line_no, int col_offset);
     T TypeIgnore(int line_no, String tag);
@@ -123,39 +122,147 @@ public interface AstFactory<T> {
     T True();
 
     T add_type_comment_to_arg(T arg, Token type_comment);
+
     T[] interactive_exit();
+
+    /**
+     * Creates a single-element asdl_seq* that contains a
+     */
     T[] singleton_seq(T item);
+
+    /**
+     * Creates a copy of seq and appends a to it
+     */
     T[] seq_append_to_end(T[] seq, T item);
+
+    /**
+     * Creates a copy of seq and prepends a to it
+     */
     T[] seq_insert_in_front(T item, T[] seq);
+
+    /**
+     * Flattens an seq of seq.
+     *
+     * In Java, this will just return the argument passed to it.  Because of the strict differentiation between
+     * individual elements and sequences/array, there are no sequences of sequences.
+     */
     T[] seq_flatten(T[] seq);
+
+    /**
+     * Creates a new name of the form `<first_name>.<second_name>`.
+     */
     T join_names_with_dot(T a, T b);
+
+    /**
+     * Counts the total number of dots in seq's tokens.
+     */
     int seq_count_dots(T[] items);
+
+    /**
+     * Creates an alias with '*' as the identifier name.
+     */
     T alias_for_star();
+
+    /**
+     * Creates a new seq with the identifiers of all the names in seq.
+     */
     T[] map_names_to_ids(T[] arg);
+
+    /**
+     * Constructs a CmpopExprPair.
+     */
     T cmpop_expr_pair(T op, T item);
+
     T[] get_cmpops(T[] items);
     T[] get_exprs(T[] items);
+
+    /**
+     * Creates an `expr` equivalent to `expr` but with `ctx` as context.
+     */
     T set_expr_context(T expr, T ctx);
+
+    /**
+     * Constructs a KeyValuePair that is used when parsing a dict's key value pairs.
+     */
     T key_value_pair(T key, T value);
+
+    /**
+     * Extracts all keys from an asdl_seq* of KeyValuePair*'s.
+     */
     T[] get_keys(T[] items);
+
+    /**
+     * Extracts all values from an asdl_seq* of KeyValuePair*'s.
+     */
     T[] get_values(T[] items);
+
+    /**
+     * Constructs a NameDefaultPair.
+     */
     T name_default_pair(T arg, T value, Token tc);
+
+    /**
+     * Constructs a SlashWithDefault.
+     */
     T slash_with_default(T[] plain_names, T[] names_with_defaults);
+
+    /**
+     * Constructs a StarEtc.
+     */
     T star_etc(T vararg, T[] kwonlyargs, T kwarg);
+
+    /**
+     * Constructs an arguments object out of all the parsed constructs in the parameters rule.
+     */
     T make_arguments(T[] slash_without_default, T slash_with_default, T[] plain_names, T[] names_with_default, T star_etc);
+
+    /**
+     * Construct a FunctionDef equivalent to function_def, but with decorators.
+     */
     T function_def_decorators(T[] decorators, T function);
+
+    /**
+     * Construct a ClassDef equivalent to class_def, but with decorators.
+     */
     T class_def_decorators(T[] decorators, T cls);
+
+    /**
+     * Construct a KeywordOrStarred.
+     */
     T keyword_or_starred(T element, int is_keyword);
+
+    /**
+     * Extract the starred expressions of an asdl_seq* of KeywordOrStarred*s.
+     */
     T[] seq_extract_starred_exprs(T[] a);
+
+    /**
+     * Return a new asdl_seq* with only the keywords in kwargs.
+     */
     T[] seq_delete_starred_exprs(T[] a);
+
     T collect_call_seqs(T[] expr, T[] b, int line_no, int col_offset);
+
     T concatenate_strings(T[] items);
+
     T[] join_sequences(T[] a, T[] b);
+
     // int check_barry_as_flufl(Token token);
+
     T make_module(T[] body);
 
+    /**
+     * Encapsulates the value of an operator into an AugOperator struct.
+     *
+     * In Java, it just returns `op`, as the `op` itself is already encapsulated due to the generic typing.
+     */
     T augoperator(T op);
+
     T dummy_name();
+
+    /**
+     * Constructs an empty arguments_ty object, that gets used when a function accepts no arguments.
+     */
     T empty_arguments();
 
     // T nonparen_genexp_in_call(T a);

@@ -634,7 +634,14 @@ public class PythonAstFactory implements AstFactory<PyObject> {
     }
 
     public int seq_count_dots(PyObject[] items) {
-        return 0;
+        int result = 0;
+        for (PyObject item : items) {
+            if (item instanceof Ellipsis || item instanceof PyEllipsis)
+                result += 3;
+            else if (item instanceof Dot)
+                result += 1;
+        }
+        return result;
     }
 
     public PyObject alias_for_star() {
@@ -743,7 +750,11 @@ public class PythonAstFactory implements AstFactory<PyObject> {
     }
 
     public PyObject class_def_decorators(PyObject[] decorators, PyObject cls) {
-        throw new RuntimeException("class_def_decorators");
+        if (cls instanceof ClassDef) {
+            ((ClassDef) cls).setDecorator_list(new AstList(Arrays.asList(decorators), AstAdapters.exprAdapter));
+            return cls;
+        } else
+            throw new RuntimeException("class_def_decorators");
     }
 
     public PyObject keyword_or_starred(PyObject element, int is_keyword) {
@@ -825,6 +836,12 @@ public class PythonAstFactory implements AstFactory<PyObject> {
 
     public PyObject from_token(Token tok) {
         switch (tok.getTokenType()) {
+            case DOT -> {
+                Dot result = new Dot();
+                result.setLineno(tok.getStartLine());
+                result.setCol_offset(tok.getStartOffset());
+                return result;
+            }
             case NAME -> {
                 String n = tok.getText();
                 Name result = new Name();
@@ -845,7 +862,7 @@ public class PythonAstFactory implements AstFactory<PyObject> {
                 return new Str(Py.newUnicode(s));
             }
         }
-        return null;
+        return Py.None;
     }
 
     public PyObject[] to_seq(List<PyObject> elts) {
