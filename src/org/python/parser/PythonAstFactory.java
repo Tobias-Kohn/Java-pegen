@@ -140,7 +140,18 @@ public class PythonAstFactory implements AstFactory<PyObject> {
 
     public PyObject ClassDef(String name, PyObject[] bases, PyObject[] keywords, PyObject[] body,
                              PyObject decorator_list, int line_no, int col_offset) {
-        throw new RuntimeException("ClassDef");
+        ClassDef result = new ClassDef();
+        result.setName(Py.newString(name));
+        if (bases == null)
+            bases = new PyObject[0];
+        result.setBases(new AstList(Arrays.asList(bases), AstAdapters.exprAdapter));
+        result.setBody(new AstList(Arrays.asList(body), AstAdapters.stmtAdapter));
+        if (decorator_list == null)
+            decorator_list = new AstList(Collections.emptyList(), AstAdapters.exprAdapter);
+        result.setDecorator_list(decorator_list);
+        result.setLineno(line_no);
+        result.setCol_offset(col_offset);
+        return result;
     }
 
     public PyObject Compare(PyObject left, PyObject[] ops, PyObject[] comparators, int line_no, int col_offset) {
@@ -198,7 +209,14 @@ public class PythonAstFactory implements AstFactory<PyObject> {
     }
 
     public PyObject ExceptHandler(PyObject type_, String name, PyObject[] body, int line_no, int col_offset) {
-        throw new RuntimeException("ExceptHandler");
+        ExceptHandler result = new ExceptHandler();
+        result.setExceptType(type_);
+        if (name != null)
+            result.setName(new Name(Py.newString(name), _Store));
+        result.setBody(new AstList(Arrays.asList(body), AstAdapters.stmtAdapter));
+        result.setLineno(line_no);
+        result.setCol_offset(col_offset);
+        return result;
     }
 
     public PyObject Expr(PyObject value, int line_no, int col_offset) {
@@ -234,7 +252,6 @@ public class PythonAstFactory implements AstFactory<PyObject> {
         FunctionDef result = new FunctionDef();
         result.setName(Py.newString(name));
         result.setArgs(args);
-        arguments a = (arguments)args;
         result.setBody(new AstList(Arrays.asList(body), AstAdapters.stmtAdapter));
         if (decorator_list == null)
             decorator_list = new AstList(Collections.emptyList(), AstAdapters.exprAdapter);
@@ -372,8 +389,10 @@ public class PythonAstFactory implements AstFactory<PyObject> {
     }
 
     public PyObject Raise(PyObject exc, PyObject cause, int line_no, int col_offset) {
-        // TODO: properly convert to the old format
+        if (cause != null)
+            throw new RuntimeException("raise with cause");
         Raise result = new Raise();
+        result.setExceptType(exc);
         result.setLineno(line_no);
         result.setCol_offset(col_offset);
         return result;
@@ -424,11 +443,26 @@ public class PythonAstFactory implements AstFactory<PyObject> {
 
     public PyObject Try(PyObject[] body, PyObject[] handlers, PyObject[] orelse, PyObject[] finalbody,
                         int line_no, int col_offset) {
-        // Try -> TryExcept / TryFinally
-        /*Try result = new Try();
-        for (PyObject item : body)
-            result.getInternalBody().add((stmt) item);*/
-        throw new RuntimeException("Try");
+        // If we have both handlers and a final-body, we have to nest a TryExcept inside a TryFinally
+        if (handlers != null) {
+            TryExcept result = new TryExcept();
+            result.setHandlers(new AstList(Arrays.asList(handlers), AstAdapters.excepthandlerAdapter));
+            result.setBody(new AstList(Arrays.asList(body), AstAdapters.stmtAdapter));
+            if (orelse != null)
+                result.setOrelse(new AstList(Arrays.asList(orelse), AstAdapters.stmtAdapter));
+            result.setLineno(line_no);
+            result.setCol_offset(col_offset);
+            if (finalbody != null)
+                body = new PyObject[]{ result };
+            else
+                return result;
+        }
+        TryFinally result = new TryFinally();
+        result.setBody(new AstList(Arrays.asList(body), AstAdapters.stmtAdapter));
+        result.setFinalbody(new AstList(Arrays.asList(finalbody), AstAdapters.stmtAdapter));
+        result.setLineno(line_no);
+        result.setCol_offset(col_offset);
+        return result;
     }
 
     public PyObject TypeIgnore(int line_no, String tag) {
@@ -454,10 +488,15 @@ public class PythonAstFactory implements AstFactory<PyObject> {
     }
 
     public PyObject With(PyObject[] items, PyObject[] body, PyObject type_comment, int line_no, int col_offset) {
+        WithItem item;
+        if (items.length == 1)
+            item = (WithItem) items[0];
+        else
+            throw new RuntimeException("with");
         With result = new With();
-        // TODO: handle the transformation
-        /*for (PyObject item : items)
-            result.set*/
+        result.setContext_expr(item.getContextExpr());
+        if (item.getOptionalVars() != null)
+            result.setOptional_vars(item.getOptionalVars());
         result.setBody(new AstList(Arrays.asList(body), AstAdapters.stmtAdapter));
         result.setLineno(line_no);
         result.setCol_offset(col_offset);
@@ -513,7 +552,7 @@ public class PythonAstFactory implements AstFactory<PyObject> {
     }
 
     public PyObject withitem(PyObject context_expr, PyObject optional_vars) {
-        throw new RuntimeException("withitem");
+        return new WithItem(context_expr, optional_vars);
     }
 
     public PyObject Add() { return _Add; }

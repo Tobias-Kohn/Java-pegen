@@ -87,9 +87,7 @@ there are some fundamental limitations since the Python input is actually compil
 Some of the missing parts (in no particular order):
 - Support for f-Strings;
 - Error detection and handling in the parser (i.e. do not cause any syntax errors! ;-) );
-- Try/Except/Finally and `raise`;
 - Positional-only and keyword-only arguments;
-- Class definitions;
 - `async` and `await`;
 - `nonlocal`, `yield from`;
 - Star (as in `foo(*args)`);
