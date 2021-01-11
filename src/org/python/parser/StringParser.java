@@ -28,11 +28,24 @@ public class StringParser {
         int j = 0;
         while (j < s.length() && Character.isAlphabetic(s.charAt(j))) {
             switch (s.charAt(j)) {
-                case 'b', 'B' -> bytes_mode = true;
-                case 'f', 'F' -> f_mode = true;
-                case 'r', 'R' -> raw_mode = true;
-                case 'u', 'U' -> { /* Ignore the old unicode marker */ }
-                default -> { return string_error(); }
+                case 'b':
+                case 'B':
+                    bytes_mode = true;
+                    break;
+                case 'f':
+                case 'F':
+                    f_mode = true;
+                    break;
+                case 'r':
+                case 'R':
+                    raw_mode = true;
+                    break;
+                case 'u':
+                case 'U':
+                    /* Ignore the old unicode marker */
+                    break;
+                default:
+                    return string_error();
             }
             j++;
         }
@@ -74,27 +87,49 @@ public class StringParser {
         char ch;
         while (i < s.length())
             if ((ch = s.charAt(i++)) == '\\') {
+                char c;
                 switch (ch = s.charAt(i++)) {
-                    case 'b' -> result.append('\b');
-                    case 'f' -> result.append('\f');
-                    case 'n' -> result.append('\n');
-                    case 'r' -> result.append('\r');
-                    case 't' -> result.append('\t');
-                    case '\\', '"', '\'' -> result.append(ch);
-                    case '0', '1', '2', '3', '4', '5', '6', '7' -> {
-                        char c = (char)Integer.parseInt(s.subSequence(i, i+3).toString(), 8);
-                        if (c >= 0x80)
-                            return string_error("bytes can only contain ASCII literal characters.");
-                        result.append(c);
-                        i += 3;
-                    }
-                    case 'x' -> {
-                        char c = (char)Integer.parseInt(s.subSequence(i, i+2).toString(), 16);
+                    case 'b':
+                        result.append('\b');
+                        break;
+                    case 'f':
+                        result.append('\f');
+                        break;
+                    case 'n':
+                        result.append('\n');
+                        break;
+                    case 'r':
+                        result.append('\r');
+                        break;
+                    case 't':
+                        result.append('\t');
+                        break;
+                    case '\\':
+                    case '"':
+                    case '\'':
+                        result.append(ch);
+                        break;
+                    case '0':
+                    case '1':
+                    case '2':
+                    case '3':
+                    case '4':
+                    case '5':
+                    case '6':
+                    case '7':
+                        c = (char)Integer.parseInt(s.subSequence(i-1, i+2).toString(), 8);
                         if (c >= 0x80)
                             return string_error("bytes can only contain ASCII literal characters.");
                         result.append(c);
                         i += 2;
-                    }
+                        break;
+                    case 'x':
+                        c = (char)Integer.parseInt(s.subSequence(i, i+2).toString(), 16);
+                        if (c >= 0x80)
+                            return string_error("bytes can only contain ASCII literal characters.");
+                        result.append(c);
+                        i += 2;
+                        break;
                 }
             }
             else if (ch < 0x80)
@@ -110,33 +145,54 @@ public class StringParser {
         char ch;
         while (i < s.length())
             if ((ch = s.charAt(i++)) == '\\') {
+                char c;
                 switch (ch = s.charAt(i++)) {
-                    case 'b' -> result.append('\b');
-                    case 'f' -> result.append('\f');
-                    case 'n' -> result.append('\n');
-                    case 'r' -> result.append('\r');
-                    case 't' -> result.append('\t');
-                    case '\\', '"', '\'' -> result.append(ch);
-                    case '0', '1', '2', '3', '4', '5', '6', '7' -> {
-                        char c = (char)Integer.parseInt(s.subSequence(i, i+3).toString(), 8);
-                        result.append(c);
-                        i += 3;
-                    }
-                    case 'x' -> {
-                        char c = (char)Integer.parseInt(s.subSequence(i, i+2).toString(), 16);
+                    case 'b':
+                        result.append('\b');
+                        break;
+                    case 'f':
+                        result.append('\f');
+                        break;
+                    case 'n':
+                        result.append('\n');
+                        break;
+                    case 'r':
+                        result.append('\r');
+                        break;
+                    case 't':
+                        result.append('\t');
+                        break;
+                    case '\\':
+                    case '"':
+                    case '\'':
+                        result.append(ch);
+                        break;
+                    case '0':
+                    case '1':
+                    case '2':
+                    case '3':
+                    case '4':
+                    case '5':
+                    case '6':
+                    case '7':
+                        c = (char)Integer.parseInt(s.subSequence(i-1, i+2).toString(), 8);
                         result.append(c);
                         i += 2;
-                    }
-                    case 'u' -> {
-                        char c = (char)Integer.parseInt(s.subSequence(i, i+4).toString(), 16);
+                        break;
+                    case 'x':
+                        c = (char)Integer.parseInt(s.subSequence(i, i+2).toString(), 16);
+                        result.append(c);
+                        i += 2;
+                        break;
+                    case 'u':
+                        c = (char)Integer.parseInt(s.subSequence(i, i+4).toString(), 16);
                         result.append(c);
                         i += 4;
-                    }
-                    case 'U' -> {
-                        char c = (char)Integer.parseInt(s.subSequence(i, i+8).toString(), 16);
+                        break;
+                    case 'U':
+                        c = (char)Integer.parseInt(s.subSequence(i, i+8).toString(), 16);
                         result.append(c);
                         i += 4;
-                    }
                 }
             } else
                 result.append(ch);

@@ -16,7 +16,7 @@ import contextlib
 #import json
 import re
 import token
-from typing import Any, Dict, Optional, IO, Set, Text, Tuple
+from typing import Any, Dict, Optional, IO, Iterator, List, Set, Text, Tuple
 
 from pegen.grammar import (
     Cut,
@@ -60,11 +60,11 @@ MODULE_SUFFIX = """
 """
 
 CLASS_PREFIX = """\
-private static class CachedInfo<T_> {
+private static class Memo<T_> {
     public final T_ item;
     public int end_mark;
     
-    CachedInfo(T_ item, int end_mark) {
+    Memo(T_ item, int end_mark) {
         this.item = item;
         this.end_mark = end_mark;
     }
@@ -383,14 +383,14 @@ class JavaParserGenerator(ParserGenerator, GrammarVisitor):
         name = node.name
         if name in ("default", ):
             name += '_'
-        self.print(f"private final Map<Integer, CachedInfo<{node_type}>> {node.name}_cache = new HashMap<>();")
+        self.print(f"private final Map<Integer, Memo<{node_type}>> {node.name}_cache = new HashMap<>();")
         self.print("")
         self.print(f"protected {node_type} {name}() {{")
         with self.indent():
             if node.left_recursive:
                 if node.leader:
                     self.print("int p = this.mark();")
-                    self.print(f"CachedInfo<{node_type}> info = {node.name}_cache.get(p);")
+                    self.print(f"Memo<{node_type}> info = {node.name}_cache.get(p);")
                     self.print("if (info != null) {")
                     with self.indent():
                         self.print(f"log(\"{node.name}() [cached]-> \" + info.toString());")
@@ -401,7 +401,7 @@ class JavaParserGenerator(ParserGenerator, GrammarVisitor):
                     self.print(f"{node_type} last_result = null;")
                     self.print("int last_mark = p;")
                     self.print("int depth = 0;")
-                    self.print(f"{node.name}_cache.put(p, new CachedInfo<>(null, p));")
+                    self.print(f"{node.name}_cache.put(p, new Memo<>(null, p));")
                     self.print(f"log(\"recursive {node.name}() at \" + p + \" depth \" + depth);")
                     self.print("while (true) {")
                     with self.indent():
@@ -416,7 +416,7 @@ class JavaParserGenerator(ParserGenerator, GrammarVisitor):
                         self.print("    break;")
                         self.print("last_result = result;")
                         self.print("last_mark = end_mark;")
-                        self.print(f"{node.name}_cache.put(p, new CachedInfo<>(result, end_mark));")
+                        self.print(f"{node.name}_cache.put(p, new Memo<>(result, end_mark));")
                     self.print("}")
                     self.print("this.reset(last_mark);")
                     self.print("if (last_result != null) {")
@@ -428,13 +428,13 @@ class JavaParserGenerator(ParserGenerator, GrammarVisitor):
                         self.print("this.reset(last_mark);")
                     self.print("}")
                     self.print(f"log(\"{node.name}() [fresh]-> \", last_result);")
-                    self.print(f"{node.name}_cache.put(p, new CachedInfo<>(last_result, last_mark));")
+                    self.print(f"{node.name}_cache.put(p, new Memo<>(last_result, last_mark));")
                     self.print(f"return last_result;")
                 else:
                     self.print(f"return _{node.name}();")
             else:
                 self.print("int p = this.mark();")
-                self.print(f"CachedInfo<{node_type}> info = {node.name}_cache.get(p);")
+                self.print(f"Memo<{node_type}> info = {node.name}_cache.get(p);")
                 self.print("if (info != null) {")
                 with self.indent():
                     self.print(f"log(\"{node.name}() [cached]-> \" + info.toString());")
@@ -448,7 +448,7 @@ class JavaParserGenerator(ParserGenerator, GrammarVisitor):
                 self.print(f"log(\"{node.name}() [fresh]-> \", result);")
                 self.print("if (result != null) {")
                 with self.indent():
-                    self.print(f"{node.name}_cache.put(p, new CachedInfo<>(result, this.mark()));")
+                    self.print(f"{node.name}_cache.put(p, new Memo<>(result, this.mark()));")
                 self.print("}")
                 self.print(f"return result;")
         self.print("}")

@@ -17,11 +17,11 @@ class GeneratedParser<T> extends Parser<T> {
         super(tokenizer, filename, verbose, ast);
     }
 
-    private static class CachedInfo<T_> {
+    private static class Memo<T_> {
         public final T_ item;
         public int end_mark;
 
-        CachedInfo(T_ item, int end_mark) {
+        Memo(T_ item, int end_mark) {
             this.item = item;
             this.end_mark = end_mark;
         }
@@ -35,11 +35,11 @@ class GeneratedParser<T> extends Parser<T> {
         }
     }
 
-    private final Map<Integer, CachedInfo<T>> start_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> start_cache = new HashMap<>();
 
     protected T start() {
         int p = this.mark();
-        CachedInfo<T> info = start_cache.get(p);
+        Memo<T> info = start_cache.get(p);
         if (info != null) {
             log("start() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -51,7 +51,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("start() [fresh]-> ", result);
         if (result != null) {
-            start_cache.put(p, new CachedInfo<>(result, this.mark()));
+            start_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -74,11 +74,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> file_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> file_cache = new HashMap<>();
 
     protected T file() {
         int p = this.mark();
-        CachedInfo<T> info = file_cache.get(p);
+        Memo<T> info = file_cache.get(p);
         if (info != null) {
             log("file() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -90,7 +90,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("file() [fresh]-> ", result);
         if (result != null) {
-            file_cache.put(p, new CachedInfo<>(result, this.mark()));
+            file_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -116,11 +116,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> interactive_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> interactive_cache = new HashMap<>();
 
     protected T interactive() {
         int p = this.mark();
-        CachedInfo<T> info = interactive_cache.get(p);
+        Memo<T> info = interactive_cache.get(p);
         if (info != null) {
             log("interactive() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -132,7 +132,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("interactive() [fresh]-> ", result);
         if (result != null) {
-            interactive_cache.put(p, new CachedInfo<>(result, this.mark()));
+            interactive_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -156,11 +156,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> eval_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> eval_cache = new HashMap<>();
 
     protected T eval() {
         int p = this.mark();
-        CachedInfo<T> info = eval_cache.get(p);
+        Memo<T> info = eval_cache.get(p);
         if (info != null) {
             log("eval() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -172,7 +172,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("eval() [fresh]-> ", result);
         if (result != null) {
-            eval_cache.put(p, new CachedInfo<>(result, this.mark()));
+            eval_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -201,11 +201,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> func_type_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> func_type_cache = new HashMap<>();
 
     protected T func_type() {
         int p = this.mark();
-        CachedInfo<T> info = func_type_cache.get(p);
+        Memo<T> info = func_type_cache.get(p);
         if (info != null) {
             log("func_type() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -217,7 +217,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("func_type() [fresh]-> ", result);
         if (result != null) {
-            func_type_cache.put(p, new CachedInfo<>(result, this.mark()));
+            func_type_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -258,11 +258,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> fstring_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> fstring_cache = new HashMap<>();
 
     protected T fstring() {
         int p = this.mark();
-        CachedInfo<T> info = fstring_cache.get(p);
+        Memo<T> info = fstring_cache.get(p);
         if (info != null) {
             log("fstring() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -274,7 +274,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("fstring() [fresh]-> ", result);
         if (result != null) {
-            fstring_cache.put(p, new CachedInfo<>(result, this.mark()));
+            fstring_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -298,11 +298,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T[]>> type_expressions_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> type_expressions_cache = new HashMap<>();
 
     protected T[] type_expressions() {
         int p = this.mark();
-        CachedInfo<T[]> info = type_expressions_cache.get(p);
+        Memo<T[]> info = type_expressions_cache.get(p);
         if (info != null) {
             log("type_expressions() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -314,7 +314,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("type_expressions() [fresh]-> ", result);
         if (result != null) {
-            type_expressions_cache.put(p, new CachedInfo<>(result, this.mark()));
+            type_expressions_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -446,11 +446,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T[]>> statements_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> statements_cache = new HashMap<>();
 
     protected T[] statements() {
         int p = this.mark();
-        CachedInfo<T[]> info = statements_cache.get(p);
+        Memo<T[]> info = statements_cache.get(p);
         if (info != null) {
             log("statements() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -462,7 +462,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("statements() [fresh]-> ", result);
         if (result != null) {
-            statements_cache.put(p, new CachedInfo<>(result, this.mark()));
+            statements_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -486,11 +486,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T[]>> statement_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> statement_cache = new HashMap<>();
 
     protected T[] statement() {
         int p = this.mark();
-        CachedInfo<T[]> info = statement_cache.get(p);
+        Memo<T[]> info = statement_cache.get(p);
         if (info != null) {
             log("statement() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -502,7 +502,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("statement() [fresh]-> ", result);
         if (result != null) {
-            statement_cache.put(p, new CachedInfo<>(result, this.mark()));
+            statement_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -535,11 +535,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T[]>> statement_newline_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> statement_newline_cache = new HashMap<>();
 
     protected T[] statement_newline() {
         int p = this.mark();
-        CachedInfo<T[]> info = statement_newline_cache.get(p);
+        Memo<T[]> info = statement_newline_cache.get(p);
         if (info != null) {
             log("statement_newline() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -551,7 +551,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("statement_newline() [fresh]-> ", result);
         if (result != null) {
-            statement_newline_cache.put(p, new CachedInfo<>(result, this.mark()));
+            statement_newline_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -602,11 +602,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T[]>> simple_stmt_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> simple_stmt_cache = new HashMap<>();
 
     protected T[] simple_stmt() {
         int p = this.mark();
-        CachedInfo<T[]> info = simple_stmt_cache.get(p);
+        Memo<T[]> info = simple_stmt_cache.get(p);
         if (info != null) {
             log("simple_stmt() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -618,7 +618,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("simple_stmt() [fresh]-> ", result);
         if (result != null) {
-            simple_stmt_cache.put(p, new CachedInfo<>(result, this.mark()));
+            simple_stmt_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -660,11 +660,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> small_stmt_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> small_stmt_cache = new HashMap<>();
 
     protected T small_stmt() {
         int p = this.mark();
-        CachedInfo<T> info = small_stmt_cache.get(p);
+        Memo<T> info = small_stmt_cache.get(p);
         if (info != null) {
             log("small_stmt() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -676,7 +676,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("small_stmt() [fresh]-> ", result);
         if (result != null) {
-            small_stmt_cache.put(p, new CachedInfo<>(result, this.mark()));
+            small_stmt_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -821,11 +821,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> compound_stmt_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> compound_stmt_cache = new HashMap<>();
 
     protected T compound_stmt() {
         int p = this.mark();
-        CachedInfo<T> info = compound_stmt_cache.get(p);
+        Memo<T> info = compound_stmt_cache.get(p);
         if (info != null) {
             log("compound_stmt() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -837,7 +837,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("compound_stmt() [fresh]-> ", result);
         if (result != null) {
-            compound_stmt_cache.put(p, new CachedInfo<>(result, this.mark()));
+            compound_stmt_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -929,11 +929,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> assignment_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> assignment_cache = new HashMap<>();
 
     protected T assignment() {
         int p = this.mark();
-        CachedInfo<T> info = assignment_cache.get(p);
+        Memo<T> info = assignment_cache.get(p);
         if (info != null) {
             log("assignment() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -945,7 +945,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("assignment() [fresh]-> ", result);
         if (result != null) {
-            assignment_cache.put(p, new CachedInfo<>(result, this.mark()));
+            assignment_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -1030,11 +1030,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> augassign_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> augassign_cache = new HashMap<>();
 
     protected T augassign() {
         int p = this.mark();
-        CachedInfo<T> info = augassign_cache.get(p);
+        Memo<T> info = augassign_cache.get(p);
         if (info != null) {
             log("augassign() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -1046,7 +1046,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("augassign() [fresh]-> ", result);
         if (result != null) {
-            augassign_cache.put(p, new CachedInfo<>(result, this.mark()));
+            augassign_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -1178,11 +1178,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> global_stmt_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> global_stmt_cache = new HashMap<>();
 
     protected T global_stmt() {
         int p = this.mark();
-        CachedInfo<T> info = global_stmt_cache.get(p);
+        Memo<T> info = global_stmt_cache.get(p);
         if (info != null) {
             log("global_stmt() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -1194,7 +1194,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("global_stmt() [fresh]-> ", result);
         if (result != null) {
-            global_stmt_cache.put(p, new CachedInfo<>(result, this.mark()));
+            global_stmt_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -1220,11 +1220,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> nonlocal_stmt_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> nonlocal_stmt_cache = new HashMap<>();
 
     protected T nonlocal_stmt() {
         int p = this.mark();
-        CachedInfo<T> info = nonlocal_stmt_cache.get(p);
+        Memo<T> info = nonlocal_stmt_cache.get(p);
         if (info != null) {
             log("nonlocal_stmt() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -1236,7 +1236,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("nonlocal_stmt() [fresh]-> ", result);
         if (result != null) {
-            nonlocal_stmt_cache.put(p, new CachedInfo<>(result, this.mark()));
+            nonlocal_stmt_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -1262,11 +1262,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> yield_stmt_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> yield_stmt_cache = new HashMap<>();
 
     protected T yield_stmt() {
         int p = this.mark();
-        CachedInfo<T> info = yield_stmt_cache.get(p);
+        Memo<T> info = yield_stmt_cache.get(p);
         if (info != null) {
             log("yield_stmt() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -1278,7 +1278,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("yield_stmt() [fresh]-> ", result);
         if (result != null) {
-            yield_stmt_cache.put(p, new CachedInfo<>(result, this.mark()));
+            yield_stmt_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -1302,11 +1302,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> assert_stmt_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> assert_stmt_cache = new HashMap<>();
 
     protected T assert_stmt() {
         int p = this.mark();
-        CachedInfo<T> info = assert_stmt_cache.get(p);
+        Memo<T> info = assert_stmt_cache.get(p);
         if (info != null) {
             log("assert_stmt() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -1318,7 +1318,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("assert_stmt() [fresh]-> ", result);
         if (result != null) {
-            assert_stmt_cache.put(p, new CachedInfo<>(result, this.mark()));
+            assert_stmt_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -1347,11 +1347,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> del_stmt_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> del_stmt_cache = new HashMap<>();
 
     protected T del_stmt() {
         int p = this.mark();
-        CachedInfo<T> info = del_stmt_cache.get(p);
+        Memo<T> info = del_stmt_cache.get(p);
         if (info != null) {
             log("del_stmt() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -1363,7 +1363,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("del_stmt() [fresh]-> ", result);
         if (result != null) {
-            del_stmt_cache.put(p, new CachedInfo<>(result, this.mark()));
+            del_stmt_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -1391,11 +1391,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> import_stmt_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> import_stmt_cache = new HashMap<>();
 
     protected T import_stmt() {
         int p = this.mark();
-        CachedInfo<T> info = import_stmt_cache.get(p);
+        Memo<T> info = import_stmt_cache.get(p);
         if (info != null) {
             log("import_stmt() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -1407,7 +1407,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("import_stmt() [fresh]-> ", result);
         if (result != null) {
-            import_stmt_cache.put(p, new CachedInfo<>(result, this.mark()));
+            import_stmt_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -1440,11 +1440,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> import_name_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> import_name_cache = new HashMap<>();
 
     protected T import_name() {
         int p = this.mark();
-        CachedInfo<T> info = import_name_cache.get(p);
+        Memo<T> info = import_name_cache.get(p);
         if (info != null) {
             log("import_name() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -1456,7 +1456,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("import_name() [fresh]-> ", result);
         if (result != null) {
-            import_name_cache.put(p, new CachedInfo<>(result, this.mark()));
+            import_name_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -1482,11 +1482,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> import_from_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> import_from_cache = new HashMap<>();
 
     protected T import_from() {
         int p = this.mark();
-        CachedInfo<T> info = import_from_cache.get(p);
+        Memo<T> info = import_from_cache.get(p);
         if (info != null) {
             log("import_from() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -1498,7 +1498,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("import_from() [fresh]-> ", result);
         if (result != null) {
-            import_from_cache.put(p, new CachedInfo<>(result, this.mark()));
+            import_from_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -1548,11 +1548,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T[]>> import_from_targets_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> import_from_targets_cache = new HashMap<>();
 
     protected T[] import_from_targets() {
         int p = this.mark();
-        CachedInfo<T[]> info = import_from_targets_cache.get(p);
+        Memo<T[]> info = import_from_targets_cache.get(p);
         if (info != null) {
             log("import_from_targets() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -1564,7 +1564,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("import_from_targets() [fresh]-> ", result);
         if (result != null) {
-            import_from_targets_cache.put(p, new CachedInfo<>(result, this.mark()));
+            import_from_targets_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -1617,11 +1617,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T[]>> import_from_as_names_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> import_from_as_names_cache = new HashMap<>();
 
     protected T[] import_from_as_names() {
         int p = this.mark();
-        CachedInfo<T[]> info = import_from_as_names_cache.get(p);
+        Memo<T[]> info = import_from_as_names_cache.get(p);
         if (info != null) {
             log("import_from_as_names() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -1633,7 +1633,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("import_from_as_names() [fresh]-> ", result);
         if (result != null) {
-            import_from_as_names_cache.put(p, new CachedInfo<>(result, this.mark()));
+            import_from_as_names_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -1657,11 +1657,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> import_from_as_name_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> import_from_as_name_cache = new HashMap<>();
 
     protected T import_from_as_name() {
         int p = this.mark();
-        CachedInfo<T> info = import_from_as_name_cache.get(p);
+        Memo<T> info = import_from_as_name_cache.get(p);
         if (info != null) {
             log("import_from_as_name() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -1673,7 +1673,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("import_from_as_name() [fresh]-> ", result);
         if (result != null) {
-            import_from_as_name_cache.put(p, new CachedInfo<>(result, this.mark()));
+            import_from_as_name_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -1700,11 +1700,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T[]>> dotted_as_names_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> dotted_as_names_cache = new HashMap<>();
 
     protected T[] dotted_as_names() {
         int p = this.mark();
-        CachedInfo<T[]> info = dotted_as_names_cache.get(p);
+        Memo<T[]> info = dotted_as_names_cache.get(p);
         if (info != null) {
             log("dotted_as_names() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -1716,7 +1716,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("dotted_as_names() [fresh]-> ", result);
         if (result != null) {
-            dotted_as_names_cache.put(p, new CachedInfo<>(result, this.mark()));
+            dotted_as_names_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -1740,11 +1740,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> dotted_as_name_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> dotted_as_name_cache = new HashMap<>();
 
     protected T dotted_as_name() {
         int p = this.mark();
-        CachedInfo<T> info = dotted_as_name_cache.get(p);
+        Memo<T> info = dotted_as_name_cache.get(p);
         if (info != null) {
             log("dotted_as_name() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -1756,7 +1756,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("dotted_as_name() [fresh]-> ", result);
         if (result != null) {
-            dotted_as_name_cache.put(p, new CachedInfo<>(result, this.mark()));
+            dotted_as_name_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -1783,11 +1783,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> dotted_name_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> dotted_name_cache = new HashMap<>();
 
     protected T dotted_name() {
         int p = this.mark();
-        CachedInfo<T> info = dotted_name_cache.get(p);
+        Memo<T> info = dotted_name_cache.get(p);
         if (info != null) {
             log("dotted_name() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -1797,7 +1797,7 @@ class GeneratedParser<T> extends Parser<T> {
         T last_result = null;
         int last_mark = p;
         int depth = 0;
-        dotted_name_cache.put(p, new CachedInfo<>(null, p));
+        dotted_name_cache.put(p, new Memo<>(null, p));
         log("recursive dotted_name() at " + p + " depth " + depth);
         while (true) {
             this.reset(p);
@@ -1811,7 +1811,7 @@ class GeneratedParser<T> extends Parser<T> {
                 break;
             last_result = result;
             last_mark = end_mark;
-            dotted_name_cache.put(p, new CachedInfo<>(result, end_mark));
+            dotted_name_cache.put(p, new Memo<>(result, end_mark));
         }
         this.reset(last_mark);
         if (last_result != null) {
@@ -1821,7 +1821,7 @@ class GeneratedParser<T> extends Parser<T> {
             this.reset(last_mark);
         }
         log("dotted_name() [fresh]-> ", last_result);
-        dotted_name_cache.put(p, new CachedInfo<>(last_result, last_mark));
+        dotted_name_cache.put(p, new Memo<>(last_result, last_mark));
         return last_result;
     }
 
@@ -1859,11 +1859,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> if_stmt_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> if_stmt_cache = new HashMap<>();
 
     protected T if_stmt() {
         int p = this.mark();
-        CachedInfo<T> info = if_stmt_cache.get(p);
+        Memo<T> info = if_stmt_cache.get(p);
         if (info != null) {
             log("if_stmt() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -1875,7 +1875,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("if_stmt() [fresh]-> ", result);
         if (result != null) {
-            if_stmt_cache.put(p, new CachedInfo<>(result, this.mark()));
+            if_stmt_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -1930,11 +1930,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> elif_stmt_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> elif_stmt_cache = new HashMap<>();
 
     protected T elif_stmt() {
         int p = this.mark();
-        CachedInfo<T> info = elif_stmt_cache.get(p);
+        Memo<T> info = elif_stmt_cache.get(p);
         if (info != null) {
             log("elif_stmt() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -1946,7 +1946,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("elif_stmt() [fresh]-> ", result);
         if (result != null) {
-            elif_stmt_cache.put(p, new CachedInfo<>(result, this.mark()));
+            elif_stmt_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -2001,11 +2001,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T[]>> else_block_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> else_block_cache = new HashMap<>();
 
     protected T[] else_block() {
         int p = this.mark();
-        CachedInfo<T[]> info = else_block_cache.get(p);
+        Memo<T[]> info = else_block_cache.get(p);
         if (info != null) {
             log("else_block() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -2017,7 +2017,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("else_block() [fresh]-> ", result);
         if (result != null) {
-            else_block_cache.put(p, new CachedInfo<>(result, this.mark()));
+            else_block_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -2046,11 +2046,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> while_stmt_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> while_stmt_cache = new HashMap<>();
 
     protected T while_stmt() {
         int p = this.mark();
-        CachedInfo<T> info = while_stmt_cache.get(p);
+        Memo<T> info = while_stmt_cache.get(p);
         if (info != null) {
             log("while_stmt() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -2062,7 +2062,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("while_stmt() [fresh]-> ", result);
         if (result != null) {
-            while_stmt_cache.put(p, new CachedInfo<>(result, this.mark()));
+            while_stmt_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -2097,11 +2097,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> for_stmt_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> for_stmt_cache = new HashMap<>();
 
     protected T for_stmt() {
         int p = this.mark();
-        CachedInfo<T> info = for_stmt_cache.get(p);
+        Memo<T> info = for_stmt_cache.get(p);
         if (info != null) {
             log("for_stmt() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -2113,7 +2113,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("for_stmt() [fresh]-> ", result);
         if (result != null) {
-            for_stmt_cache.put(p, new CachedInfo<>(result, this.mark()));
+            for_stmt_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -2190,11 +2190,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> with_stmt_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> with_stmt_cache = new HashMap<>();
 
     protected T with_stmt() {
         int p = this.mark();
-        CachedInfo<T> info = with_stmt_cache.get(p);
+        Memo<T> info = with_stmt_cache.get(p);
         if (info != null) {
             log("with_stmt() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -2206,7 +2206,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("with_stmt() [fresh]-> ", result);
         if (result != null) {
-            with_stmt_cache.put(p, new CachedInfo<>(result, this.mark()));
+            with_stmt_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -2317,11 +2317,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> with_item_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> with_item_cache = new HashMap<>();
 
     protected T with_item() {
         int p = this.mark();
-        CachedInfo<T> info = with_item_cache.get(p);
+        Memo<T> info = with_item_cache.get(p);
         if (info != null) {
             log("with_item() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -2333,7 +2333,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("with_item() [fresh]-> ", result);
         if (result != null) {
-            with_item_cache.put(p, new CachedInfo<>(result, this.mark()));
+            with_item_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -2373,11 +2373,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> try_stmt_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> try_stmt_cache = new HashMap<>();
 
     protected T try_stmt() {
         int p = this.mark();
-        CachedInfo<T> info = try_stmt_cache.get(p);
+        Memo<T> info = try_stmt_cache.get(p);
         if (info != null) {
             log("try_stmt() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -2389,7 +2389,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("try_stmt() [fresh]-> ", result);
         if (result != null) {
-            try_stmt_cache.put(p, new CachedInfo<>(result, this.mark()));
+            try_stmt_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -2444,11 +2444,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> except_block_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> except_block_cache = new HashMap<>();
 
     protected T except_block() {
         int p = this.mark();
-        CachedInfo<T> info = except_block_cache.get(p);
+        Memo<T> info = except_block_cache.get(p);
         if (info != null) {
             log("except_block() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -2460,7 +2460,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("except_block() [fresh]-> ", result);
         if (result != null) {
-            except_block_cache.put(p, new CachedInfo<>(result, this.mark()));
+            except_block_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -2509,11 +2509,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T[]>> finally_block_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> finally_block_cache = new HashMap<>();
 
     protected T[] finally_block() {
         int p = this.mark();
-        CachedInfo<T[]> info = finally_block_cache.get(p);
+        Memo<T[]> info = finally_block_cache.get(p);
         if (info != null) {
             log("finally_block() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -2525,7 +2525,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("finally_block() [fresh]-> ", result);
         if (result != null) {
-            finally_block_cache.put(p, new CachedInfo<>(result, this.mark()));
+            finally_block_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -2554,11 +2554,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> return_stmt_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> return_stmt_cache = new HashMap<>();
 
     protected T return_stmt() {
         int p = this.mark();
-        CachedInfo<T> info = return_stmt_cache.get(p);
+        Memo<T> info = return_stmt_cache.get(p);
         if (info != null) {
             log("return_stmt() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -2570,7 +2570,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("return_stmt() [fresh]-> ", result);
         if (result != null) {
-            return_stmt_cache.put(p, new CachedInfo<>(result, this.mark()));
+            return_stmt_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -2596,11 +2596,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> raise_stmt_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> raise_stmt_cache = new HashMap<>();
 
     protected T raise_stmt() {
         int p = this.mark();
-        CachedInfo<T> info = raise_stmt_cache.get(p);
+        Memo<T> info = raise_stmt_cache.get(p);
         if (info != null) {
             log("raise_stmt() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -2612,7 +2612,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("raise_stmt() [fresh]-> ", result);
         if (result != null) {
-            raise_stmt_cache.put(p, new CachedInfo<>(result, this.mark()));
+            raise_stmt_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -2649,11 +2649,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> function_def_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> function_def_cache = new HashMap<>();
 
     protected T function_def() {
         int p = this.mark();
-        CachedInfo<T> info = function_def_cache.get(p);
+        Memo<T> info = function_def_cache.get(p);
         if (info != null) {
             log("function_def() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -2665,7 +2665,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("function_def() [fresh]-> ", result);
         if (result != null) {
-            function_def_cache.put(p, new CachedInfo<>(result, this.mark()));
+            function_def_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -2701,11 +2701,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> function_def_raw_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> function_def_raw_cache = new HashMap<>();
 
     protected T function_def_raw() {
         int p = this.mark();
-        CachedInfo<T> info = function_def_raw_cache.get(p);
+        Memo<T> info = function_def_raw_cache.get(p);
         if (info != null) {
             log("function_def_raw() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -2717,7 +2717,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("function_def_raw() [fresh]-> ", result);
         if (result != null) {
-            function_def_raw_cache.put(p, new CachedInfo<>(result, this.mark()));
+            function_def_raw_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -2798,11 +2798,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> func_type_comment_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> func_type_comment_cache = new HashMap<>();
 
     protected T func_type_comment() {
         int p = this.mark();
-        CachedInfo<T> info = func_type_comment_cache.get(p);
+        Memo<T> info = func_type_comment_cache.get(p);
         if (info != null) {
             log("func_type_comment() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -2814,7 +2814,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("func_type_comment() [fresh]-> ", result);
         if (result != null) {
-            func_type_comment_cache.put(p, new CachedInfo<>(result, this.mark()));
+            func_type_comment_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -2850,11 +2850,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> params_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> params_cache = new HashMap<>();
 
     protected T params() {
         int p = this.mark();
-        CachedInfo<T> info = params_cache.get(p);
+        Memo<T> info = params_cache.get(p);
         if (info != null) {
             log("params() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -2866,7 +2866,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("params() [fresh]-> ", result);
         if (result != null) {
-            params_cache.put(p, new CachedInfo<>(result, this.mark()));
+            params_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -2890,11 +2890,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> parameters_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> parameters_cache = new HashMap<>();
 
     protected T parameters() {
         int p = this.mark();
-        CachedInfo<T> info = parameters_cache.get(p);
+        Memo<T> info = parameters_cache.get(p);
         if (info != null) {
             log("parameters() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -2906,7 +2906,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("parameters() [fresh]-> ", result);
         if (result != null) {
-            parameters_cache.put(p, new CachedInfo<>(result, this.mark()));
+            parameters_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -2990,11 +2990,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T[]>> slash_no_default_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> slash_no_default_cache = new HashMap<>();
 
     protected T[] slash_no_default() {
         int p = this.mark();
-        CachedInfo<T[]> info = slash_no_default_cache.get(p);
+        Memo<T[]> info = slash_no_default_cache.get(p);
         if (info != null) {
             log("slash_no_default() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -3006,7 +3006,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("slash_no_default() [fresh]-> ", result);
         if (result != null) {
-            slash_no_default_cache.put(p, new CachedInfo<>(result, this.mark()));
+            slash_no_default_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -3050,11 +3050,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> slash_with_default_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> slash_with_default_cache = new HashMap<>();
 
     protected T slash_with_default() {
         int p = this.mark();
-        CachedInfo<T> info = slash_with_default_cache.get(p);
+        Memo<T> info = slash_with_default_cache.get(p);
         if (info != null) {
             log("slash_with_default() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -3066,7 +3066,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("slash_with_default() [fresh]-> ", result);
         if (result != null) {
-            slash_with_default_cache.put(p, new CachedInfo<>(result, this.mark()));
+            slash_with_default_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -3116,11 +3116,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> star_etc_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> star_etc_cache = new HashMap<>();
 
     protected T star_etc() {
         int p = this.mark();
-        CachedInfo<T> info = star_etc_cache.get(p);
+        Memo<T> info = star_etc_cache.get(p);
         if (info != null) {
             log("star_etc() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -3132,7 +3132,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("star_etc() [fresh]-> ", result);
         if (result != null) {
-            star_etc_cache.put(p, new CachedInfo<>(result, this.mark()));
+            star_etc_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -3192,11 +3192,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> kwds_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> kwds_cache = new HashMap<>();
 
     protected T kwds() {
         int p = this.mark();
-        CachedInfo<T> info = kwds_cache.get(p);
+        Memo<T> info = kwds_cache.get(p);
         if (info != null) {
             log("kwds() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -3208,7 +3208,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("kwds() [fresh]-> ", result);
         if (result != null) {
-            kwds_cache.put(p, new CachedInfo<>(result, this.mark()));
+            kwds_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -3235,11 +3235,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> param_no_default_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> param_no_default_cache = new HashMap<>();
 
     protected T param_no_default() {
         int p = this.mark();
-        CachedInfo<T> info = param_no_default_cache.get(p);
+        Memo<T> info = param_no_default_cache.get(p);
         if (info != null) {
             log("param_no_default() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -3251,7 +3251,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("param_no_default() [fresh]-> ", result);
         if (result != null) {
-            param_no_default_cache.put(p, new CachedInfo<>(result, this.mark()));
+            param_no_default_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -3295,11 +3295,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> param_with_default_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> param_with_default_cache = new HashMap<>();
 
     protected T param_with_default() {
         int p = this.mark();
-        CachedInfo<T> info = param_with_default_cache.get(p);
+        Memo<T> info = param_with_default_cache.get(p);
         if (info != null) {
             log("param_with_default() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -3311,7 +3311,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("param_with_default() [fresh]-> ", result);
         if (result != null) {
-            param_with_default_cache.put(p, new CachedInfo<>(result, this.mark()));
+            param_with_default_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -3361,11 +3361,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> param_maybe_default_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> param_maybe_default_cache = new HashMap<>();
 
     protected T param_maybe_default() {
         int p = this.mark();
-        CachedInfo<T> info = param_maybe_default_cache.get(p);
+        Memo<T> info = param_maybe_default_cache.get(p);
         if (info != null) {
             log("param_maybe_default() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -3377,7 +3377,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("param_maybe_default() [fresh]-> ", result);
         if (result != null) {
-            param_maybe_default_cache.put(p, new CachedInfo<>(result, this.mark()));
+            param_maybe_default_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -3427,11 +3427,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> param_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> param_cache = new HashMap<>();
 
     protected T param() {
         int p = this.mark();
-        CachedInfo<T> info = param_cache.get(p);
+        Memo<T> info = param_cache.get(p);
         if (info != null) {
             log("param() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -3443,7 +3443,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("param() [fresh]-> ", result);
         if (result != null) {
-            param_cache.put(p, new CachedInfo<>(result, this.mark()));
+            param_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -3470,11 +3470,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> annotation_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> annotation_cache = new HashMap<>();
 
     protected T annotation() {
         int p = this.mark();
-        CachedInfo<T> info = annotation_cache.get(p);
+        Memo<T> info = annotation_cache.get(p);
         if (info != null) {
             log("annotation() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -3486,7 +3486,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("annotation() [fresh]-> ", result);
         if (result != null) {
-            annotation_cache.put(p, new CachedInfo<>(result, this.mark()));
+            annotation_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -3513,11 +3513,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> default_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> default_cache = new HashMap<>();
 
     protected T default_() {
         int p = this.mark();
-        CachedInfo<T> info = default_cache.get(p);
+        Memo<T> info = default_cache.get(p);
         if (info != null) {
             log("default() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -3529,7 +3529,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("default() [fresh]-> ", result);
         if (result != null) {
-            default_cache.put(p, new CachedInfo<>(result, this.mark()));
+            default_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -3556,11 +3556,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T[]>> decorators_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> decorators_cache = new HashMap<>();
 
     protected T[] decorators() {
         int p = this.mark();
-        CachedInfo<T[]> info = decorators_cache.get(p);
+        Memo<T[]> info = decorators_cache.get(p);
         if (info != null) {
             log("decorators() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -3572,7 +3572,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("decorators() [fresh]-> ", result);
         if (result != null) {
-            decorators_cache.put(p, new CachedInfo<>(result, this.mark()));
+            decorators_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -3596,11 +3596,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> class_def_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> class_def_cache = new HashMap<>();
 
     protected T class_def() {
         int p = this.mark();
-        CachedInfo<T> info = class_def_cache.get(p);
+        Memo<T> info = class_def_cache.get(p);
         if (info != null) {
             log("class_def() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -3612,7 +3612,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("class_def() [fresh]-> ", result);
         if (result != null) {
-            class_def_cache.put(p, new CachedInfo<>(result, this.mark()));
+            class_def_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -3648,11 +3648,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> class_def_raw_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> class_def_raw_cache = new HashMap<>();
 
     protected T class_def_raw() {
         int p = this.mark();
-        CachedInfo<T> info = class_def_raw_cache.get(p);
+        Memo<T> info = class_def_raw_cache.get(p);
         if (info != null) {
             log("class_def_raw() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -3664,7 +3664,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("class_def_raw() [fresh]-> ", result);
         if (result != null) {
-            class_def_raw_cache.put(p, new CachedInfo<>(result, this.mark()));
+            class_def_raw_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -3699,11 +3699,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T[]>> block_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> block_cache = new HashMap<>();
 
     protected T[] block() {
         int p = this.mark();
-        CachedInfo<T[]> info = block_cache.get(p);
+        Memo<T[]> info = block_cache.get(p);
         if (info != null) {
             log("block() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -3715,7 +3715,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("block() [fresh]-> ", result);
         if (result != null) {
-            block_cache.put(p, new CachedInfo<>(result, this.mark()));
+            block_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -3754,11 +3754,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T[]>> expressions_list_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> expressions_list_cache = new HashMap<>();
 
     protected T[] expressions_list() {
         int p = this.mark();
-        CachedInfo<T[]> info = expressions_list_cache.get(p);
+        Memo<T[]> info = expressions_list_cache.get(p);
         if (info != null) {
             log("expressions_list() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -3770,7 +3770,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("expressions_list() [fresh]-> ", result);
         if (result != null) {
-            expressions_list_cache.put(p, new CachedInfo<>(result, this.mark()));
+            expressions_list_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -3797,11 +3797,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> star_expressions_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> star_expressions_cache = new HashMap<>();
 
     protected T star_expressions() {
         int p = this.mark();
-        CachedInfo<T> info = star_expressions_cache.get(p);
+        Memo<T> info = star_expressions_cache.get(p);
         if (info != null) {
             log("star_expressions() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -3813,7 +3813,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("star_expressions() [fresh]-> ", result);
         if (result != null) {
-            star_expressions_cache.put(p, new CachedInfo<>(result, this.mark()));
+            star_expressions_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -3864,11 +3864,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> star_expression_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> star_expression_cache = new HashMap<>();
 
     protected T star_expression() {
         int p = this.mark();
-        CachedInfo<T> info = star_expression_cache.get(p);
+        Memo<T> info = star_expression_cache.get(p);
         if (info != null) {
             log("star_expression() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -3880,7 +3880,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("star_expression() [fresh]-> ", result);
         if (result != null) {
-            star_expression_cache.put(p, new CachedInfo<>(result, this.mark()));
+            star_expression_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -3916,11 +3916,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T[]>> star_named_expressions_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> star_named_expressions_cache = new HashMap<>();
 
     protected T[] star_named_expressions() {
         int p = this.mark();
-        CachedInfo<T[]> info = star_named_expressions_cache.get(p);
+        Memo<T[]> info = star_named_expressions_cache.get(p);
         if (info != null) {
             log("star_named_expressions() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -3932,7 +3932,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("star_named_expressions() [fresh]-> ", result);
         if (result != null) {
-            star_named_expressions_cache.put(p, new CachedInfo<>(result, this.mark()));
+            star_named_expressions_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -3959,11 +3959,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> star_named_expression_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> star_named_expression_cache = new HashMap<>();
 
     protected T star_named_expression() {
         int p = this.mark();
-        CachedInfo<T> info = star_named_expression_cache.get(p);
+        Memo<T> info = star_named_expression_cache.get(p);
         if (info != null) {
             log("star_named_expression() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -3975,7 +3975,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("star_named_expression() [fresh]-> ", result);
         if (result != null) {
-            star_named_expression_cache.put(p, new CachedInfo<>(result, this.mark()));
+            star_named_expression_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -4011,11 +4011,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> named_expression_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> named_expression_cache = new HashMap<>();
 
     protected T named_expression() {
         int p = this.mark();
-        CachedInfo<T> info = named_expression_cache.get(p);
+        Memo<T> info = named_expression_cache.get(p);
         if (info != null) {
             log("named_expression() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -4027,7 +4027,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("named_expression() [fresh]-> ", result);
         if (result != null) {
-            named_expression_cache.put(p, new CachedInfo<>(result, this.mark()));
+            named_expression_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -4070,11 +4070,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> annotated_rhs_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> annotated_rhs_cache = new HashMap<>();
 
     protected T annotated_rhs() {
         int p = this.mark();
-        CachedInfo<T> info = annotated_rhs_cache.get(p);
+        Memo<T> info = annotated_rhs_cache.get(p);
         if (info != null) {
             log("annotated_rhs() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -4086,7 +4086,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("annotated_rhs() [fresh]-> ", result);
         if (result != null) {
-            annotated_rhs_cache.put(p, new CachedInfo<>(result, this.mark()));
+            annotated_rhs_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -4119,11 +4119,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> expressions_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> expressions_cache = new HashMap<>();
 
     protected T expressions() {
         int p = this.mark();
-        CachedInfo<T> info = expressions_cache.get(p);
+        Memo<T> info = expressions_cache.get(p);
         if (info != null) {
             log("expressions() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -4135,7 +4135,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("expressions() [fresh]-> ", result);
         if (result != null) {
-            expressions_cache.put(p, new CachedInfo<>(result, this.mark()));
+            expressions_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -4186,11 +4186,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> expression_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> expression_cache = new HashMap<>();
 
     protected T expression() {
         int p = this.mark();
-        CachedInfo<T> info = expression_cache.get(p);
+        Memo<T> info = expression_cache.get(p);
         if (info != null) {
             log("expression() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -4202,7 +4202,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("expression() [fresh]-> ", result);
         if (result != null) {
-            expression_cache.put(p, new CachedInfo<>(result, this.mark()));
+            expression_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -4254,11 +4254,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> lambdef_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> lambdef_cache = new HashMap<>();
 
     protected T lambdef() {
         int p = this.mark();
-        CachedInfo<T> info = lambdef_cache.get(p);
+        Memo<T> info = lambdef_cache.get(p);
         if (info != null) {
             log("lambdef() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -4270,7 +4270,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("lambdef() [fresh]-> ", result);
         if (result != null) {
-            lambdef_cache.put(p, new CachedInfo<>(result, this.mark()));
+            lambdef_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -4302,11 +4302,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> lambda_params_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> lambda_params_cache = new HashMap<>();
 
     protected T lambda_params() {
         int p = this.mark();
-        CachedInfo<T> info = lambda_params_cache.get(p);
+        Memo<T> info = lambda_params_cache.get(p);
         if (info != null) {
             log("lambda_params() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -4318,7 +4318,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("lambda_params() [fresh]-> ", result);
         if (result != null) {
-            lambda_params_cache.put(p, new CachedInfo<>(result, this.mark()));
+            lambda_params_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -4342,11 +4342,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> lambda_parameters_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> lambda_parameters_cache = new HashMap<>();
 
     protected T lambda_parameters() {
         int p = this.mark();
-        CachedInfo<T> info = lambda_parameters_cache.get(p);
+        Memo<T> info = lambda_parameters_cache.get(p);
         if (info != null) {
             log("lambda_parameters() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -4358,7 +4358,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("lambda_parameters() [fresh]-> ", result);
         if (result != null) {
-            lambda_parameters_cache.put(p, new CachedInfo<>(result, this.mark()));
+            lambda_parameters_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -4442,11 +4442,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T[]>> lambda_slash_no_default_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> lambda_slash_no_default_cache = new HashMap<>();
 
     protected T[] lambda_slash_no_default() {
         int p = this.mark();
-        CachedInfo<T[]> info = lambda_slash_no_default_cache.get(p);
+        Memo<T[]> info = lambda_slash_no_default_cache.get(p);
         if (info != null) {
             log("lambda_slash_no_default() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -4458,7 +4458,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("lambda_slash_no_default() [fresh]-> ", result);
         if (result != null) {
-            lambda_slash_no_default_cache.put(p, new CachedInfo<>(result, this.mark()));
+            lambda_slash_no_default_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -4502,11 +4502,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> lambda_slash_with_default_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> lambda_slash_with_default_cache = new HashMap<>();
 
     protected T lambda_slash_with_default() {
         int p = this.mark();
-        CachedInfo<T> info = lambda_slash_with_default_cache.get(p);
+        Memo<T> info = lambda_slash_with_default_cache.get(p);
         if (info != null) {
             log("lambda_slash_with_default() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -4518,7 +4518,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("lambda_slash_with_default() [fresh]-> ", result);
         if (result != null) {
-            lambda_slash_with_default_cache.put(p, new CachedInfo<>(result, this.mark()));
+            lambda_slash_with_default_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -4568,11 +4568,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> lambda_star_etc_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> lambda_star_etc_cache = new HashMap<>();
 
     protected T lambda_star_etc() {
         int p = this.mark();
-        CachedInfo<T> info = lambda_star_etc_cache.get(p);
+        Memo<T> info = lambda_star_etc_cache.get(p);
         if (info != null) {
             log("lambda_star_etc() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -4584,7 +4584,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("lambda_star_etc() [fresh]-> ", result);
         if (result != null) {
-            lambda_star_etc_cache.put(p, new CachedInfo<>(result, this.mark()));
+            lambda_star_etc_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -4644,11 +4644,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> lambda_kwds_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> lambda_kwds_cache = new HashMap<>();
 
     protected T lambda_kwds() {
         int p = this.mark();
-        CachedInfo<T> info = lambda_kwds_cache.get(p);
+        Memo<T> info = lambda_kwds_cache.get(p);
         if (info != null) {
             log("lambda_kwds() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -4660,7 +4660,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("lambda_kwds() [fresh]-> ", result);
         if (result != null) {
-            lambda_kwds_cache.put(p, new CachedInfo<>(result, this.mark()));
+            lambda_kwds_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -4687,11 +4687,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> lambda_param_no_default_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> lambda_param_no_default_cache = new HashMap<>();
 
     protected T lambda_param_no_default() {
         int p = this.mark();
-        CachedInfo<T> info = lambda_param_no_default_cache.get(p);
+        Memo<T> info = lambda_param_no_default_cache.get(p);
         if (info != null) {
             log("lambda_param_no_default() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -4703,7 +4703,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("lambda_param_no_default() [fresh]-> ", result);
         if (result != null) {
-            lambda_param_no_default_cache.put(p, new CachedInfo<>(result, this.mark()));
+            lambda_param_no_default_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -4741,11 +4741,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> lambda_param_with_default_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> lambda_param_with_default_cache = new HashMap<>();
 
     protected T lambda_param_with_default() {
         int p = this.mark();
-        CachedInfo<T> info = lambda_param_with_default_cache.get(p);
+        Memo<T> info = lambda_param_with_default_cache.get(p);
         if (info != null) {
             log("lambda_param_with_default() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -4757,7 +4757,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("lambda_param_with_default() [fresh]-> ", result);
         if (result != null) {
-            lambda_param_with_default_cache.put(p, new CachedInfo<>(result, this.mark()));
+            lambda_param_with_default_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -4801,11 +4801,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> lambda_param_maybe_default_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> lambda_param_maybe_default_cache = new HashMap<>();
 
     protected T lambda_param_maybe_default() {
         int p = this.mark();
-        CachedInfo<T> info = lambda_param_maybe_default_cache.get(p);
+        Memo<T> info = lambda_param_maybe_default_cache.get(p);
         if (info != null) {
             log("lambda_param_maybe_default() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -4817,7 +4817,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("lambda_param_maybe_default() [fresh]-> ", result);
         if (result != null) {
-            lambda_param_maybe_default_cache.put(p, new CachedInfo<>(result, this.mark()));
+            lambda_param_maybe_default_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -4861,11 +4861,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> lambda_param_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> lambda_param_cache = new HashMap<>();
 
     protected T lambda_param() {
         int p = this.mark();
-        CachedInfo<T> info = lambda_param_cache.get(p);
+        Memo<T> info = lambda_param_cache.get(p);
         if (info != null) {
             log("lambda_param() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -4877,7 +4877,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("lambda_param() [fresh]-> ", result);
         if (result != null) {
-            lambda_param_cache.put(p, new CachedInfo<>(result, this.mark()));
+            lambda_param_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -4901,11 +4901,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> disjunction_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> disjunction_cache = new HashMap<>();
 
     protected T disjunction() {
         int p = this.mark();
-        CachedInfo<T> info = disjunction_cache.get(p);
+        Memo<T> info = disjunction_cache.get(p);
         if (info != null) {
             log("disjunction() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -4917,7 +4917,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("disjunction() [fresh]-> ", result);
         if (result != null) {
-            disjunction_cache.put(p, new CachedInfo<>(result, this.mark()));
+            disjunction_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -4953,11 +4953,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> conjunction_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> conjunction_cache = new HashMap<>();
 
     protected T conjunction() {
         int p = this.mark();
-        CachedInfo<T> info = conjunction_cache.get(p);
+        Memo<T> info = conjunction_cache.get(p);
         if (info != null) {
             log("conjunction() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -4969,7 +4969,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("conjunction() [fresh]-> ", result);
         if (result != null) {
-            conjunction_cache.put(p, new CachedInfo<>(result, this.mark()));
+            conjunction_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -5005,11 +5005,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> inversion_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> inversion_cache = new HashMap<>();
 
     protected T inversion() {
         int p = this.mark();
-        CachedInfo<T> info = inversion_cache.get(p);
+        Memo<T> info = inversion_cache.get(p);
         if (info != null) {
             log("inversion() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -5021,7 +5021,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("inversion() [fresh]-> ", result);
         if (result != null) {
-            inversion_cache.put(p, new CachedInfo<>(result, this.mark()));
+            inversion_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -5056,11 +5056,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> comparison_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> comparison_cache = new HashMap<>();
 
     protected T comparison() {
         int p = this.mark();
-        CachedInfo<T> info = comparison_cache.get(p);
+        Memo<T> info = comparison_cache.get(p);
         if (info != null) {
             log("comparison() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -5072,7 +5072,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("comparison() [fresh]-> ", result);
         if (result != null) {
-            comparison_cache.put(p, new CachedInfo<>(result, this.mark()));
+            comparison_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -5108,11 +5108,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> compare_op_bitwise_or_pair_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> compare_op_bitwise_or_pair_cache = new HashMap<>();
 
     protected T compare_op_bitwise_or_pair() {
         int p = this.mark();
-        CachedInfo<T> info = compare_op_bitwise_or_pair_cache.get(p);
+        Memo<T> info = compare_op_bitwise_or_pair_cache.get(p);
         if (info != null) {
             log("compare_op_bitwise_or_pair() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -5124,7 +5124,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("compare_op_bitwise_or_pair() [fresh]-> ", result);
         if (result != null) {
-            compare_op_bitwise_or_pair_cache.put(p, new CachedInfo<>(result, this.mark()));
+            compare_op_bitwise_or_pair_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -5229,11 +5229,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> eq_bitwise_or_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> eq_bitwise_or_cache = new HashMap<>();
 
     protected T eq_bitwise_or() {
         int p = this.mark();
-        CachedInfo<T> info = eq_bitwise_or_cache.get(p);
+        Memo<T> info = eq_bitwise_or_cache.get(p);
         if (info != null) {
             log("eq_bitwise_or() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -5245,7 +5245,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("eq_bitwise_or() [fresh]-> ", result);
         if (result != null) {
-            eq_bitwise_or_cache.put(p, new CachedInfo<>(result, this.mark()));
+            eq_bitwise_or_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -5272,11 +5272,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> noteq_bitwise_or_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> noteq_bitwise_or_cache = new HashMap<>();
 
     protected T noteq_bitwise_or() {
         int p = this.mark();
-        CachedInfo<T> info = noteq_bitwise_or_cache.get(p);
+        Memo<T> info = noteq_bitwise_or_cache.get(p);
         if (info != null) {
             log("noteq_bitwise_or() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -5288,7 +5288,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("noteq_bitwise_or() [fresh]-> ", result);
         if (result != null) {
-            noteq_bitwise_or_cache.put(p, new CachedInfo<>(result, this.mark()));
+            noteq_bitwise_or_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -5315,11 +5315,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> lte_bitwise_or_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> lte_bitwise_or_cache = new HashMap<>();
 
     protected T lte_bitwise_or() {
         int p = this.mark();
-        CachedInfo<T> info = lte_bitwise_or_cache.get(p);
+        Memo<T> info = lte_bitwise_or_cache.get(p);
         if (info != null) {
             log("lte_bitwise_or() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -5331,7 +5331,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("lte_bitwise_or() [fresh]-> ", result);
         if (result != null) {
-            lte_bitwise_or_cache.put(p, new CachedInfo<>(result, this.mark()));
+            lte_bitwise_or_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -5358,11 +5358,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> lt_bitwise_or_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> lt_bitwise_or_cache = new HashMap<>();
 
     protected T lt_bitwise_or() {
         int p = this.mark();
-        CachedInfo<T> info = lt_bitwise_or_cache.get(p);
+        Memo<T> info = lt_bitwise_or_cache.get(p);
         if (info != null) {
             log("lt_bitwise_or() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -5374,7 +5374,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("lt_bitwise_or() [fresh]-> ", result);
         if (result != null) {
-            lt_bitwise_or_cache.put(p, new CachedInfo<>(result, this.mark()));
+            lt_bitwise_or_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -5401,11 +5401,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> gte_bitwise_or_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> gte_bitwise_or_cache = new HashMap<>();
 
     protected T gte_bitwise_or() {
         int p = this.mark();
-        CachedInfo<T> info = gte_bitwise_or_cache.get(p);
+        Memo<T> info = gte_bitwise_or_cache.get(p);
         if (info != null) {
             log("gte_bitwise_or() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -5417,7 +5417,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("gte_bitwise_or() [fresh]-> ", result);
         if (result != null) {
-            gte_bitwise_or_cache.put(p, new CachedInfo<>(result, this.mark()));
+            gte_bitwise_or_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -5444,11 +5444,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> gt_bitwise_or_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> gt_bitwise_or_cache = new HashMap<>();
 
     protected T gt_bitwise_or() {
         int p = this.mark();
-        CachedInfo<T> info = gt_bitwise_or_cache.get(p);
+        Memo<T> info = gt_bitwise_or_cache.get(p);
         if (info != null) {
             log("gt_bitwise_or() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -5460,7 +5460,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("gt_bitwise_or() [fresh]-> ", result);
         if (result != null) {
-            gt_bitwise_or_cache.put(p, new CachedInfo<>(result, this.mark()));
+            gt_bitwise_or_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -5487,11 +5487,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> notin_bitwise_or_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> notin_bitwise_or_cache = new HashMap<>();
 
     protected T notin_bitwise_or() {
         int p = this.mark();
-        CachedInfo<T> info = notin_bitwise_or_cache.get(p);
+        Memo<T> info = notin_bitwise_or_cache.get(p);
         if (info != null) {
             log("notin_bitwise_or() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -5503,7 +5503,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("notin_bitwise_or() [fresh]-> ", result);
         if (result != null) {
-            notin_bitwise_or_cache.put(p, new CachedInfo<>(result, this.mark()));
+            notin_bitwise_or_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -5531,11 +5531,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> in_bitwise_or_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> in_bitwise_or_cache = new HashMap<>();
 
     protected T in_bitwise_or() {
         int p = this.mark();
-        CachedInfo<T> info = in_bitwise_or_cache.get(p);
+        Memo<T> info = in_bitwise_or_cache.get(p);
         if (info != null) {
             log("in_bitwise_or() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -5547,7 +5547,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("in_bitwise_or() [fresh]-> ", result);
         if (result != null) {
-            in_bitwise_or_cache.put(p, new CachedInfo<>(result, this.mark()));
+            in_bitwise_or_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -5573,11 +5573,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> isnot_bitwise_or_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> isnot_bitwise_or_cache = new HashMap<>();
 
     protected T isnot_bitwise_or() {
         int p = this.mark();
-        CachedInfo<T> info = isnot_bitwise_or_cache.get(p);
+        Memo<T> info = isnot_bitwise_or_cache.get(p);
         if (info != null) {
             log("isnot_bitwise_or() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -5589,7 +5589,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("isnot_bitwise_or() [fresh]-> ", result);
         if (result != null) {
-            isnot_bitwise_or_cache.put(p, new CachedInfo<>(result, this.mark()));
+            isnot_bitwise_or_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -5617,11 +5617,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> is_bitwise_or_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> is_bitwise_or_cache = new HashMap<>();
 
     protected T is_bitwise_or() {
         int p = this.mark();
-        CachedInfo<T> info = is_bitwise_or_cache.get(p);
+        Memo<T> info = is_bitwise_or_cache.get(p);
         if (info != null) {
             log("is_bitwise_or() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -5633,7 +5633,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("is_bitwise_or() [fresh]-> ", result);
         if (result != null) {
-            is_bitwise_or_cache.put(p, new CachedInfo<>(result, this.mark()));
+            is_bitwise_or_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -5659,11 +5659,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> bitwise_or_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> bitwise_or_cache = new HashMap<>();
 
     protected T bitwise_or() {
         int p = this.mark();
-        CachedInfo<T> info = bitwise_or_cache.get(p);
+        Memo<T> info = bitwise_or_cache.get(p);
         if (info != null) {
             log("bitwise_or() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -5673,7 +5673,7 @@ class GeneratedParser<T> extends Parser<T> {
         T last_result = null;
         int last_mark = p;
         int depth = 0;
-        bitwise_or_cache.put(p, new CachedInfo<>(null, p));
+        bitwise_or_cache.put(p, new Memo<>(null, p));
         log("recursive bitwise_or() at " + p + " depth " + depth);
         while (true) {
             this.reset(p);
@@ -5687,7 +5687,7 @@ class GeneratedParser<T> extends Parser<T> {
                 break;
             last_result = result;
             last_mark = end_mark;
-            bitwise_or_cache.put(p, new CachedInfo<>(result, end_mark));
+            bitwise_or_cache.put(p, new Memo<>(result, end_mark));
         }
         this.reset(last_mark);
         if (last_result != null) {
@@ -5697,7 +5697,7 @@ class GeneratedParser<T> extends Parser<T> {
             this.reset(last_mark);
         }
         log("bitwise_or() [fresh]-> ", last_result);
-        bitwise_or_cache.put(p, new CachedInfo<>(last_result, last_mark));
+        bitwise_or_cache.put(p, new Memo<>(last_result, last_mark));
         return last_result;
     }
 
@@ -5735,11 +5735,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> bitwise_xor_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> bitwise_xor_cache = new HashMap<>();
 
     protected T bitwise_xor() {
         int p = this.mark();
-        CachedInfo<T> info = bitwise_xor_cache.get(p);
+        Memo<T> info = bitwise_xor_cache.get(p);
         if (info != null) {
             log("bitwise_xor() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -5749,7 +5749,7 @@ class GeneratedParser<T> extends Parser<T> {
         T last_result = null;
         int last_mark = p;
         int depth = 0;
-        bitwise_xor_cache.put(p, new CachedInfo<>(null, p));
+        bitwise_xor_cache.put(p, new Memo<>(null, p));
         log("recursive bitwise_xor() at " + p + " depth " + depth);
         while (true) {
             this.reset(p);
@@ -5763,7 +5763,7 @@ class GeneratedParser<T> extends Parser<T> {
                 break;
             last_result = result;
             last_mark = end_mark;
-            bitwise_xor_cache.put(p, new CachedInfo<>(result, end_mark));
+            bitwise_xor_cache.put(p, new Memo<>(result, end_mark));
         }
         this.reset(last_mark);
         if (last_result != null) {
@@ -5773,7 +5773,7 @@ class GeneratedParser<T> extends Parser<T> {
             this.reset(last_mark);
         }
         log("bitwise_xor() [fresh]-> ", last_result);
-        bitwise_xor_cache.put(p, new CachedInfo<>(last_result, last_mark));
+        bitwise_xor_cache.put(p, new Memo<>(last_result, last_mark));
         return last_result;
     }
 
@@ -5811,11 +5811,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> bitwise_and_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> bitwise_and_cache = new HashMap<>();
 
     protected T bitwise_and() {
         int p = this.mark();
-        CachedInfo<T> info = bitwise_and_cache.get(p);
+        Memo<T> info = bitwise_and_cache.get(p);
         if (info != null) {
             log("bitwise_and() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -5825,7 +5825,7 @@ class GeneratedParser<T> extends Parser<T> {
         T last_result = null;
         int last_mark = p;
         int depth = 0;
-        bitwise_and_cache.put(p, new CachedInfo<>(null, p));
+        bitwise_and_cache.put(p, new Memo<>(null, p));
         log("recursive bitwise_and() at " + p + " depth " + depth);
         while (true) {
             this.reset(p);
@@ -5839,7 +5839,7 @@ class GeneratedParser<T> extends Parser<T> {
                 break;
             last_result = result;
             last_mark = end_mark;
-            bitwise_and_cache.put(p, new CachedInfo<>(result, end_mark));
+            bitwise_and_cache.put(p, new Memo<>(result, end_mark));
         }
         this.reset(last_mark);
         if (last_result != null) {
@@ -5849,7 +5849,7 @@ class GeneratedParser<T> extends Parser<T> {
             this.reset(last_mark);
         }
         log("bitwise_and() [fresh]-> ", last_result);
-        bitwise_and_cache.put(p, new CachedInfo<>(last_result, last_mark));
+        bitwise_and_cache.put(p, new Memo<>(last_result, last_mark));
         return last_result;
     }
 
@@ -5887,11 +5887,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> shift_expr_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> shift_expr_cache = new HashMap<>();
 
     protected T shift_expr() {
         int p = this.mark();
-        CachedInfo<T> info = shift_expr_cache.get(p);
+        Memo<T> info = shift_expr_cache.get(p);
         if (info != null) {
             log("shift_expr() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -5901,7 +5901,7 @@ class GeneratedParser<T> extends Parser<T> {
         T last_result = null;
         int last_mark = p;
         int depth = 0;
-        shift_expr_cache.put(p, new CachedInfo<>(null, p));
+        shift_expr_cache.put(p, new Memo<>(null, p));
         log("recursive shift_expr() at " + p + " depth " + depth);
         while (true) {
             this.reset(p);
@@ -5915,7 +5915,7 @@ class GeneratedParser<T> extends Parser<T> {
                 break;
             last_result = result;
             last_mark = end_mark;
-            shift_expr_cache.put(p, new CachedInfo<>(result, end_mark));
+            shift_expr_cache.put(p, new Memo<>(result, end_mark));
         }
         this.reset(last_mark);
         if (last_result != null) {
@@ -5925,7 +5925,7 @@ class GeneratedParser<T> extends Parser<T> {
             this.reset(last_mark);
         }
         log("shift_expr() [fresh]-> ", last_result);
-        shift_expr_cache.put(p, new CachedInfo<>(last_result, last_mark));
+        shift_expr_cache.put(p, new Memo<>(last_result, last_mark));
         return last_result;
     }
 
@@ -5978,11 +5978,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> sum_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> sum_cache = new HashMap<>();
 
     protected T sum() {
         int p = this.mark();
-        CachedInfo<T> info = sum_cache.get(p);
+        Memo<T> info = sum_cache.get(p);
         if (info != null) {
             log("sum() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -5992,7 +5992,7 @@ class GeneratedParser<T> extends Parser<T> {
         T last_result = null;
         int last_mark = p;
         int depth = 0;
-        sum_cache.put(p, new CachedInfo<>(null, p));
+        sum_cache.put(p, new Memo<>(null, p));
         log("recursive sum() at " + p + " depth " + depth);
         while (true) {
             this.reset(p);
@@ -6006,7 +6006,7 @@ class GeneratedParser<T> extends Parser<T> {
                 break;
             last_result = result;
             last_mark = end_mark;
-            sum_cache.put(p, new CachedInfo<>(result, end_mark));
+            sum_cache.put(p, new Memo<>(result, end_mark));
         }
         this.reset(last_mark);
         if (last_result != null) {
@@ -6016,7 +6016,7 @@ class GeneratedParser<T> extends Parser<T> {
             this.reset(last_mark);
         }
         log("sum() [fresh]-> ", last_result);
-        sum_cache.put(p, new CachedInfo<>(last_result, last_mark));
+        sum_cache.put(p, new Memo<>(last_result, last_mark));
         return last_result;
     }
 
@@ -6069,11 +6069,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> term_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> term_cache = new HashMap<>();
 
     protected T term() {
         int p = this.mark();
-        CachedInfo<T> info = term_cache.get(p);
+        Memo<T> info = term_cache.get(p);
         if (info != null) {
             log("term() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -6083,7 +6083,7 @@ class GeneratedParser<T> extends Parser<T> {
         T last_result = null;
         int last_mark = p;
         int depth = 0;
-        term_cache.put(p, new CachedInfo<>(null, p));
+        term_cache.put(p, new Memo<>(null, p));
         log("recursive term() at " + p + " depth " + depth);
         while (true) {
             this.reset(p);
@@ -6097,7 +6097,7 @@ class GeneratedParser<T> extends Parser<T> {
                 break;
             last_result = result;
             last_mark = end_mark;
-            term_cache.put(p, new CachedInfo<>(result, end_mark));
+            term_cache.put(p, new Memo<>(result, end_mark));
         }
         this.reset(last_mark);
         if (last_result != null) {
@@ -6107,7 +6107,7 @@ class GeneratedParser<T> extends Parser<T> {
             this.reset(last_mark);
         }
         log("term() [fresh]-> ", last_result);
-        term_cache.put(p, new CachedInfo<>(last_result, last_mark));
+        term_cache.put(p, new Memo<>(last_result, last_mark));
         return last_result;
     }
 
@@ -6205,11 +6205,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> factor_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> factor_cache = new HashMap<>();
 
     protected T factor() {
         int p = this.mark();
-        CachedInfo<T> info = factor_cache.get(p);
+        Memo<T> info = factor_cache.get(p);
         if (info != null) {
             log("factor() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -6221,7 +6221,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("factor() [fresh]-> ", result);
         if (result != null) {
-            factor_cache.put(p, new CachedInfo<>(result, this.mark()));
+            factor_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -6281,11 +6281,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> power_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> power_cache = new HashMap<>();
 
     protected T power() {
         int p = this.mark();
-        CachedInfo<T> info = power_cache.get(p);
+        Memo<T> info = power_cache.get(p);
         if (info != null) {
             log("power() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -6297,7 +6297,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("power() [fresh]-> ", result);
         if (result != null) {
-            power_cache.put(p, new CachedInfo<>(result, this.mark()));
+            power_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -6336,11 +6336,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> await_primary_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> await_primary_cache = new HashMap<>();
 
     protected T await_primary() {
         int p = this.mark();
-        CachedInfo<T> info = await_primary_cache.get(p);
+        Memo<T> info = await_primary_cache.get(p);
         if (info != null) {
             log("await_primary() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -6352,7 +6352,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("await_primary() [fresh]-> ", result);
         if (result != null) {
-            await_primary_cache.put(p, new CachedInfo<>(result, this.mark()));
+            await_primary_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -6387,11 +6387,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> primary_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> primary_cache = new HashMap<>();
 
     protected T primary() {
         int p = this.mark();
-        CachedInfo<T> info = primary_cache.get(p);
+        Memo<T> info = primary_cache.get(p);
         if (info != null) {
             log("primary() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -6401,7 +6401,7 @@ class GeneratedParser<T> extends Parser<T> {
         T last_result = null;
         int last_mark = p;
         int depth = 0;
-        primary_cache.put(p, new CachedInfo<>(null, p));
+        primary_cache.put(p, new Memo<>(null, p));
         log("recursive primary() at " + p + " depth " + depth);
         while (true) {
             this.reset(p);
@@ -6415,7 +6415,7 @@ class GeneratedParser<T> extends Parser<T> {
                 break;
             last_result = result;
             last_mark = end_mark;
-            primary_cache.put(p, new CachedInfo<>(result, end_mark));
+            primary_cache.put(p, new Memo<>(result, end_mark));
         }
         this.reset(last_mark);
         if (last_result != null) {
@@ -6425,7 +6425,7 @@ class GeneratedParser<T> extends Parser<T> {
             this.reset(last_mark);
         }
         log("primary() [fresh]-> ", last_result);
-        primary_cache.put(p, new CachedInfo<>(last_result, last_mark));
+        primary_cache.put(p, new Memo<>(last_result, last_mark));
         return last_result;
     }
 
@@ -6511,11 +6511,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> slices_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> slices_cache = new HashMap<>();
 
     protected T slices() {
         int p = this.mark();
-        CachedInfo<T> info = slices_cache.get(p);
+        Memo<T> info = slices_cache.get(p);
         if (info != null) {
             log("slices() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -6527,7 +6527,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("slices() [fresh]-> ", result);
         if (result != null) {
-            slices_cache.put(p, new CachedInfo<>(result, this.mark()));
+            slices_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -6565,11 +6565,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> slice_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> slice_cache = new HashMap<>();
 
     protected T slice() {
         int p = this.mark();
-        CachedInfo<T> info = slice_cache.get(p);
+        Memo<T> info = slice_cache.get(p);
         if (info != null) {
             log("slice() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -6581,7 +6581,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("slice() [fresh]-> ", result);
         if (result != null) {
-            slice_cache.put(p, new CachedInfo<>(result, this.mark()));
+            slice_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -6623,11 +6623,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> atom_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> atom_cache = new HashMap<>();
 
     protected T atom() {
         int p = this.mark();
-        CachedInfo<T> info = atom_cache.get(p);
+        Memo<T> info = atom_cache.get(p);
         if (info != null) {
             log("atom() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -6639,7 +6639,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("atom() [fresh]-> ", result);
         if (result != null) {
-            atom_cache.put(p, new CachedInfo<>(result, this.mark()));
+            atom_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -6749,11 +6749,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> strings_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> strings_cache = new HashMap<>();
 
     protected T strings() {
         int p = this.mark();
-        CachedInfo<T> info = strings_cache.get(p);
+        Memo<T> info = strings_cache.get(p);
         if (info != null) {
             log("strings() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -6765,7 +6765,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("strings() [fresh]-> ", result);
         if (result != null) {
-            strings_cache.put(p, new CachedInfo<>(result, this.mark()));
+            strings_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -6789,11 +6789,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> list_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> list_cache = new HashMap<>();
 
     protected T list() {
         int p = this.mark();
-        CachedInfo<T> info = list_cache.get(p);
+        Memo<T> info = list_cache.get(p);
         if (info != null) {
             log("list() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -6805,7 +6805,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("list() [fresh]-> ", result);
         if (result != null) {
-            list_cache.put(p, new CachedInfo<>(result, this.mark()));
+            list_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -6835,11 +6835,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> listcomp_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> listcomp_cache = new HashMap<>();
 
     protected T listcomp() {
         int p = this.mark();
-        CachedInfo<T> info = listcomp_cache.get(p);
+        Memo<T> info = listcomp_cache.get(p);
         if (info != null) {
             log("listcomp() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -6851,7 +6851,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("listcomp() [fresh]-> ", result);
         if (result != null) {
-            listcomp_cache.put(p, new CachedInfo<>(result, this.mark()));
+            listcomp_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -6886,11 +6886,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> tuple_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> tuple_cache = new HashMap<>();
 
     protected T tuple() {
         int p = this.mark();
-        CachedInfo<T> info = tuple_cache.get(p);
+        Memo<T> info = tuple_cache.get(p);
         if (info != null) {
             log("tuple() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -6902,7 +6902,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("tuple() [fresh]-> ", result);
         if (result != null) {
-            tuple_cache.put(p, new CachedInfo<>(result, this.mark()));
+            tuple_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -6932,11 +6932,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> group_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> group_cache = new HashMap<>();
 
     protected T group() {
         int p = this.mark();
-        CachedInfo<T> info = group_cache.get(p);
+        Memo<T> info = group_cache.get(p);
         if (info != null) {
             log("group() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -6948,7 +6948,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("group() [fresh]-> ", result);
         if (result != null) {
-            group_cache.put(p, new CachedInfo<>(result, this.mark()));
+            group_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -6978,11 +6978,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> genexp_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> genexp_cache = new HashMap<>();
 
     protected T genexp() {
         int p = this.mark();
-        CachedInfo<T> info = genexp_cache.get(p);
+        Memo<T> info = genexp_cache.get(p);
         if (info != null) {
             log("genexp() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -6994,7 +6994,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("genexp() [fresh]-> ", result);
         if (result != null) {
-            genexp_cache.put(p, new CachedInfo<>(result, this.mark()));
+            genexp_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -7029,11 +7029,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> set_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> set_cache = new HashMap<>();
 
     protected T set() {
         int p = this.mark();
-        CachedInfo<T> info = set_cache.get(p);
+        Memo<T> info = set_cache.get(p);
         if (info != null) {
             log("set() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -7045,7 +7045,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("set() [fresh]-> ", result);
         if (result != null) {
-            set_cache.put(p, new CachedInfo<>(result, this.mark()));
+            set_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -7075,11 +7075,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> setcomp_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> setcomp_cache = new HashMap<>();
 
     protected T setcomp() {
         int p = this.mark();
-        CachedInfo<T> info = setcomp_cache.get(p);
+        Memo<T> info = setcomp_cache.get(p);
         if (info != null) {
             log("setcomp() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -7091,7 +7091,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("setcomp() [fresh]-> ", result);
         if (result != null) {
-            setcomp_cache.put(p, new CachedInfo<>(result, this.mark()));
+            setcomp_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -7126,11 +7126,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> dict_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> dict_cache = new HashMap<>();
 
     protected T dict() {
         int p = this.mark();
-        CachedInfo<T> info = dict_cache.get(p);
+        Memo<T> info = dict_cache.get(p);
         if (info != null) {
             log("dict() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -7142,7 +7142,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("dict() [fresh]-> ", result);
         if (result != null) {
-            dict_cache.put(p, new CachedInfo<>(result, this.mark()));
+            dict_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -7172,11 +7172,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> dictcomp_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> dictcomp_cache = new HashMap<>();
 
     protected T dictcomp() {
         int p = this.mark();
-        CachedInfo<T> info = dictcomp_cache.get(p);
+        Memo<T> info = dictcomp_cache.get(p);
         if (info != null) {
             log("dictcomp() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -7188,7 +7188,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("dictcomp() [fresh]-> ", result);
         if (result != null) {
-            dictcomp_cache.put(p, new CachedInfo<>(result, this.mark()));
+            dictcomp_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -7221,11 +7221,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T[]>> double_starred_kvpairs_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> double_starred_kvpairs_cache = new HashMap<>();
 
     protected T[] double_starred_kvpairs() {
         int p = this.mark();
-        CachedInfo<T[]> info = double_starred_kvpairs_cache.get(p);
+        Memo<T[]> info = double_starred_kvpairs_cache.get(p);
         if (info != null) {
             log("double_starred_kvpairs() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -7237,7 +7237,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("double_starred_kvpairs() [fresh]-> ", result);
         if (result != null) {
-            double_starred_kvpairs_cache.put(p, new CachedInfo<>(result, this.mark()));
+            double_starred_kvpairs_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -7264,11 +7264,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> double_starred_kvpair_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> double_starred_kvpair_cache = new HashMap<>();
 
     protected T double_starred_kvpair() {
         int p = this.mark();
-        CachedInfo<T> info = double_starred_kvpair_cache.get(p);
+        Memo<T> info = double_starred_kvpair_cache.get(p);
         if (info != null) {
             log("double_starred_kvpair() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -7280,7 +7280,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("double_starred_kvpair() [fresh]-> ", result);
         if (result != null) {
-            double_starred_kvpair_cache.put(p, new CachedInfo<>(result, this.mark()));
+            double_starred_kvpair_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -7316,11 +7316,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> kvpair_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> kvpair_cache = new HashMap<>();
 
     protected T kvpair() {
         int p = this.mark();
-        CachedInfo<T> info = kvpair_cache.get(p);
+        Memo<T> info = kvpair_cache.get(p);
         if (info != null) {
             log("kvpair() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -7332,7 +7332,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("kvpair() [fresh]-> ", result);
         if (result != null) {
-            kvpair_cache.put(p, new CachedInfo<>(result, this.mark()));
+            kvpair_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -7362,11 +7362,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T[]>> for_if_clauses_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> for_if_clauses_cache = new HashMap<>();
 
     protected T[] for_if_clauses() {
         int p = this.mark();
-        CachedInfo<T[]> info = for_if_clauses_cache.get(p);
+        Memo<T[]> info = for_if_clauses_cache.get(p);
         if (info != null) {
             log("for_if_clauses() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -7378,7 +7378,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("for_if_clauses() [fresh]-> ", result);
         if (result != null) {
-            for_if_clauses_cache.put(p, new CachedInfo<>(result, this.mark()));
+            for_if_clauses_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -7402,11 +7402,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> for_if_clause_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> for_if_clause_cache = new HashMap<>();
 
     protected T for_if_clause() {
         int p = this.mark();
-        CachedInfo<T> info = for_if_clause_cache.get(p);
+        Memo<T> info = for_if_clause_cache.get(p);
         if (info != null) {
             log("for_if_clause() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -7418,7 +7418,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("for_if_clause() [fresh]-> ", result);
         if (result != null) {
-            for_if_clause_cache.put(p, new CachedInfo<>(result, this.mark()));
+            for_if_clause_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -7477,11 +7477,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> yield_expr_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> yield_expr_cache = new HashMap<>();
 
     protected T yield_expr() {
         int p = this.mark();
-        CachedInfo<T> info = yield_expr_cache.get(p);
+        Memo<T> info = yield_expr_cache.get(p);
         if (info != null) {
             log("yield_expr() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -7493,7 +7493,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("yield_expr() [fresh]-> ", result);
         if (result != null) {
-            yield_expr_cache.put(p, new CachedInfo<>(result, this.mark()));
+            yield_expr_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -7532,11 +7532,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> arguments_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> arguments_cache = new HashMap<>();
 
     protected T arguments() {
         int p = this.mark();
-        CachedInfo<T> info = arguments_cache.get(p);
+        Memo<T> info = arguments_cache.get(p);
         if (info != null) {
             log("arguments() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -7548,7 +7548,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("arguments() [fresh]-> ", result);
         if (result != null) {
-            arguments_cache.put(p, new CachedInfo<>(result, this.mark()));
+            arguments_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -7577,11 +7577,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> args_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> args_cache = new HashMap<>();
 
     protected T args() {
         int p = this.mark();
-        CachedInfo<T> info = args_cache.get(p);
+        Memo<T> info = args_cache.get(p);
         if (info != null) {
             log("args() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -7593,7 +7593,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("args() [fresh]-> ", result);
         if (result != null) {
-            args_cache.put(p, new CachedInfo<>(result, this.mark()));
+            args_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -7629,11 +7629,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T[]>> kwargs_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> kwargs_cache = new HashMap<>();
 
     protected T[] kwargs() {
         int p = this.mark();
-        CachedInfo<T[]> info = kwargs_cache.get(p);
+        Memo<T[]> info = kwargs_cache.get(p);
         if (info != null) {
             log("kwargs() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -7645,7 +7645,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("kwargs() [fresh]-> ", result);
         if (result != null) {
-            kwargs_cache.put(p, new CachedInfo<>(result, this.mark()));
+            kwargs_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -7693,11 +7693,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> starred_expression_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> starred_expression_cache = new HashMap<>();
 
     protected T starred_expression() {
         int p = this.mark();
-        CachedInfo<T> info = starred_expression_cache.get(p);
+        Memo<T> info = starred_expression_cache.get(p);
         if (info != null) {
             log("starred_expression() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -7709,7 +7709,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("starred_expression() [fresh]-> ", result);
         if (result != null) {
-            starred_expression_cache.put(p, new CachedInfo<>(result, this.mark()));
+            starred_expression_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -7736,11 +7736,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> kwarg_or_starred_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> kwarg_or_starred_cache = new HashMap<>();
 
     protected T kwarg_or_starred() {
         int p = this.mark();
-        CachedInfo<T> info = kwarg_or_starred_cache.get(p);
+        Memo<T> info = kwarg_or_starred_cache.get(p);
         if (info != null) {
             log("kwarg_or_starred() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -7752,7 +7752,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("kwarg_or_starred() [fresh]-> ", result);
         if (result != null) {
-            kwarg_or_starred_cache.put(p, new CachedInfo<>(result, this.mark()));
+            kwarg_or_starred_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -7791,11 +7791,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> kwarg_or_double_starred_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> kwarg_or_double_starred_cache = new HashMap<>();
 
     protected T kwarg_or_double_starred() {
         int p = this.mark();
-        CachedInfo<T> info = kwarg_or_double_starred_cache.get(p);
+        Memo<T> info = kwarg_or_double_starred_cache.get(p);
         if (info != null) {
             log("kwarg_or_double_starred() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -7807,7 +7807,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("kwarg_or_double_starred() [fresh]-> ", result);
         if (result != null) {
-            kwarg_or_double_starred_cache.put(p, new CachedInfo<>(result, this.mark()));
+            kwarg_or_double_starred_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -7849,11 +7849,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> star_targets_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> star_targets_cache = new HashMap<>();
 
     protected T star_targets() {
         int p = this.mark();
-        CachedInfo<T> info = star_targets_cache.get(p);
+        Memo<T> info = star_targets_cache.get(p);
         if (info != null) {
             log("star_targets() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -7865,7 +7865,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("star_targets() [fresh]-> ", result);
         if (result != null) {
-            star_targets_cache.put(p, new CachedInfo<>(result, this.mark()));
+            star_targets_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -7906,11 +7906,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T[]>> star_targets_seq_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> star_targets_seq_cache = new HashMap<>();
 
     protected T[] star_targets_seq() {
         int p = this.mark();
-        CachedInfo<T[]> info = star_targets_seq_cache.get(p);
+        Memo<T[]> info = star_targets_seq_cache.get(p);
         if (info != null) {
             log("star_targets_seq() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -7922,7 +7922,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("star_targets_seq() [fresh]-> ", result);
         if (result != null) {
-            star_targets_seq_cache.put(p, new CachedInfo<>(result, this.mark()));
+            star_targets_seq_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -7949,11 +7949,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> star_target_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> star_target_cache = new HashMap<>();
 
     protected T star_target() {
         int p = this.mark();
-        CachedInfo<T> info = star_target_cache.get(p);
+        Memo<T> info = star_target_cache.get(p);
         if (info != null) {
             log("star_target() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -7965,7 +7965,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("star_target() [fresh]-> ", result);
         if (result != null) {
-            star_target_cache.put(p, new CachedInfo<>(result, this.mark()));
+            star_target_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -8038,11 +8038,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> star_atom_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> star_atom_cache = new HashMap<>();
 
     protected T star_atom() {
         int p = this.mark();
-        CachedInfo<T> info = star_atom_cache.get(p);
+        Memo<T> info = star_atom_cache.get(p);
         if (info != null) {
             log("star_atom() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -8054,7 +8054,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("star_atom() [fresh]-> ", result);
         if (result != null) {
-            star_atom_cache.put(p, new CachedInfo<>(result, this.mark()));
+            star_atom_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -8123,11 +8123,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> single_target_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> single_target_cache = new HashMap<>();
 
     protected T single_target() {
         int p = this.mark();
-        CachedInfo<T> info = single_target_cache.get(p);
+        Memo<T> info = single_target_cache.get(p);
         if (info != null) {
             log("single_target() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -8139,7 +8139,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("single_target() [fresh]-> ", result);
         if (result != null) {
-            single_target_cache.put(p, new CachedInfo<>(result, this.mark()));
+            single_target_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -8187,11 +8187,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> single_subscript_attribute_target_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> single_subscript_attribute_target_cache = new HashMap<>();
 
     protected T single_subscript_attribute_target() {
         int p = this.mark();
-        CachedInfo<T> info = single_subscript_attribute_target_cache.get(p);
+        Memo<T> info = single_subscript_attribute_target_cache.get(p);
         if (info != null) {
             log("single_subscript_attribute_target() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -8203,7 +8203,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("single_subscript_attribute_target() [fresh]-> ", result);
         if (result != null) {
-            single_subscript_attribute_target_cache.put(p, new CachedInfo<>(result, this.mark()));
+            single_subscript_attribute_target_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -8255,11 +8255,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T[]>> del_targets_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> del_targets_cache = new HashMap<>();
 
     protected T[] del_targets() {
         int p = this.mark();
-        CachedInfo<T[]> info = del_targets_cache.get(p);
+        Memo<T[]> info = del_targets_cache.get(p);
         if (info != null) {
             log("del_targets() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -8271,7 +8271,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("del_targets() [fresh]-> ", result);
         if (result != null) {
-            del_targets_cache.put(p, new CachedInfo<>(result, this.mark()));
+            del_targets_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -8298,11 +8298,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> del_target_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> del_target_cache = new HashMap<>();
 
     protected T del_target() {
         int p = this.mark();
-        CachedInfo<T> info = del_target_cache.get(p);
+        Memo<T> info = del_target_cache.get(p);
         if (info != null) {
             log("del_target() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -8314,7 +8314,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("del_target() [fresh]-> ", result);
         if (result != null) {
-            del_target_cache.put(p, new CachedInfo<>(result, this.mark()));
+            del_target_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -8375,11 +8375,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> del_t_atom_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> del_t_atom_cache = new HashMap<>();
 
     protected T del_t_atom() {
         int p = this.mark();
-        CachedInfo<T> info = del_t_atom_cache.get(p);
+        Memo<T> info = del_t_atom_cache.get(p);
         if (info != null) {
             log("del_t_atom() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -8391,7 +8391,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("del_t_atom() [fresh]-> ", result);
         if (result != null) {
-            del_t_atom_cache.put(p, new CachedInfo<>(result, this.mark()));
+            del_t_atom_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -8460,11 +8460,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T[]>> targets_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> targets_cache = new HashMap<>();
 
     protected T[] targets() {
         int p = this.mark();
-        CachedInfo<T[]> info = targets_cache.get(p);
+        Memo<T[]> info = targets_cache.get(p);
         if (info != null) {
             log("targets() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -8476,7 +8476,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("targets() [fresh]-> ", result);
         if (result != null) {
-            targets_cache.put(p, new CachedInfo<>(result, this.mark()));
+            targets_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -8503,11 +8503,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> target_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> target_cache = new HashMap<>();
 
     protected T target() {
         int p = this.mark();
-        CachedInfo<T> info = target_cache.get(p);
+        Memo<T> info = target_cache.get(p);
         if (info != null) {
             log("target() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -8519,7 +8519,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("target() [fresh]-> ", result);
         if (result != null) {
-            target_cache.put(p, new CachedInfo<>(result, this.mark()));
+            target_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -8580,11 +8580,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> t_primary_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> t_primary_cache = new HashMap<>();
 
     protected T t_primary() {
         int p = this.mark();
-        CachedInfo<T> info = t_primary_cache.get(p);
+        Memo<T> info = t_primary_cache.get(p);
         if (info != null) {
             log("t_primary() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -8594,7 +8594,7 @@ class GeneratedParser<T> extends Parser<T> {
         T last_result = null;
         int last_mark = p;
         int depth = 0;
-        t_primary_cache.put(p, new CachedInfo<>(null, p));
+        t_primary_cache.put(p, new Memo<>(null, p));
         log("recursive t_primary() at " + p + " depth " + depth);
         while (true) {
             this.reset(p);
@@ -8608,7 +8608,7 @@ class GeneratedParser<T> extends Parser<T> {
                 break;
             last_result = result;
             last_mark = end_mark;
-            t_primary_cache.put(p, new CachedInfo<>(result, end_mark));
+            t_primary_cache.put(p, new Memo<>(result, end_mark));
         }
         this.reset(last_mark);
         if (last_result != null) {
@@ -8618,7 +8618,7 @@ class GeneratedParser<T> extends Parser<T> {
             this.reset(last_mark);
         }
         log("t_primary() [fresh]-> ", last_result);
-        t_primary_cache.put(p, new CachedInfo<>(last_result, last_mark));
+        t_primary_cache.put(p, new Memo<>(last_result, last_mark));
         return last_result;
     }
 
@@ -8714,11 +8714,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> t_lookahead_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> t_lookahead_cache = new HashMap<>();
 
     protected T t_lookahead() {
         int p = this.mark();
-        CachedInfo<T> info = t_lookahead_cache.get(p);
+        Memo<T> info = t_lookahead_cache.get(p);
         if (info != null) {
             log("t_lookahead() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -8730,7 +8730,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("t_lookahead() [fresh]-> ", result);
         if (result != null) {
-            t_lookahead_cache.put(p, new CachedInfo<>(result, this.mark()));
+            t_lookahead_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -8771,11 +8771,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> t_atom_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> t_atom_cache = new HashMap<>();
 
     protected T t_atom() {
         int p = this.mark();
-        CachedInfo<T> info = t_atom_cache.get(p);
+        Memo<T> info = t_atom_cache.get(p);
         if (info != null) {
             log("t_atom() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -8787,7 +8787,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("t_atom() [fresh]-> ", result);
         if (result != null) {
-            t_atom_cache.put(p, new CachedInfo<>(result, this.mark()));
+            t_atom_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -8856,11 +8856,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop0_1_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop0_1_cache = new HashMap<>();
 
     protected T[] _loop0_1() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop0_1_cache.get(p);
+        Memo<T[]> info = _loop0_1_cache.get(p);
         if (info != null) {
             log("_loop0_1() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -8872,7 +8872,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop0_1() [fresh]-> ", result);
         if (result != null) {
-            _loop0_1_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop0_1_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -8896,11 +8896,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop0_2_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop0_2_cache = new HashMap<>();
 
     protected T[] _loop0_2() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop0_2_cache.get(p);
+        Memo<T[]> info = _loop0_2_cache.get(p);
         if (info != null) {
             log("_loop0_2() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -8912,7 +8912,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop0_2() [fresh]-> ", result);
         if (result != null) {
-            _loop0_2_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop0_2_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -8936,11 +8936,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop0_4_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop0_4_cache = new HashMap<>();
 
     protected T[] _loop0_4() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop0_4_cache.get(p);
+        Memo<T[]> info = _loop0_4_cache.get(p);
         if (info != null) {
             log("_loop0_4() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -8952,7 +8952,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop0_4() [fresh]-> ", result);
         if (result != null) {
-            _loop0_4_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop0_4_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -8980,11 +8980,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _gather_3_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _gather_3_cache = new HashMap<>();
 
     protected T[] _gather_3() {
         int p = this.mark();
-        CachedInfo<T[]> info = _gather_3_cache.get(p);
+        Memo<T[]> info = _gather_3_cache.get(p);
         if (info != null) {
             log("_gather_3() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -8996,7 +8996,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_gather_3() [fresh]-> ", result);
         if (result != null) {
-            _gather_3_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _gather_3_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -9022,11 +9022,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop0_6_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop0_6_cache = new HashMap<>();
 
     protected T[] _loop0_6() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop0_6_cache.get(p);
+        Memo<T[]> info = _loop0_6_cache.get(p);
         if (info != null) {
             log("_loop0_6() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -9038,7 +9038,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop0_6() [fresh]-> ", result);
         if (result != null) {
-            _loop0_6_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop0_6_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -9066,11 +9066,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _gather_5_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _gather_5_cache = new HashMap<>();
 
     protected T[] _gather_5() {
         int p = this.mark();
-        CachedInfo<T[]> info = _gather_5_cache.get(p);
+        Memo<T[]> info = _gather_5_cache.get(p);
         if (info != null) {
             log("_gather_5() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -9082,7 +9082,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_gather_5() [fresh]-> ", result);
         if (result != null) {
-            _gather_5_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _gather_5_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -9108,11 +9108,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop0_8_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop0_8_cache = new HashMap<>();
 
     protected T[] _loop0_8() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop0_8_cache.get(p);
+        Memo<T[]> info = _loop0_8_cache.get(p);
         if (info != null) {
             log("_loop0_8() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -9124,7 +9124,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop0_8() [fresh]-> ", result);
         if (result != null) {
-            _loop0_8_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop0_8_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -9152,11 +9152,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _gather_7_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _gather_7_cache = new HashMap<>();
 
     protected T[] _gather_7() {
         int p = this.mark();
-        CachedInfo<T[]> info = _gather_7_cache.get(p);
+        Memo<T[]> info = _gather_7_cache.get(p);
         if (info != null) {
             log("_gather_7() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -9168,7 +9168,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_gather_7() [fresh]-> ", result);
         if (result != null) {
-            _gather_7_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _gather_7_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -9194,11 +9194,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop0_10_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop0_10_cache = new HashMap<>();
 
     protected T[] _loop0_10() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop0_10_cache.get(p);
+        Memo<T[]> info = _loop0_10_cache.get(p);
         if (info != null) {
             log("_loop0_10() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -9210,7 +9210,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop0_10() [fresh]-> ", result);
         if (result != null) {
-            _loop0_10_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop0_10_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -9238,11 +9238,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _gather_9_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _gather_9_cache = new HashMap<>();
 
     protected T[] _gather_9() {
         int p = this.mark();
-        CachedInfo<T[]> info = _gather_9_cache.get(p);
+        Memo<T[]> info = _gather_9_cache.get(p);
         if (info != null) {
             log("_gather_9() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -9254,7 +9254,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_gather_9() [fresh]-> ", result);
         if (result != null) {
-            _gather_9_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _gather_9_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -9280,11 +9280,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop1_11_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop1_11_cache = new HashMap<>();
 
     protected T[] _loop1_11() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop1_11_cache.get(p);
+        Memo<T[]> info = _loop1_11_cache.get(p);
         if (info != null) {
             log("_loop1_11() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -9296,7 +9296,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop1_11() [fresh]-> ", result);
         if (result != null) {
-            _loop1_11_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop1_11_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -9321,11 +9321,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop0_13_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop0_13_cache = new HashMap<>();
 
     protected T[] _loop0_13() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop0_13_cache.get(p);
+        Memo<T[]> info = _loop0_13_cache.get(p);
         if (info != null) {
             log("_loop0_13() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -9337,7 +9337,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop0_13() [fresh]-> ", result);
         if (result != null) {
-            _loop0_13_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop0_13_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -9365,11 +9365,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _gather_12_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _gather_12_cache = new HashMap<>();
 
     protected T[] _gather_12() {
         int p = this.mark();
-        CachedInfo<T[]> info = _gather_12_cache.get(p);
+        Memo<T[]> info = _gather_12_cache.get(p);
         if (info != null) {
             log("_gather_12() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -9381,7 +9381,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_gather_12() [fresh]-> ", result);
         if (result != null) {
-            _gather_12_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _gather_12_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -9407,11 +9407,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> _tmp_14_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> _tmp_14_cache = new HashMap<>();
 
     protected T _tmp_14() {
         int p = this.mark();
-        CachedInfo<T> info = _tmp_14_cache.get(p);
+        Memo<T> info = _tmp_14_cache.get(p);
         if (info != null) {
             log("_tmp_14() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -9423,7 +9423,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_tmp_14() [fresh]-> ", result);
         if (result != null) {
-            _tmp_14_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _tmp_14_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -9453,11 +9453,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> _tmp_15_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> _tmp_15_cache = new HashMap<>();
 
     protected T _tmp_15() {
         int p = this.mark();
-        CachedInfo<T> info = _tmp_15_cache.get(p);
+        Memo<T> info = _tmp_15_cache.get(p);
         if (info != null) {
             log("_tmp_15() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -9469,7 +9469,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_tmp_15() [fresh]-> ", result);
         if (result != null) {
-            _tmp_15_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _tmp_15_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -9508,11 +9508,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> _tmp_16_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> _tmp_16_cache = new HashMap<>();
 
     protected T _tmp_16() {
         int p = this.mark();
-        CachedInfo<T> info = _tmp_16_cache.get(p);
+        Memo<T> info = _tmp_16_cache.get(p);
         if (info != null) {
             log("_tmp_16() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -9524,7 +9524,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_tmp_16() [fresh]-> ", result);
         if (result != null) {
-            _tmp_16_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _tmp_16_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -9555,11 +9555,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> _tmp_17_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> _tmp_17_cache = new HashMap<>();
 
     protected T _tmp_17() {
         int p = this.mark();
-        CachedInfo<T> info = _tmp_17_cache.get(p);
+        Memo<T> info = _tmp_17_cache.get(p);
         if (info != null) {
             log("_tmp_17() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -9571,7 +9571,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_tmp_17() [fresh]-> ", result);
         if (result != null) {
-            _tmp_17_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _tmp_17_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -9601,11 +9601,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> _tmp_18_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> _tmp_18_cache = new HashMap<>();
 
     protected T _tmp_18() {
         int p = this.mark();
-        CachedInfo<T> info = _tmp_18_cache.get(p);
+        Memo<T> info = _tmp_18_cache.get(p);
         if (info != null) {
             log("_tmp_18() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -9617,7 +9617,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_tmp_18() [fresh]-> ", result);
         if (result != null) {
-            _tmp_18_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _tmp_18_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -9647,11 +9647,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> _tmp_19_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> _tmp_19_cache = new HashMap<>();
 
     protected T _tmp_19() {
         int p = this.mark();
-        CachedInfo<T> info = _tmp_19_cache.get(p);
+        Memo<T> info = _tmp_19_cache.get(p);
         if (info != null) {
             log("_tmp_19() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -9663,7 +9663,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_tmp_19() [fresh]-> ", result);
         if (result != null) {
-            _tmp_19_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _tmp_19_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -9689,11 +9689,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> _tmp_20_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> _tmp_20_cache = new HashMap<>();
 
     protected T _tmp_20() {
         int p = this.mark();
-        CachedInfo<T> info = _tmp_20_cache.get(p);
+        Memo<T> info = _tmp_20_cache.get(p);
         if (info != null) {
             log("_tmp_20() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -9705,7 +9705,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_tmp_20() [fresh]-> ", result);
         if (result != null) {
-            _tmp_20_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _tmp_20_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -9743,11 +9743,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> _tmp_21_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> _tmp_21_cache = new HashMap<>();
 
     protected T _tmp_21() {
         int p = this.mark();
-        CachedInfo<T> info = _tmp_21_cache.get(p);
+        Memo<T> info = _tmp_21_cache.get(p);
         if (info != null) {
             log("_tmp_21() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -9759,7 +9759,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_tmp_21() [fresh]-> ", result);
         if (result != null) {
-            _tmp_21_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _tmp_21_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -9785,11 +9785,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop1_22_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop1_22_cache = new HashMap<>();
 
     protected T[] _loop1_22() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop1_22_cache.get(p);
+        Memo<T[]> info = _loop1_22_cache.get(p);
         if (info != null) {
             log("_loop1_22() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -9801,7 +9801,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop1_22() [fresh]-> ", result);
         if (result != null) {
-            _loop1_22_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop1_22_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -9826,11 +9826,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T>> _tmp_23_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> _tmp_23_cache = new HashMap<>();
 
     protected T _tmp_23() {
         int p = this.mark();
-        CachedInfo<T> info = _tmp_23_cache.get(p);
+        Memo<T> info = _tmp_23_cache.get(p);
         if (info != null) {
             log("_tmp_23() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -9842,7 +9842,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_tmp_23() [fresh]-> ", result);
         if (result != null) {
-            _tmp_23_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _tmp_23_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -9874,11 +9874,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> _tmp_24_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> _tmp_24_cache = new HashMap<>();
 
     protected T _tmp_24() {
         int p = this.mark();
-        CachedInfo<T> info = _tmp_24_cache.get(p);
+        Memo<T> info = _tmp_24_cache.get(p);
         if (info != null) {
             log("_tmp_24() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -9890,7 +9890,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_tmp_24() [fresh]-> ", result);
         if (result != null) {
-            _tmp_24_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _tmp_24_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -9922,11 +9922,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop0_26_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop0_26_cache = new HashMap<>();
 
     protected T[] _loop0_26() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop0_26_cache.get(p);
+        Memo<T[]> info = _loop0_26_cache.get(p);
         if (info != null) {
             log("_loop0_26() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -9938,7 +9938,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop0_26() [fresh]-> ", result);
         if (result != null) {
-            _loop0_26_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop0_26_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -9966,11 +9966,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _gather_25_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _gather_25_cache = new HashMap<>();
 
     protected T[] _gather_25() {
         int p = this.mark();
-        CachedInfo<T[]> info = _gather_25_cache.get(p);
+        Memo<T[]> info = _gather_25_cache.get(p);
         if (info != null) {
             log("_gather_25() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -9982,7 +9982,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_gather_25() [fresh]-> ", result);
         if (result != null) {
-            _gather_25_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _gather_25_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -10008,11 +10008,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop0_28_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop0_28_cache = new HashMap<>();
 
     protected T[] _loop0_28() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop0_28_cache.get(p);
+        Memo<T[]> info = _loop0_28_cache.get(p);
         if (info != null) {
             log("_loop0_28() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -10024,7 +10024,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop0_28() [fresh]-> ", result);
         if (result != null) {
-            _loop0_28_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop0_28_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -10052,11 +10052,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _gather_27_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _gather_27_cache = new HashMap<>();
 
     protected T[] _gather_27() {
         int p = this.mark();
-        CachedInfo<T[]> info = _gather_27_cache.get(p);
+        Memo<T[]> info = _gather_27_cache.get(p);
         if (info != null) {
             log("_gather_27() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -10068,7 +10068,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_gather_27() [fresh]-> ", result);
         if (result != null) {
-            _gather_27_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _gather_27_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -10094,11 +10094,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> _tmp_29_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> _tmp_29_cache = new HashMap<>();
 
     protected T _tmp_29() {
         int p = this.mark();
-        CachedInfo<T> info = _tmp_29_cache.get(p);
+        Memo<T> info = _tmp_29_cache.get(p);
         if (info != null) {
             log("_tmp_29() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -10110,7 +10110,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_tmp_29() [fresh]-> ", result);
         if (result != null) {
-            _tmp_29_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _tmp_29_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -10136,11 +10136,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> _tmp_30_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> _tmp_30_cache = new HashMap<>();
 
     protected T _tmp_30() {
         int p = this.mark();
-        CachedInfo<T> info = _tmp_30_cache.get(p);
+        Memo<T> info = _tmp_30_cache.get(p);
         if (info != null) {
             log("_tmp_30() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -10152,7 +10152,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_tmp_30() [fresh]-> ", result);
         if (result != null) {
-            _tmp_30_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _tmp_30_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -10183,11 +10183,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop0_31_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop0_31_cache = new HashMap<>();
 
     protected T[] _loop0_31() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop0_31_cache.get(p);
+        Memo<T[]> info = _loop0_31_cache.get(p);
         if (info != null) {
             log("_loop0_31() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -10199,7 +10199,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop0_31() [fresh]-> ", result);
         if (result != null) {
-            _loop0_31_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop0_31_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -10224,11 +10224,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop1_32_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop1_32_cache = new HashMap<>();
 
     protected T[] _loop1_32() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop1_32_cache.get(p);
+        Memo<T[]> info = _loop1_32_cache.get(p);
         if (info != null) {
             log("_loop1_32() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -10240,7 +10240,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop1_32() [fresh]-> ", result);
         if (result != null) {
-            _loop1_32_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop1_32_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -10265,11 +10265,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop0_34_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop0_34_cache = new HashMap<>();
 
     protected T[] _loop0_34() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop0_34_cache.get(p);
+        Memo<T[]> info = _loop0_34_cache.get(p);
         if (info != null) {
             log("_loop0_34() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -10281,7 +10281,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop0_34() [fresh]-> ", result);
         if (result != null) {
-            _loop0_34_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop0_34_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -10309,11 +10309,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _gather_33_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _gather_33_cache = new HashMap<>();
 
     protected T[] _gather_33() {
         int p = this.mark();
-        CachedInfo<T[]> info = _gather_33_cache.get(p);
+        Memo<T[]> info = _gather_33_cache.get(p);
         if (info != null) {
             log("_gather_33() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -10325,7 +10325,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_gather_33() [fresh]-> ", result);
         if (result != null) {
-            _gather_33_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _gather_33_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -10351,11 +10351,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> _tmp_35_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> _tmp_35_cache = new HashMap<>();
 
     protected T _tmp_35() {
         int p = this.mark();
-        CachedInfo<T> info = _tmp_35_cache.get(p);
+        Memo<T> info = _tmp_35_cache.get(p);
         if (info != null) {
             log("_tmp_35() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -10367,7 +10367,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_tmp_35() [fresh]-> ", result);
         if (result != null) {
-            _tmp_35_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _tmp_35_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -10392,11 +10392,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop0_37_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop0_37_cache = new HashMap<>();
 
     protected T[] _loop0_37() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop0_37_cache.get(p);
+        Memo<T[]> info = _loop0_37_cache.get(p);
         if (info != null) {
             log("_loop0_37() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -10408,7 +10408,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop0_37() [fresh]-> ", result);
         if (result != null) {
-            _loop0_37_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop0_37_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -10436,11 +10436,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _gather_36_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _gather_36_cache = new HashMap<>();
 
     protected T[] _gather_36() {
         int p = this.mark();
-        CachedInfo<T[]> info = _gather_36_cache.get(p);
+        Memo<T[]> info = _gather_36_cache.get(p);
         if (info != null) {
             log("_gather_36() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -10452,7 +10452,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_gather_36() [fresh]-> ", result);
         if (result != null) {
-            _gather_36_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _gather_36_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -10478,11 +10478,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> _tmp_38_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> _tmp_38_cache = new HashMap<>();
 
     protected T _tmp_38() {
         int p = this.mark();
-        CachedInfo<T> info = _tmp_38_cache.get(p);
+        Memo<T> info = _tmp_38_cache.get(p);
         if (info != null) {
             log("_tmp_38() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -10494,7 +10494,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_tmp_38() [fresh]-> ", result);
         if (result != null) {
-            _tmp_38_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _tmp_38_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -10519,11 +10519,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop0_40_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop0_40_cache = new HashMap<>();
 
     protected T[] _loop0_40() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop0_40_cache.get(p);
+        Memo<T[]> info = _loop0_40_cache.get(p);
         if (info != null) {
             log("_loop0_40() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -10535,7 +10535,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop0_40() [fresh]-> ", result);
         if (result != null) {
-            _loop0_40_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop0_40_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -10563,11 +10563,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _gather_39_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _gather_39_cache = new HashMap<>();
 
     protected T[] _gather_39() {
         int p = this.mark();
-        CachedInfo<T[]> info = _gather_39_cache.get(p);
+        Memo<T[]> info = _gather_39_cache.get(p);
         if (info != null) {
             log("_gather_39() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -10579,7 +10579,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_gather_39() [fresh]-> ", result);
         if (result != null) {
-            _gather_39_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _gather_39_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -10605,11 +10605,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop0_42_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop0_42_cache = new HashMap<>();
 
     protected T[] _loop0_42() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop0_42_cache.get(p);
+        Memo<T[]> info = _loop0_42_cache.get(p);
         if (info != null) {
             log("_loop0_42() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -10621,7 +10621,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop0_42() [fresh]-> ", result);
         if (result != null) {
-            _loop0_42_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop0_42_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -10649,11 +10649,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _gather_41_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _gather_41_cache = new HashMap<>();
 
     protected T[] _gather_41() {
         int p = this.mark();
-        CachedInfo<T[]> info = _gather_41_cache.get(p);
+        Memo<T[]> info = _gather_41_cache.get(p);
         if (info != null) {
             log("_gather_41() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -10665,7 +10665,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_gather_41() [fresh]-> ", result);
         if (result != null) {
-            _gather_41_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _gather_41_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -10691,11 +10691,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop0_44_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop0_44_cache = new HashMap<>();
 
     protected T[] _loop0_44() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop0_44_cache.get(p);
+        Memo<T[]> info = _loop0_44_cache.get(p);
         if (info != null) {
             log("_loop0_44() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -10707,7 +10707,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop0_44() [fresh]-> ", result);
         if (result != null) {
-            _loop0_44_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop0_44_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -10735,11 +10735,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _gather_43_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _gather_43_cache = new HashMap<>();
 
     protected T[] _gather_43() {
         int p = this.mark();
-        CachedInfo<T[]> info = _gather_43_cache.get(p);
+        Memo<T[]> info = _gather_43_cache.get(p);
         if (info != null) {
             log("_gather_43() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -10751,7 +10751,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_gather_43() [fresh]-> ", result);
         if (result != null) {
-            _gather_43_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _gather_43_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -10777,11 +10777,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop0_46_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop0_46_cache = new HashMap<>();
 
     protected T[] _loop0_46() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop0_46_cache.get(p);
+        Memo<T[]> info = _loop0_46_cache.get(p);
         if (info != null) {
             log("_loop0_46() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -10793,7 +10793,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop0_46() [fresh]-> ", result);
         if (result != null) {
-            _loop0_46_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop0_46_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -10821,11 +10821,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _gather_45_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _gather_45_cache = new HashMap<>();
 
     protected T[] _gather_45() {
         int p = this.mark();
-        CachedInfo<T[]> info = _gather_45_cache.get(p);
+        Memo<T[]> info = _gather_45_cache.get(p);
         if (info != null) {
             log("_gather_45() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -10837,7 +10837,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_gather_45() [fresh]-> ", result);
         if (result != null) {
-            _gather_45_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _gather_45_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -10863,11 +10863,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> _tmp_47_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> _tmp_47_cache = new HashMap<>();
 
     protected T _tmp_47() {
         int p = this.mark();
-        CachedInfo<T> info = _tmp_47_cache.get(p);
+        Memo<T> info = _tmp_47_cache.get(p);
         if (info != null) {
             log("_tmp_47() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -10879,7 +10879,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_tmp_47() [fresh]-> ", result);
         if (result != null) {
-            _tmp_47_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _tmp_47_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -10920,11 +10920,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop1_48_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop1_48_cache = new HashMap<>();
 
     protected T[] _loop1_48() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop1_48_cache.get(p);
+        Memo<T[]> info = _loop1_48_cache.get(p);
         if (info != null) {
             log("_loop1_48() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -10936,7 +10936,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop1_48() [fresh]-> ", result);
         if (result != null) {
-            _loop1_48_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop1_48_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -10961,11 +10961,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T>> _tmp_49_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> _tmp_49_cache = new HashMap<>();
 
     protected T _tmp_49() {
         int p = this.mark();
-        CachedInfo<T> info = _tmp_49_cache.get(p);
+        Memo<T> info = _tmp_49_cache.get(p);
         if (info != null) {
             log("_tmp_49() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -10977,7 +10977,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_tmp_49() [fresh]-> ", result);
         if (result != null) {
-            _tmp_49_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _tmp_49_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -11002,11 +11002,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> _tmp_50_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> _tmp_50_cache = new HashMap<>();
 
     protected T _tmp_50() {
         int p = this.mark();
-        CachedInfo<T> info = _tmp_50_cache.get(p);
+        Memo<T> info = _tmp_50_cache.get(p);
         if (info != null) {
             log("_tmp_50() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -11018,7 +11018,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_tmp_50() [fresh]-> ", result);
         if (result != null) {
-            _tmp_50_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _tmp_50_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -11043,11 +11043,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> _tmp_51_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> _tmp_51_cache = new HashMap<>();
 
     protected T _tmp_51() {
         int p = this.mark();
-        CachedInfo<T> info = _tmp_51_cache.get(p);
+        Memo<T> info = _tmp_51_cache.get(p);
         if (info != null) {
             log("_tmp_51() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -11059,7 +11059,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_tmp_51() [fresh]-> ", result);
         if (result != null) {
-            _tmp_51_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _tmp_51_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -11085,11 +11085,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> _tmp_52_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> _tmp_52_cache = new HashMap<>();
 
     protected T _tmp_52() {
         int p = this.mark();
-        CachedInfo<T> info = _tmp_52_cache.get(p);
+        Memo<T> info = _tmp_52_cache.get(p);
         if (info != null) {
             log("_tmp_52() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -11101,7 +11101,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_tmp_52() [fresh]-> ", result);
         if (result != null) {
-            _tmp_52_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _tmp_52_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -11127,11 +11127,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> _tmp_53_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> _tmp_53_cache = new HashMap<>();
 
     protected T _tmp_53() {
         int p = this.mark();
-        CachedInfo<T> info = _tmp_53_cache.get(p);
+        Memo<T> info = _tmp_53_cache.get(p);
         if (info != null) {
             log("_tmp_53() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -11143,7 +11143,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_tmp_53() [fresh]-> ", result);
         if (result != null) {
-            _tmp_53_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _tmp_53_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -11167,11 +11167,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop0_54_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop0_54_cache = new HashMap<>();
 
     protected T[] _loop0_54() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop0_54_cache.get(p);
+        Memo<T[]> info = _loop0_54_cache.get(p);
         if (info != null) {
             log("_loop0_54() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -11183,7 +11183,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop0_54() [fresh]-> ", result);
         if (result != null) {
-            _loop0_54_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop0_54_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -11208,11 +11208,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop0_55_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop0_55_cache = new HashMap<>();
 
     protected T[] _loop0_55() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop0_55_cache.get(p);
+        Memo<T[]> info = _loop0_55_cache.get(p);
         if (info != null) {
             log("_loop0_55() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -11224,7 +11224,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop0_55() [fresh]-> ", result);
         if (result != null) {
-            _loop0_55_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop0_55_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -11249,11 +11249,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop0_56_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop0_56_cache = new HashMap<>();
 
     protected T[] _loop0_56() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop0_56_cache.get(p);
+        Memo<T[]> info = _loop0_56_cache.get(p);
         if (info != null) {
             log("_loop0_56() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -11265,7 +11265,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop0_56() [fresh]-> ", result);
         if (result != null) {
-            _loop0_56_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop0_56_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -11290,11 +11290,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop1_57_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop1_57_cache = new HashMap<>();
 
     protected T[] _loop1_57() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop1_57_cache.get(p);
+        Memo<T[]> info = _loop1_57_cache.get(p);
         if (info != null) {
             log("_loop1_57() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -11306,7 +11306,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop1_57() [fresh]-> ", result);
         if (result != null) {
-            _loop1_57_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop1_57_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -11331,11 +11331,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop0_58_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop0_58_cache = new HashMap<>();
 
     protected T[] _loop0_58() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop0_58_cache.get(p);
+        Memo<T[]> info = _loop0_58_cache.get(p);
         if (info != null) {
             log("_loop0_58() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -11347,7 +11347,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop0_58() [fresh]-> ", result);
         if (result != null) {
-            _loop0_58_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop0_58_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -11372,11 +11372,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop1_59_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop1_59_cache = new HashMap<>();
 
     protected T[] _loop1_59() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop1_59_cache.get(p);
+        Memo<T[]> info = _loop1_59_cache.get(p);
         if (info != null) {
             log("_loop1_59() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -11388,7 +11388,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop1_59() [fresh]-> ", result);
         if (result != null) {
-            _loop1_59_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop1_59_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -11413,11 +11413,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop1_60_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop1_60_cache = new HashMap<>();
 
     protected T[] _loop1_60() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop1_60_cache.get(p);
+        Memo<T[]> info = _loop1_60_cache.get(p);
         if (info != null) {
             log("_loop1_60() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -11429,7 +11429,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop1_60() [fresh]-> ", result);
         if (result != null) {
-            _loop1_60_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop1_60_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -11454,11 +11454,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop1_61_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop1_61_cache = new HashMap<>();
 
     protected T[] _loop1_61() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop1_61_cache.get(p);
+        Memo<T[]> info = _loop1_61_cache.get(p);
         if (info != null) {
             log("_loop1_61() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -11470,7 +11470,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop1_61() [fresh]-> ", result);
         if (result != null) {
-            _loop1_61_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop1_61_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -11495,11 +11495,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop0_62_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop0_62_cache = new HashMap<>();
 
     protected T[] _loop0_62() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop0_62_cache.get(p);
+        Memo<T[]> info = _loop0_62_cache.get(p);
         if (info != null) {
             log("_loop0_62() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -11511,7 +11511,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop0_62() [fresh]-> ", result);
         if (result != null) {
-            _loop0_62_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop0_62_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -11536,11 +11536,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop1_63_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop1_63_cache = new HashMap<>();
 
     protected T[] _loop1_63() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop1_63_cache.get(p);
+        Memo<T[]> info = _loop1_63_cache.get(p);
         if (info != null) {
             log("_loop1_63() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -11552,7 +11552,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop1_63() [fresh]-> ", result);
         if (result != null) {
-            _loop1_63_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop1_63_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -11577,11 +11577,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop0_64_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop0_64_cache = new HashMap<>();
 
     protected T[] _loop0_64() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop0_64_cache.get(p);
+        Memo<T[]> info = _loop0_64_cache.get(p);
         if (info != null) {
             log("_loop0_64() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -11593,7 +11593,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop0_64() [fresh]-> ", result);
         if (result != null) {
-            _loop0_64_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop0_64_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -11618,11 +11618,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop1_65_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop1_65_cache = new HashMap<>();
 
     protected T[] _loop1_65() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop1_65_cache.get(p);
+        Memo<T[]> info = _loop1_65_cache.get(p);
         if (info != null) {
             log("_loop1_65() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -11634,7 +11634,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop1_65() [fresh]-> ", result);
         if (result != null) {
-            _loop1_65_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop1_65_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -11659,11 +11659,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop0_66_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop0_66_cache = new HashMap<>();
 
     protected T[] _loop0_66() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop0_66_cache.get(p);
+        Memo<T[]> info = _loop0_66_cache.get(p);
         if (info != null) {
             log("_loop0_66() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -11675,7 +11675,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop0_66() [fresh]-> ", result);
         if (result != null) {
-            _loop0_66_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop0_66_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -11700,11 +11700,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop1_67_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop1_67_cache = new HashMap<>();
 
     protected T[] _loop1_67() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop1_67_cache.get(p);
+        Memo<T[]> info = _loop1_67_cache.get(p);
         if (info != null) {
             log("_loop1_67() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -11716,7 +11716,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop1_67() [fresh]-> ", result);
         if (result != null) {
-            _loop1_67_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop1_67_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -11741,11 +11741,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop1_68_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop1_68_cache = new HashMap<>();
 
     protected T[] _loop1_68() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop1_68_cache.get(p);
+        Memo<T[]> info = _loop1_68_cache.get(p);
         if (info != null) {
             log("_loop1_68() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -11757,7 +11757,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop1_68() [fresh]-> ", result);
         if (result != null) {
-            _loop1_68_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop1_68_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -11782,11 +11782,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T>> _tmp_69_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> _tmp_69_cache = new HashMap<>();
 
     protected T _tmp_69() {
         int p = this.mark();
-        CachedInfo<T> info = _tmp_69_cache.get(p);
+        Memo<T> info = _tmp_69_cache.get(p);
         if (info != null) {
             log("_tmp_69() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -11798,7 +11798,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_tmp_69() [fresh]-> ", result);
         if (result != null) {
-            _tmp_69_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _tmp_69_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -11827,11 +11827,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop0_71_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop0_71_cache = new HashMap<>();
 
     protected T[] _loop0_71() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop0_71_cache.get(p);
+        Memo<T[]> info = _loop0_71_cache.get(p);
         if (info != null) {
             log("_loop0_71() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -11843,7 +11843,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop0_71() [fresh]-> ", result);
         if (result != null) {
-            _loop0_71_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop0_71_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -11871,11 +11871,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _gather_70_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _gather_70_cache = new HashMap<>();
 
     protected T[] _gather_70() {
         int p = this.mark();
-        CachedInfo<T[]> info = _gather_70_cache.get(p);
+        Memo<T[]> info = _gather_70_cache.get(p);
         if (info != null) {
             log("_gather_70() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -11887,7 +11887,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_gather_70() [fresh]-> ", result);
         if (result != null) {
-            _gather_70_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _gather_70_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -11913,11 +11913,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop1_72_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop1_72_cache = new HashMap<>();
 
     protected T[] _loop1_72() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop1_72_cache.get(p);
+        Memo<T[]> info = _loop1_72_cache.get(p);
         if (info != null) {
             log("_loop1_72() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -11929,7 +11929,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop1_72() [fresh]-> ", result);
         if (result != null) {
-            _loop1_72_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop1_72_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -11954,11 +11954,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop0_74_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop0_74_cache = new HashMap<>();
 
     protected T[] _loop0_74() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop0_74_cache.get(p);
+        Memo<T[]> info = _loop0_74_cache.get(p);
         if (info != null) {
             log("_loop0_74() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -11970,7 +11970,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop0_74() [fresh]-> ", result);
         if (result != null) {
-            _loop0_74_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop0_74_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -11998,11 +11998,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _gather_73_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _gather_73_cache = new HashMap<>();
 
     protected T[] _gather_73() {
         int p = this.mark();
-        CachedInfo<T[]> info = _gather_73_cache.get(p);
+        Memo<T[]> info = _gather_73_cache.get(p);
         if (info != null) {
             log("_gather_73() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -12014,7 +12014,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_gather_73() [fresh]-> ", result);
         if (result != null) {
-            _gather_73_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _gather_73_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -12040,11 +12040,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop1_75_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop1_75_cache = new HashMap<>();
 
     protected T[] _loop1_75() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop1_75_cache.get(p);
+        Memo<T[]> info = _loop1_75_cache.get(p);
         if (info != null) {
             log("_loop1_75() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -12056,7 +12056,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop1_75() [fresh]-> ", result);
         if (result != null) {
-            _loop1_75_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop1_75_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -12081,11 +12081,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop0_76_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop0_76_cache = new HashMap<>();
 
     protected T[] _loop0_76() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop0_76_cache.get(p);
+        Memo<T[]> info = _loop0_76_cache.get(p);
         if (info != null) {
             log("_loop0_76() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -12097,7 +12097,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop0_76() [fresh]-> ", result);
         if (result != null) {
-            _loop0_76_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop0_76_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -12122,11 +12122,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop0_77_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop0_77_cache = new HashMap<>();
 
     protected T[] _loop0_77() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop0_77_cache.get(p);
+        Memo<T[]> info = _loop0_77_cache.get(p);
         if (info != null) {
             log("_loop0_77() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -12138,7 +12138,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop0_77() [fresh]-> ", result);
         if (result != null) {
-            _loop0_77_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop0_77_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -12163,11 +12163,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop0_78_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop0_78_cache = new HashMap<>();
 
     protected T[] _loop0_78() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop0_78_cache.get(p);
+        Memo<T[]> info = _loop0_78_cache.get(p);
         if (info != null) {
             log("_loop0_78() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -12179,7 +12179,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop0_78() [fresh]-> ", result);
         if (result != null) {
-            _loop0_78_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop0_78_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -12204,11 +12204,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop1_79_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop1_79_cache = new HashMap<>();
 
     protected T[] _loop1_79() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop1_79_cache.get(p);
+        Memo<T[]> info = _loop1_79_cache.get(p);
         if (info != null) {
             log("_loop1_79() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -12220,7 +12220,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop1_79() [fresh]-> ", result);
         if (result != null) {
-            _loop1_79_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop1_79_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -12245,11 +12245,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop0_80_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop0_80_cache = new HashMap<>();
 
     protected T[] _loop0_80() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop0_80_cache.get(p);
+        Memo<T[]> info = _loop0_80_cache.get(p);
         if (info != null) {
             log("_loop0_80() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -12261,7 +12261,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop0_80() [fresh]-> ", result);
         if (result != null) {
-            _loop0_80_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop0_80_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -12286,11 +12286,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop1_81_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop1_81_cache = new HashMap<>();
 
     protected T[] _loop1_81() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop1_81_cache.get(p);
+        Memo<T[]> info = _loop1_81_cache.get(p);
         if (info != null) {
             log("_loop1_81() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -12302,7 +12302,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop1_81() [fresh]-> ", result);
         if (result != null) {
-            _loop1_81_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop1_81_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -12327,11 +12327,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop1_82_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop1_82_cache = new HashMap<>();
 
     protected T[] _loop1_82() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop1_82_cache.get(p);
+        Memo<T[]> info = _loop1_82_cache.get(p);
         if (info != null) {
             log("_loop1_82() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -12343,7 +12343,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop1_82() [fresh]-> ", result);
         if (result != null) {
-            _loop1_82_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop1_82_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -12368,11 +12368,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop1_83_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop1_83_cache = new HashMap<>();
 
     protected T[] _loop1_83() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop1_83_cache.get(p);
+        Memo<T[]> info = _loop1_83_cache.get(p);
         if (info != null) {
             log("_loop1_83() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -12384,7 +12384,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop1_83() [fresh]-> ", result);
         if (result != null) {
-            _loop1_83_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop1_83_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -12409,11 +12409,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop0_84_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop0_84_cache = new HashMap<>();
 
     protected T[] _loop0_84() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop0_84_cache.get(p);
+        Memo<T[]> info = _loop0_84_cache.get(p);
         if (info != null) {
             log("_loop0_84() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -12425,7 +12425,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop0_84() [fresh]-> ", result);
         if (result != null) {
-            _loop0_84_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop0_84_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -12450,11 +12450,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop1_85_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop1_85_cache = new HashMap<>();
 
     protected T[] _loop1_85() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop1_85_cache.get(p);
+        Memo<T[]> info = _loop1_85_cache.get(p);
         if (info != null) {
             log("_loop1_85() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -12466,7 +12466,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop1_85() [fresh]-> ", result);
         if (result != null) {
-            _loop1_85_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop1_85_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -12491,11 +12491,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop0_86_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop0_86_cache = new HashMap<>();
 
     protected T[] _loop0_86() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop0_86_cache.get(p);
+        Memo<T[]> info = _loop0_86_cache.get(p);
         if (info != null) {
             log("_loop0_86() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -12507,7 +12507,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop0_86() [fresh]-> ", result);
         if (result != null) {
-            _loop0_86_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop0_86_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -12532,11 +12532,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop1_87_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop1_87_cache = new HashMap<>();
 
     protected T[] _loop1_87() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop1_87_cache.get(p);
+        Memo<T[]> info = _loop1_87_cache.get(p);
         if (info != null) {
             log("_loop1_87() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -12548,7 +12548,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop1_87() [fresh]-> ", result);
         if (result != null) {
-            _loop1_87_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop1_87_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -12573,11 +12573,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop0_88_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop0_88_cache = new HashMap<>();
 
     protected T[] _loop0_88() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop0_88_cache.get(p);
+        Memo<T[]> info = _loop0_88_cache.get(p);
         if (info != null) {
             log("_loop0_88() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -12589,7 +12589,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop0_88() [fresh]-> ", result);
         if (result != null) {
-            _loop0_88_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop0_88_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -12614,11 +12614,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop1_89_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop1_89_cache = new HashMap<>();
 
     protected T[] _loop1_89() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop1_89_cache.get(p);
+        Memo<T[]> info = _loop1_89_cache.get(p);
         if (info != null) {
             log("_loop1_89() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -12630,7 +12630,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop1_89() [fresh]-> ", result);
         if (result != null) {
-            _loop1_89_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop1_89_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -12655,11 +12655,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop1_90_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop1_90_cache = new HashMap<>();
 
     protected T[] _loop1_90() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop1_90_cache.get(p);
+        Memo<T[]> info = _loop1_90_cache.get(p);
         if (info != null) {
             log("_loop1_90() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -12671,7 +12671,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop1_90() [fresh]-> ", result);
         if (result != null) {
-            _loop1_90_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop1_90_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -12696,11 +12696,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop1_91_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop1_91_cache = new HashMap<>();
 
     protected T[] _loop1_91() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop1_91_cache.get(p);
+        Memo<T[]> info = _loop1_91_cache.get(p);
         if (info != null) {
             log("_loop1_91() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -12712,7 +12712,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop1_91() [fresh]-> ", result);
         if (result != null) {
-            _loop1_91_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop1_91_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -12737,11 +12737,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop1_92_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop1_92_cache = new HashMap<>();
 
     protected T[] _loop1_92() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop1_92_cache.get(p);
+        Memo<T[]> info = _loop1_92_cache.get(p);
         if (info != null) {
             log("_loop1_92() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -12753,7 +12753,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop1_92() [fresh]-> ", result);
         if (result != null) {
-            _loop1_92_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop1_92_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -12778,11 +12778,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop0_94_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop0_94_cache = new HashMap<>();
 
     protected T[] _loop0_94() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop0_94_cache.get(p);
+        Memo<T[]> info = _loop0_94_cache.get(p);
         if (info != null) {
             log("_loop0_94() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -12794,7 +12794,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop0_94() [fresh]-> ", result);
         if (result != null) {
-            _loop0_94_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop0_94_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -12822,11 +12822,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _gather_93_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _gather_93_cache = new HashMap<>();
 
     protected T[] _gather_93() {
         int p = this.mark();
-        CachedInfo<T[]> info = _gather_93_cache.get(p);
+        Memo<T[]> info = _gather_93_cache.get(p);
         if (info != null) {
             log("_gather_93() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -12838,7 +12838,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_gather_93() [fresh]-> ", result);
         if (result != null) {
-            _gather_93_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _gather_93_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -12864,11 +12864,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> _tmp_95_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> _tmp_95_cache = new HashMap<>();
 
     protected T _tmp_95() {
         int p = this.mark();
-        CachedInfo<T> info = _tmp_95_cache.get(p);
+        Memo<T> info = _tmp_95_cache.get(p);
         if (info != null) {
             log("_tmp_95() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -12880,7 +12880,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_tmp_95() [fresh]-> ", result);
         if (result != null) {
-            _tmp_95_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _tmp_95_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -12906,11 +12906,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> _tmp_96_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> _tmp_96_cache = new HashMap<>();
 
     protected T _tmp_96() {
         int p = this.mark();
-        CachedInfo<T> info = _tmp_96_cache.get(p);
+        Memo<T> info = _tmp_96_cache.get(p);
         if (info != null) {
             log("_tmp_96() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -12922,7 +12922,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_tmp_96() [fresh]-> ", result);
         if (result != null) {
-            _tmp_96_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _tmp_96_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -12963,11 +12963,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> _tmp_97_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> _tmp_97_cache = new HashMap<>();
 
     protected T _tmp_97() {
         int p = this.mark();
-        CachedInfo<T> info = _tmp_97_cache.get(p);
+        Memo<T> info = _tmp_97_cache.get(p);
         if (info != null) {
             log("_tmp_97() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -12979,7 +12979,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_tmp_97() [fresh]-> ", result);
         if (result != null) {
-            _tmp_97_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _tmp_97_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -13011,11 +13011,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> _tmp_98_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> _tmp_98_cache = new HashMap<>();
 
     protected T _tmp_98() {
         int p = this.mark();
-        CachedInfo<T> info = _tmp_98_cache.get(p);
+        Memo<T> info = _tmp_98_cache.get(p);
         if (info != null) {
             log("_tmp_98() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -13027,7 +13027,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_tmp_98() [fresh]-> ", result);
         if (result != null) {
-            _tmp_98_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _tmp_98_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -13077,11 +13077,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop1_99_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop1_99_cache = new HashMap<>();
 
     protected T[] _loop1_99() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop1_99_cache.get(p);
+        Memo<T[]> info = _loop1_99_cache.get(p);
         if (info != null) {
             log("_loop1_99() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -13093,7 +13093,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop1_99() [fresh]-> ", result);
         if (result != null) {
-            _loop1_99_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop1_99_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -13118,11 +13118,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _tmp_100_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _tmp_100_cache = new HashMap<>();
 
     protected T[] _tmp_100() {
         int p = this.mark();
-        CachedInfo<T[]> info = _tmp_100_cache.get(p);
+        Memo<T[]> info = _tmp_100_cache.get(p);
         if (info != null) {
             log("_tmp_100() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -13134,7 +13134,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_tmp_100() [fresh]-> ", result);
         if (result != null) {
-            _tmp_100_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _tmp_100_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -13163,11 +13163,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> _tmp_101_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> _tmp_101_cache = new HashMap<>();
 
     protected T _tmp_101() {
         int p = this.mark();
-        CachedInfo<T> info = _tmp_101_cache.get(p);
+        Memo<T> info = _tmp_101_cache.get(p);
         if (info != null) {
             log("_tmp_101() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -13179,7 +13179,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_tmp_101() [fresh]-> ", result);
         if (result != null) {
-            _tmp_101_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _tmp_101_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -13211,11 +13211,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop0_103_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop0_103_cache = new HashMap<>();
 
     protected T[] _loop0_103() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop0_103_cache.get(p);
+        Memo<T[]> info = _loop0_103_cache.get(p);
         if (info != null) {
             log("_loop0_103() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -13227,7 +13227,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop0_103() [fresh]-> ", result);
         if (result != null) {
-            _loop0_103_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop0_103_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -13255,11 +13255,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _gather_102_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _gather_102_cache = new HashMap<>();
 
     protected T[] _gather_102() {
         int p = this.mark();
-        CachedInfo<T[]> info = _gather_102_cache.get(p);
+        Memo<T[]> info = _gather_102_cache.get(p);
         if (info != null) {
             log("_gather_102() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -13271,7 +13271,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_gather_102() [fresh]-> ", result);
         if (result != null) {
-            _gather_102_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _gather_102_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -13297,11 +13297,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop1_104_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop1_104_cache = new HashMap<>();
 
     protected T[] _loop1_104() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop1_104_cache.get(p);
+        Memo<T[]> info = _loop1_104_cache.get(p);
         if (info != null) {
             log("_loop1_104() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -13313,7 +13313,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop1_104() [fresh]-> ", result);
         if (result != null) {
-            _loop1_104_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop1_104_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -13338,11 +13338,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop0_105_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop0_105_cache = new HashMap<>();
 
     protected T[] _loop0_105() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop0_105_cache.get(p);
+        Memo<T[]> info = _loop0_105_cache.get(p);
         if (info != null) {
             log("_loop0_105() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -13354,7 +13354,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop0_105() [fresh]-> ", result);
         if (result != null) {
-            _loop0_105_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop0_105_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -13379,11 +13379,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop0_106_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop0_106_cache = new HashMap<>();
 
     protected T[] _loop0_106() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop0_106_cache.get(p);
+        Memo<T[]> info = _loop0_106_cache.get(p);
         if (info != null) {
             log("_loop0_106() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -13395,7 +13395,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop0_106() [fresh]-> ", result);
         if (result != null) {
-            _loop0_106_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop0_106_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -13420,11 +13420,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop0_108_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop0_108_cache = new HashMap<>();
 
     protected T[] _loop0_108() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop0_108_cache.get(p);
+        Memo<T[]> info = _loop0_108_cache.get(p);
         if (info != null) {
             log("_loop0_108() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -13436,7 +13436,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop0_108() [fresh]-> ", result);
         if (result != null) {
-            _loop0_108_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop0_108_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -13464,11 +13464,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _gather_107_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _gather_107_cache = new HashMap<>();
 
     protected T[] _gather_107() {
         int p = this.mark();
-        CachedInfo<T[]> info = _gather_107_cache.get(p);
+        Memo<T[]> info = _gather_107_cache.get(p);
         if (info != null) {
             log("_gather_107() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -13480,7 +13480,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_gather_107() [fresh]-> ", result);
         if (result != null) {
-            _gather_107_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _gather_107_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -13506,11 +13506,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _tmp_109_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _tmp_109_cache = new HashMap<>();
 
     protected T[] _tmp_109() {
         int p = this.mark();
-        CachedInfo<T[]> info = _tmp_109_cache.get(p);
+        Memo<T[]> info = _tmp_109_cache.get(p);
         if (info != null) {
             log("_tmp_109() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -13522,7 +13522,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_tmp_109() [fresh]-> ", result);
         if (result != null) {
-            _tmp_109_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _tmp_109_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -13548,11 +13548,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop0_111_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop0_111_cache = new HashMap<>();
 
     protected T[] _loop0_111() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop0_111_cache.get(p);
+        Memo<T[]> info = _loop0_111_cache.get(p);
         if (info != null) {
             log("_loop0_111() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -13564,7 +13564,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop0_111() [fresh]-> ", result);
         if (result != null) {
-            _loop0_111_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop0_111_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -13592,11 +13592,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _gather_110_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _gather_110_cache = new HashMap<>();
 
     protected T[] _gather_110() {
         int p = this.mark();
-        CachedInfo<T[]> info = _gather_110_cache.get(p);
+        Memo<T[]> info = _gather_110_cache.get(p);
         if (info != null) {
             log("_gather_110() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -13608,7 +13608,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_gather_110() [fresh]-> ", result);
         if (result != null) {
-            _gather_110_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _gather_110_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -13634,11 +13634,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop0_113_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop0_113_cache = new HashMap<>();
 
     protected T[] _loop0_113() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop0_113_cache.get(p);
+        Memo<T[]> info = _loop0_113_cache.get(p);
         if (info != null) {
             log("_loop0_113() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -13650,7 +13650,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop0_113() [fresh]-> ", result);
         if (result != null) {
-            _loop0_113_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop0_113_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -13678,11 +13678,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _gather_112_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _gather_112_cache = new HashMap<>();
 
     protected T[] _gather_112() {
         int p = this.mark();
-        CachedInfo<T[]> info = _gather_112_cache.get(p);
+        Memo<T[]> info = _gather_112_cache.get(p);
         if (info != null) {
             log("_gather_112() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -13694,7 +13694,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_gather_112() [fresh]-> ", result);
         if (result != null) {
-            _gather_112_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _gather_112_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -13720,11 +13720,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop0_115_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop0_115_cache = new HashMap<>();
 
     protected T[] _loop0_115() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop0_115_cache.get(p);
+        Memo<T[]> info = _loop0_115_cache.get(p);
         if (info != null) {
             log("_loop0_115() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -13736,7 +13736,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop0_115() [fresh]-> ", result);
         if (result != null) {
-            _loop0_115_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop0_115_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -13764,11 +13764,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _gather_114_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _gather_114_cache = new HashMap<>();
 
     protected T[] _gather_114() {
         int p = this.mark();
-        CachedInfo<T[]> info = _gather_114_cache.get(p);
+        Memo<T[]> info = _gather_114_cache.get(p);
         if (info != null) {
             log("_gather_114() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -13780,7 +13780,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_gather_114() [fresh]-> ", result);
         if (result != null) {
-            _gather_114_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _gather_114_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -13806,11 +13806,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop0_117_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop0_117_cache = new HashMap<>();
 
     protected T[] _loop0_117() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop0_117_cache.get(p);
+        Memo<T[]> info = _loop0_117_cache.get(p);
         if (info != null) {
             log("_loop0_117() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -13822,7 +13822,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop0_117() [fresh]-> ", result);
         if (result != null) {
-            _loop0_117_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop0_117_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -13850,11 +13850,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _gather_116_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _gather_116_cache = new HashMap<>();
 
     protected T[] _gather_116() {
         int p = this.mark();
-        CachedInfo<T[]> info = _gather_116_cache.get(p);
+        Memo<T[]> info = _gather_116_cache.get(p);
         if (info != null) {
             log("_gather_116() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -13866,7 +13866,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_gather_116() [fresh]-> ", result);
         if (result != null) {
-            _gather_116_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _gather_116_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -13892,11 +13892,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop0_118_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop0_118_cache = new HashMap<>();
 
     protected T[] _loop0_118() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop0_118_cache.get(p);
+        Memo<T[]> info = _loop0_118_cache.get(p);
         if (info != null) {
             log("_loop0_118() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -13908,7 +13908,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop0_118() [fresh]-> ", result);
         if (result != null) {
-            _loop0_118_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop0_118_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -13933,11 +13933,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop0_120_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop0_120_cache = new HashMap<>();
 
     protected T[] _loop0_120() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop0_120_cache.get(p);
+        Memo<T[]> info = _loop0_120_cache.get(p);
         if (info != null) {
             log("_loop0_120() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -13949,7 +13949,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop0_120() [fresh]-> ", result);
         if (result != null) {
-            _loop0_120_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop0_120_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -13977,11 +13977,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _gather_119_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _gather_119_cache = new HashMap<>();
 
     protected T[] _gather_119() {
         int p = this.mark();
-        CachedInfo<T[]> info = _gather_119_cache.get(p);
+        Memo<T[]> info = _gather_119_cache.get(p);
         if (info != null) {
             log("_gather_119() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -13993,7 +13993,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_gather_119() [fresh]-> ", result);
         if (result != null) {
-            _gather_119_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _gather_119_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -14019,11 +14019,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> _tmp_121_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> _tmp_121_cache = new HashMap<>();
 
     protected T _tmp_121() {
         int p = this.mark();
-        CachedInfo<T> info = _tmp_121_cache.get(p);
+        Memo<T> info = _tmp_121_cache.get(p);
         if (info != null) {
             log("_tmp_121() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -14035,7 +14035,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_tmp_121() [fresh]-> ", result);
         if (result != null) {
-            _tmp_121_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _tmp_121_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -14060,11 +14060,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop0_123_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop0_123_cache = new HashMap<>();
 
     protected T[] _loop0_123() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop0_123_cache.get(p);
+        Memo<T[]> info = _loop0_123_cache.get(p);
         if (info != null) {
             log("_loop0_123() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -14076,7 +14076,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop0_123() [fresh]-> ", result);
         if (result != null) {
-            _loop0_123_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop0_123_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -14104,11 +14104,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _gather_122_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _gather_122_cache = new HashMap<>();
 
     protected T[] _gather_122() {
         int p = this.mark();
-        CachedInfo<T[]> info = _gather_122_cache.get(p);
+        Memo<T[]> info = _gather_122_cache.get(p);
         if (info != null) {
             log("_gather_122() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -14120,7 +14120,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_gather_122() [fresh]-> ", result);
         if (result != null) {
-            _gather_122_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _gather_122_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -14146,11 +14146,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _loop0_125_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _loop0_125_cache = new HashMap<>();
 
     protected T[] _loop0_125() {
         int p = this.mark();
-        CachedInfo<T[]> info = _loop0_125_cache.get(p);
+        Memo<T[]> info = _loop0_125_cache.get(p);
         if (info != null) {
             log("_loop0_125() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -14162,7 +14162,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_loop0_125() [fresh]-> ", result);
         if (result != null) {
-            _loop0_125_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _loop0_125_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -14190,11 +14190,11 @@ class GeneratedParser<T> extends Parser<T> {
         return ast.to_seq(children);
     }
 
-    private final Map<Integer, CachedInfo<T[]>> _gather_124_cache = new HashMap<>();
+    private final Map<Integer, Memo<T[]>> _gather_124_cache = new HashMap<>();
 
     protected T[] _gather_124() {
         int p = this.mark();
-        CachedInfo<T[]> info = _gather_124_cache.get(p);
+        Memo<T[]> info = _gather_124_cache.get(p);
         if (info != null) {
             log("_gather_124() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -14206,7 +14206,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_gather_124() [fresh]-> ", result);
         if (result != null) {
-            _gather_124_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _gather_124_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -14232,11 +14232,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> _tmp_126_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> _tmp_126_cache = new HashMap<>();
 
     protected T _tmp_126() {
         int p = this.mark();
-        CachedInfo<T> info = _tmp_126_cache.get(p);
+        Memo<T> info = _tmp_126_cache.get(p);
         if (info != null) {
             log("_tmp_126() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -14248,7 +14248,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_tmp_126() [fresh]-> ", result);
         if (result != null) {
-            _tmp_126_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _tmp_126_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -14274,11 +14274,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> _tmp_127_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> _tmp_127_cache = new HashMap<>();
 
     protected T _tmp_127() {
         int p = this.mark();
-        CachedInfo<T> info = _tmp_127_cache.get(p);
+        Memo<T> info = _tmp_127_cache.get(p);
         if (info != null) {
             log("_tmp_127() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -14290,7 +14290,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_tmp_127() [fresh]-> ", result);
         if (result != null) {
-            _tmp_127_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _tmp_127_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -14322,11 +14322,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> _tmp_128_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> _tmp_128_cache = new HashMap<>();
 
     protected T _tmp_128() {
         int p = this.mark();
-        CachedInfo<T> info = _tmp_128_cache.get(p);
+        Memo<T> info = _tmp_128_cache.get(p);
         if (info != null) {
             log("_tmp_128() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -14338,7 +14338,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_tmp_128() [fresh]-> ", result);
         if (result != null) {
-            _tmp_128_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _tmp_128_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -14370,11 +14370,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> _tmp_129_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> _tmp_129_cache = new HashMap<>();
 
     protected T _tmp_129() {
         int p = this.mark();
-        CachedInfo<T> info = _tmp_129_cache.get(p);
+        Memo<T> info = _tmp_129_cache.get(p);
         if (info != null) {
             log("_tmp_129() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -14386,7 +14386,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_tmp_129() [fresh]-> ", result);
         if (result != null) {
-            _tmp_129_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _tmp_129_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -14414,11 +14414,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> _tmp_130_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> _tmp_130_cache = new HashMap<>();
 
     protected T _tmp_130() {
         int p = this.mark();
-        CachedInfo<T> info = _tmp_130_cache.get(p);
+        Memo<T> info = _tmp_130_cache.get(p);
         if (info != null) {
             log("_tmp_130() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -14430,7 +14430,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_tmp_130() [fresh]-> ", result);
         if (result != null) {
-            _tmp_130_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _tmp_130_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -14456,11 +14456,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> _tmp_131_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> _tmp_131_cache = new HashMap<>();
 
     protected T _tmp_131() {
         int p = this.mark();
-        CachedInfo<T> info = _tmp_131_cache.get(p);
+        Memo<T> info = _tmp_131_cache.get(p);
         if (info != null) {
             log("_tmp_131() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -14472,7 +14472,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_tmp_131() [fresh]-> ", result);
         if (result != null) {
-            _tmp_131_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _tmp_131_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -14498,11 +14498,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> _tmp_132_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> _tmp_132_cache = new HashMap<>();
 
     protected T _tmp_132() {
         int p = this.mark();
-        CachedInfo<T> info = _tmp_132_cache.get(p);
+        Memo<T> info = _tmp_132_cache.get(p);
         if (info != null) {
             log("_tmp_132() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -14514,7 +14514,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_tmp_132() [fresh]-> ", result);
         if (result != null) {
-            _tmp_132_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _tmp_132_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -14539,11 +14539,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> _tmp_133_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> _tmp_133_cache = new HashMap<>();
 
     protected T _tmp_133() {
         int p = this.mark();
-        CachedInfo<T> info = _tmp_133_cache.get(p);
+        Memo<T> info = _tmp_133_cache.get(p);
         if (info != null) {
             log("_tmp_133() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -14555,7 +14555,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_tmp_133() [fresh]-> ", result);
         if (result != null) {
-            _tmp_133_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _tmp_133_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -14580,11 +14580,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> _tmp_134_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> _tmp_134_cache = new HashMap<>();
 
     protected T _tmp_134() {
         int p = this.mark();
-        CachedInfo<T> info = _tmp_134_cache.get(p);
+        Memo<T> info = _tmp_134_cache.get(p);
         if (info != null) {
             log("_tmp_134() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -14596,7 +14596,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_tmp_134() [fresh]-> ", result);
         if (result != null) {
-            _tmp_134_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _tmp_134_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -14621,11 +14621,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> _tmp_135_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> _tmp_135_cache = new HashMap<>();
 
     protected T _tmp_135() {
         int p = this.mark();
-        CachedInfo<T> info = _tmp_135_cache.get(p);
+        Memo<T> info = _tmp_135_cache.get(p);
         if (info != null) {
             log("_tmp_135() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -14637,7 +14637,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_tmp_135() [fresh]-> ", result);
         if (result != null) {
-            _tmp_135_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _tmp_135_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -14662,11 +14662,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> _tmp_136_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> _tmp_136_cache = new HashMap<>();
 
     protected T _tmp_136() {
         int p = this.mark();
-        CachedInfo<T> info = _tmp_136_cache.get(p);
+        Memo<T> info = _tmp_136_cache.get(p);
         if (info != null) {
             log("_tmp_136() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -14678,7 +14678,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_tmp_136() [fresh]-> ", result);
         if (result != null) {
-            _tmp_136_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _tmp_136_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
@@ -14712,11 +14712,11 @@ class GeneratedParser<T> extends Parser<T> {
         return null;
     }
 
-    private final Map<Integer, CachedInfo<T>> _tmp_137_cache = new HashMap<>();
+    private final Map<Integer, Memo<T>> _tmp_137_cache = new HashMap<>();
 
     protected T _tmp_137() {
         int p = this.mark();
-        CachedInfo<T> info = _tmp_137_cache.get(p);
+        Memo<T> info = _tmp_137_cache.get(p);
         if (info != null) {
             log("_tmp_137() [cached]-> " + info.toString());
             this.reset(info.end_mark);
@@ -14728,7 +14728,7 @@ class GeneratedParser<T> extends Parser<T> {
         this._level -= 1;
         log("_tmp_137() [fresh]-> ", result);
         if (result != null) {
-            _tmp_137_cache.put(p, new CachedInfo<>(result, this.mark()));
+            _tmp_137_cache.put(p, new Memo<>(result, this.mark()));
         }
         return result;
     }
