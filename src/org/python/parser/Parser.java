@@ -42,7 +42,36 @@ public abstract class Parser<T> {
         this.tokenizer.reset(mark);
     }
 
-    protected abstract T start();
+    protected T start() {
+        return file();
+    };
+
+    protected T start(ParserInputType inputType) {
+        switch (inputType) {
+            case FILE:
+                return file();
+            case SINGLE:
+                return interactive();
+            case EVAL:
+                return eval();
+            case FUNC_TYPE:
+                return func_type();
+            case FSTRING:
+                return fstring();
+            default:
+                return start();
+        }
+    }
+
+    protected abstract T file();
+
+    protected abstract T interactive();
+
+    protected abstract T eval();
+
+    protected abstract T func_type();
+
+    protected abstract T fstring();
 
     protected abstract boolean isKeyword(String name);
 
