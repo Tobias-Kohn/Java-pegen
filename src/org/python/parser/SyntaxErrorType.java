@@ -1,5 +1,11 @@
 package org.python.parser;
 
+/**
+ * Various errors riased by the tokenizer.
+ *
+ * In the original Python code these errors are part of the tokenizer code.  We assembled them into a separate enum and file
+ * to ensure a common format for error messages and allow them to be potentially localised.
+ */
 public enum SyntaxErrorType {
 
     EOF(11),
@@ -13,6 +19,7 @@ public enum SyntaxErrorType {
     INVALID_CHAR(26, "invalid character '%c' (U+%s)"),
     BAD_SINGLE(27),
 
+    // These are all syntax errors, hence a value of `14`:
     SYNTAX_UNMATCHED_BRACKET(14, "unmatched '%c'"),
     SYNTAX_BRACKET_MISMATCH(14, "closing parenthesis '%c' does not match opening parenthesis '%c'"),
     SYNTAX_BRACKET_MISMATCH_MULTILINE(14, "closing parenthesis '%c' does not match opening parenthesis '%c' on line %d"),

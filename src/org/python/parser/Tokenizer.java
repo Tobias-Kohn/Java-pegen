@@ -222,11 +222,13 @@ public class Tokenizer implements Iterator<Token> {
         }
         if (c == '\n') {
             at_beginning_of_line = true;
-            lineno++;
             if (blankline || paren_level > 0) {
+                lineno++;
                 get();
-            } else
+            } else {
                 add(TokenType.NEWLINE);
+                lineno++;
+            }
             return;
         }
 
@@ -235,6 +237,7 @@ public class Tokenizer implements Iterator<Token> {
             c = peekc();
             if (Character.isDigit(c)) {
                 fraction();
+                return;
             } else if (c == '.') {
                 if (peekcAhead() == '.') {
                     pos += 2;
@@ -516,7 +519,7 @@ public class Tokenizer implements Iterator<Token> {
                     } while ('0' <= c && c < '8');
                 } while (c == '_');
                 if (Character.isDigit(c)) {
-                    addError(SyntaxErrorType.SYNTAX_INVALID_DIGIT_IN_OCT_LITERAL, c);
+                    addError(SyntaxErrorType.SYNTAX_INVALID_DIGIT_IN_OCT_LITERAL, pos - token_start, c);
                     return;
                 }
             } else if (c == 'b' || c == 'B') {
@@ -529,7 +532,7 @@ public class Tokenizer implements Iterator<Token> {
                     if (c != '0' && c != '1') {
                         pos--;
                         if (Character.isDigit(c)) {
-                            addError(SyntaxErrorType.SYNTAX_INVALID_DIGIT_IN_BIN_LITERAL, c);
+                            addError(SyntaxErrorType.SYNTAX_INVALID_DIGIT_IN_BIN_LITERAL, pos - token_start, c);
                         } else {
                             addError(SyntaxErrorType.SYNTAX_INVALID_BIN_LITERAL);
                         }
@@ -540,7 +543,7 @@ public class Tokenizer implements Iterator<Token> {
                     } while (c == '0' || c == '1');
                 } while (c == '_');
                 if (Character.isDigit(c)) {
-                    addError(SyntaxErrorType.SYNTAX_INVALID_DIGIT_IN_BIN_LITERAL, c);
+                    addError(SyntaxErrorType.SYNTAX_INVALID_DIGIT_IN_BIN_LITERAL, pos - token_start, c);
                     return;
                 }
             } else {
